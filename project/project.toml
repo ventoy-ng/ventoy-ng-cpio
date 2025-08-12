@@ -2,22 +2,22 @@ name = "ventoy-cpio"
 
 [[target]]
 name = "system/x86_64"
-triple = "x86_64-linux"
+triplet = "x86_64-linux"
 suffix = "64"
 
 [[target]]
 name = "system/i386"
-triple = "i386-linux"
+triplet = "i386-linux"
 suffix = "32"
 
 [[target]]
 name = "system/aarch64"
-triple = "aarch64-linux"
+triplet = "aarch64-linux"
 suffix = "aa64"
 
 [[target]]
 name = "system/mips64el"
-tuple = "mips64el-linux"
+triplet = "mips64el-linux"
 suffix = "m64e"
 
 [[target]]
