@@ -1,6 +1,7 @@
 from io import BytesIO
 from pathlib import Path
 import re
+from hashlib import sha256
 from os import makedirs, chdir
 from typing import Optional
 from urllib.request import urlopen
@@ -25,16 +26,23 @@ def is_archive_file(filename: str) -> bool:
     ])
 
 
-def do_download_source(
-    url: str,
-    target_file: Path,
-) -> bytes:
+def download_source(url: str) -> bytes:
     req = urlopen(url)
     data = req.read()
     assert isinstance(data, bytes)
-    with target_file.open("wb") as file:
-        file.write(data)
     return data
+
+
+def verify_source(this: SourceInfo, data: bytes):
+    xhash = this.xhash
+    assert xhash is not None
+    sxhash = xhash.split(":")
+    hash_kind = sxhash[0]
+    assert hash_kind == "sha256"
+    valid_hash_value = sxhash[1]
+    hash_value = sha256(data)
+    if hash_value.hexdigest() != valid_hash_value:
+        raise ValueError
 
 
 def extract_source_tar_builtin(
@@ -83,6 +91,27 @@ def extract_source_archive(
     raise NotImplementedError
 
 
+def handle_source_url(
+    this: SourceInfo,
+    target_file: Path,
+    url: str,
+    download_dir: Path,
+):
+    if target_file.exists():
+        print("  Skipping download")
+        return None
+    makedirs(download_dir, exist_ok=True)
+    print("  Downloading...")
+    data = download_source(url)
+    if this.xhash is not None:
+        print("  Verifying...")
+        verify_source(this, data)
+    with target_file.open("wb") as file:
+        file.write(data)
+    print("  Done!")
+    return data
+
+
 def handle_source_archive(
     this: SourceInfo,
     paths: ProjectPaths,
@@ -113,14 +142,7 @@ def prepare_source(this: SourceInfo, paths: ProjectPaths):
         # assumed: is a singular c file
         download_dir /= this.name
     target_file = download_dir / filename
-    if not target_file.exists():
-        makedirs(download_dir, exist_ok=True)
-        print("  Downloading...")
-        data = do_download_source(url, target_file)
-        print("  Done!")
-    else:
-        print("  Skipping download")
-        data = None
+    data = handle_source_url(this, target_file, url, download_dir)
     if is_archive:
         handle_source_archive(this, paths, filename, target_file, data)
 
