@@ -1,14 +1,14 @@
 name = "ventoy-cpio"
 
 [[target]]
-name = "system/i386"
-triple = "i386-linux"
-suffix = "32"
-
-[[target]]
 name = "system/x86_64"
 triple = "x86_64-linux"
 suffix = "64"
+
+[[target]]
+name = "system/i386"
+triple = "i386-linux"
+suffix = "32"
 
 [[target]]
 name = "system/aarch64"
@@ -22,7 +22,7 @@ suffix = "m64e"
 
 [[target]]
 name = "output/x86"
-subtargets = ["system/i386", "system/x86_64"]
+subtargets = ["system/x86_64", "system/i386"]
 
 [[target]]
 name = "output/arm64"
