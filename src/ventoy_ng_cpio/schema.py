@@ -38,6 +38,7 @@ class SourceInfo(DataClassTOMLMixin):
             alias="hash",
         ),
     )
+    extracted_name: Optional[str] = field(default=None)
 
     @lru_cache(1)
     def get_id(self) -> str:
@@ -77,6 +78,15 @@ class SourceInfo(DataClassTOMLMixin):
         if url is not None:
             return Path(url.path).name
         raise ValueError
+
+    @lru_cache(1)
+    def get_extracted_name(self) -> str:
+        extracted_name = self.extracted_name
+        assert extracted_name is not None
+        return extracted_name.format(
+            name=self.name,
+            version=self.version,
+        )
 
 
 @dataclass(frozen=True)

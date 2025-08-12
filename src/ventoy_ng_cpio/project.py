@@ -19,6 +19,10 @@ class ProjectPaths:
         return self.root / "project.toml"
 
     @property
+    def archives_dir(self) -> Path:
+        return self.build_dir / "archives"
+
+    @property
     def sources_dir(self) -> Path:
         return self.build_dir / "sources"
 
