@@ -1,0 +1,243 @@
+name = "ventoy-cpio"
+
+[[target]]
+name = "system/i386"
+triple = "i386-linux"
+suffix = "32"
+
+[[target]]
+name = "system/x86_64"
+triple = "x86_64-linux"
+suffix = "64"
+
+[[target]]
+name = "system/aarch64"
+triple = "aarch64-linux"
+suffix = "aa64"
+
+[[target]]
+name = "system/mips64el"
+tuple = "mips64el-linux"
+suffix = "m64e"
+
+[[target]]
+name = "output/x86"
+subtargets = ["system/i386", "system/x86_64"]
+
+[[target]]
+name = "output/arm64"
+subtargets = ["system/aarch64"]
+
+[[target]]
+name = "output/mips64"
+subtargets = ["system/mips64el"]
+
+[[sources]]
+name = "busybox"
+#version = "1.36.1"
+version = "1.32.0"
+id = "{name}"
+url = "https://busybox.net/downloads/{name}-{version}.tar.bz2"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "device-mapper"
+version = "1.02.28"
+id = "{name}"
+url = "ftp://sourceware.org/pub/dm/{name}.{version}.tgz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "lunzip"
+version = "1.11"
+id = "{name}"
+url = "https://download.savannah.gnu.org/releases/lzip/{name}/{name}-{version}.tar.gz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "lz4"
+version = "1.10.0"
+id = "{name}"
+url = "https://github.com/lz4/{name}/releases/download/v{version}/{name}-{version}.tar.gz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "smallz4"
+version = "1.5"
+id = "{name}"
+url = "https://create.stephan-brumme.com/{name}/{name}cat.c"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "lzo"
+version = "2.10"
+id = "{name}"
+url = "https://www.oberhumer.com/opensource/{name}/download/{name}-{version}.tar.gz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "squashfs"
+version = "4.4"
+id = "{name}"
+url = "https://netix.dl.sourceforge.net/project/{name}/{name}/{name}{version}/{name}{version}.tar.gz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "vblade"
+version = "24"
+id = "{name}"
+url = "https://github.com/OpenAoE/{name}/archive/refs/tags/{name}-{version}.tar.gz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "xz"
+version = "5.6.4"
+id = "{name}"
+url = "https://github.com/tukaani-project/{name}/releases/download/v{version}/{name}-{version}.tar.xz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "xz-embedded"
+version = "2024-12-30"
+id = "{name}"
+url = "https://github.com/tukaani-project/{name}/archive/refs/tags/v{version}.tar.gz"
+filename = "{name}-{version}.tar.gz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "zlib"
+version = "1.3.1"
+id = "{name}"
+url = "https://github.com/madler/{name}/releases/download/v{version}/{name}-{version}.tar.xz"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[sources]]
+name = "zstd"
+version = "1.5.7"
+id = "{name}"
+url = "https://github.com/facebook/{name}/releases/download/v{version}/{name}-{version}.tar.zst"
+#hash = "sha256:c35d87f1d04b2b153d33c275c2632e40d388a88f19a9e71727e0bbbff51fe689"
+
+[[components]]
+name = "busybox-ash"
+target_set = "system"
+sources = ["busybox"]
+build_file = "components/busybox/build.py"
+
+[[components]]
+name = "busybox-full"
+target_set = "system"
+sources = ["busybox"]
+build_file = "components/busybox/build.py"
+
+[[components]]
+name = "busybox-hexdump"
+target_set = "system"
+sources = ["busybox"]
+build_file = "components/busybox/build.py"
+
+[[components]]
+name = "busybox-xzcat"
+target_set = "system"
+sources = ["busybox"]
+build_file = "components/busybox/build.py"
+
+[[components]]
+name = "device-mapper"
+target_set = "system"
+sources = ["device-mapper"]
+
+[[components]]
+name = "lunzip"
+target_set = "system"
+sources = ["lunzip"]
+
+[[components]]
+name = "lz4"
+target_set = "system"
+sources = ["lz4"]
+
+[[components]]
+name = "lzo"
+target_set = "system"
+sources = ["lzo"]
+
+[[components]]
+name = "smallz4"
+target_set = "system"
+sources = ["smallz4"]
+
+[[components]]
+name = "vblade"
+target_set = "system"
+sources = ["vblade"]
+
+[[components]]
+name = "xz"
+target_set = "system"
+sources = ["xz"]
+
+[[components]]
+name = "xz-embedded"
+target_set = "system"
+sources = ["xz-embedded"]
+
+[[components]]
+name = "zlib"
+target_set = "system"
+sources = ["zlib"]
+
+[[components]]
+name = "zstd"
+target_set = "system"
+sources = ["zstd"]
+
+[[components]]
+name = "squashfs"
+target_set = "system"
+sources = ["squashfs"]
+deps = ["lz4", "lzo", "xz", "zlib", "zstd"]
+
+[[components]]
+name = "rd-stage2-tools"
+target_set = "system"
+deps = [
+    "busybox-full",
+    "device-mapper",
+    "lunzip",
+    "smallz4",
+    "squashfs",
+    "vblade",
+    "zlib",
+    "zstd",
+]
+
+[[components]]
+name = "rd-stage2"
+target_set = "output"
+deps = ["rd-stage2-tools"]
+build_file = "components/cpio/build.py"
+build_args.cpio_dir = "."
+build_args.cpio_files = "tool"
+build_args.cpio_target = "tool.cpio.xz"
+
+[[components]]
+name = "rd-stage1-tools"
+target_set = "system"
+deps = ["busybox-ash", "busybox-xzcat", "xz-embedded"]
+
+[[components]]
+name = "arch-ramdisks"
+target_set = "output"
+deps = ["rd-stage2", "rd-stage1-tools"]
+build_file = "components/cpio/build.py"
+build_args.cpio_dir = "ramdisk"
+build_args.cpio_files = "."
+build_args.cpio_target = "ventoy_{target}.cpio"
+
+[[components]]
+name = "base"
+
+[[components]]
+name = "main"
+deps = ["base", "arch-ramdisks"]

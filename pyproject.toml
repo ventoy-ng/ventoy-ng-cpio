@@ -7,7 +7,13 @@ authors = [
     { name = "fnrir", email = "fnr1r0@protonmail.com" }
 ]
 requires-python = ">=3.13"
-dependencies = []
+dependencies = [
+    "mashumaro>=3.16",
+    "toml>=0.10.2",
+    "tomli>=2.2.1",
+    "tomli-w>=1.2.0",
+    "typing-extensions>=4.14.1",
+]
 
 [project.scripts]
 ventoy-ng-cpio = "ventoy_ng_cpio:main"
