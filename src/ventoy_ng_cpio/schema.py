@@ -22,6 +22,15 @@ class TargetInfo(DataClassTOMLMixin):
     use_suffix: bool = field(default=True)
     subtargets: Optional[list[str]] = field(default=None)
 
+    @property
+    def arch(self) -> str:
+        assert self.triplet
+        return self.triplet.split("-")[0]
+
+    @property
+    def name2(self) -> str:
+        return self.name.split("/")[1]
+
 
 @dataclass(frozen=True)
 class SourceInfo(DataClassTOMLMixin):

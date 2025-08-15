@@ -1,4 +1,6 @@
 from dataclasses import dataclass, field
+from functools import lru_cache
+from os.path import relpath
 from pathlib import Path
 from typing import ClassVar, Optional, Self
 
@@ -6,21 +8,29 @@ from .paths import BUILD_DIR
 from .schema import (
     ComponentInfo, ProjectInfo, SourceInfo, TargetInfo,
 )
+from .utils.flatten import flatten
 from .utils.path import PathLike, pathlike_to_path
 
 
-@dataclass(frozen=True)
-class ProjectPaths:
-    root: Path
-    build_dir: Path = field(default=BUILD_DIR)
+class BasePaths:
+    build_dir: Path
+    project_dir: Path
 
     @property
     def project_toml_file(self) -> Path:
-        return self.root / "project.toml"
+        return self.project_dir / "project.toml"
 
     @property
     def archives_dir(self) -> Path:
         return self.build_dir / "archives"
+
+    @property
+    def build_aux_dir(self) -> Path:
+        return self.build_dir / "build-aux"
+
+    @property
+    def outputs_dir(self) -> Path:
+        return self.build_dir / "outputs"
 
     @property
     def sources_dir(self) -> Path:
@@ -29,6 +39,50 @@ class ProjectPaths:
     @property
     def work_dir(self) -> Path:
         return self.build_dir / "work"
+
+    def component_dir(self, component: "Component") -> Path:
+        return self.build_dir / "work" / component.name
+
+    def component_job_dir(self, job: "ComponentJob") -> Path:
+        return self.component_dir(job.component) / f"build{job.target.suffix}"
+
+    def component_output_dir(self, component: "Component") -> Path:
+        return self.build_dir / "output" / component.name
+
+    def component_job_output_dir(self, job: "ComponentJob") -> Path:
+        return self.component_output_dir(job.component) / job.target.info.name2
+
+
+@dataclass(frozen=True)
+class ProjectPaths(BasePaths):
+    project_dir: Path
+    build_dir: Path = field(default=BUILD_DIR)
+    cwd: Path = field(default_factory=Path.cwd)
+
+    def with_component_job(self, job: "ComponentJob") -> "JobPaths":
+        root_dir = self.component_job_dir(job).absolute()
+        return JobPaths(
+            root_dir,
+            Path(relpath(self.build_dir, root_dir)),
+            Path(relpath(self.project_dir, root_dir)),
+            job,
+        )
+
+
+@dataclass(frozen=True)
+class JobPaths(BasePaths):
+    cwd: Path
+    build_dir: Path
+    project_dir: Path
+    job: "ComponentJob"
+
+    @property
+    def my_component_dir(self) -> Path:
+        return Path("..")
+
+    @property
+    def my_output_dir(self) -> Path:
+        return self.component_job_output_dir(self.job)
 
 
 @dataclass(frozen=True)
@@ -92,6 +146,8 @@ class Target:
         return f"-{suf}"
 
     def is_subtarget(self, other: Self) -> bool:
+        if self._match_any_subtarget:
+            return True
         if other is self:
             return True
         if not self.subtargets:
@@ -100,6 +156,13 @@ class Target:
             target.is_subtarget(other)
             for target in self.subtargets
         ])
+
+    def get_cross(self) -> str:
+        return f"{self.info.arch}-unknown-linux-musl"
+
+    @lru_cache
+    def get_cmd(self, cmd: str) -> str:
+        return f"{self.get_cross()}-{cmd}"
 
 
 @dataclass(frozen=True)
@@ -256,6 +319,14 @@ class ComponentJob:
             new_jobs = cls.new(component, jobs)
             jobs.update(new_jobs)
         return jobs
+
+    def walk(self) -> list[Self]:
+        deptt = [
+            dep.walk()
+            for dep in self.dependencies.values()
+        ]
+        dept = flatten(deptt)
+        return dept + [self]
 
 
 @dataclass(repr=False)
