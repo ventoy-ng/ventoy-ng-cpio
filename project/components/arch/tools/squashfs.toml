@@ -1,0 +1,4 @@
+name = "squashfs"
+target_set = "system"
+sources = ["squashfs"]
+deps = ["lz4", "lzo", "xz", "zlib", "zstd"]

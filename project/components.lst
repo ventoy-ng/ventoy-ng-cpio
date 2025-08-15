@@ -1,0 +1,33 @@
+# first: libraries
+arch/tools/lz4.toml
+arch/tools/lzo.toml
+arch/tools/xz.toml
+arch/tools/zlib.toml
+arch/tools/zstd.toml
+
+# utils
+arch/tools/busybox/full.toml
+arch/tools/busybox/hexdump.toml
+arch/tools/device-mapper.toml
+arch/tools/lunzip.toml
+arch/tools/smallz4.toml
+arch/tools/squashfs.toml
+arch/tools/vblade.toml
+
+# stage 2: inner compressed ramdisk
+arch/rd-stage2-tools.toml
+arch/rd-stage2.toml
+
+# stage 1 tools
+arch/tools/busybox/ash.toml
+arch/tools/busybox/xzcat.toml
+arch/tools/xz-embedded.toml
+
+# stage 1: uncompressed ramdisk
+arch/rd-stage1-tools.toml
+arch/arch-ramdisks.toml
+
+# base ramdisk
+base.toml
+
+main.toml

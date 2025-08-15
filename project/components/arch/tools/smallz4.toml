@@ -1,0 +1,3 @@
+name = "smallz4"
+target_set = "system"
+sources = ["smallz4"]

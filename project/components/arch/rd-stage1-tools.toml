@@ -1,0 +1,3 @@
+name = "rd-stage1-tools"
+target_set = "system"
+deps = ["busybox-ash", "busybox-xzcat", "xz-embedded"]

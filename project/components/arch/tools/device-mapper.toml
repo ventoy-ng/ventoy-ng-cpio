@@ -1,0 +1,3 @@
+name = "device-mapper"
+target_set = "system"
+sources = ["device-mapper"]

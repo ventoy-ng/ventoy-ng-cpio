@@ -23,6 +23,6 @@ class ComponentInfo(DataClassTOMLMixin):
 @dataclass(frozen=False)
 class ProjectInfo(DataClassTOMLMixin):
     name: str
-    components: list[ComponentInfo]
     target: list[TargetInfo] = field(default_factory=list)
     sources: list[SourceInfo] = field(default_factory=list)
+    components: list[ComponentInfo] = field(default_factory=list)

@@ -1,0 +1,3 @@
+name = "lzo"
+target_set = "system"
+sources = ["lzo"]

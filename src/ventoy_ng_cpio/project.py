@@ -329,6 +329,23 @@ class ComponentJob:
         return dept + [self]
 
 
+def load_components(project_path: Path) -> dict[Path, ComponentInfo]:
+    index_path = project_path / "components.lst"
+    comp_index = index_path.read_text()
+    comp_dir = project_path / "components"
+
+    res = {}
+    for line in comp_index.splitlines():
+        if not line or line.startswith("#"):
+            continue
+        comp_path = comp_dir / line
+        comp_txt = comp_path.read_text()
+        comp_info = ComponentInfo.from_toml(comp_txt)
+        res[comp_path] = comp_info
+
+    return res
+
+
 @dataclass(repr=False)
 class Project:
     paths: ProjectPaths
@@ -375,6 +392,7 @@ class Project:
             i: SourceInfo.from_toml(i.read_text())
             for i in project_sources_dir.iterdir()
         }
+        component_info = load_components(project_dirx)
         info.target = [
             target
             for target in target_info.values()
@@ -382,5 +400,9 @@ class Project:
         info.sources = [
             source
             for source in sources_info.values()
+        ]
+        info.components = [
+            comp
+            for comp in component_info.values()
         ]
         return cls.new(paths, info)

@@ -1,0 +1,3 @@
+name = "xz-embedded"
+target_set = "system"
+sources = ["xz-embedded"]

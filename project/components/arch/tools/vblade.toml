@@ -1,0 +1,3 @@
+name = "vblade"
+target_set = "system"
+sources = ["vblade"]

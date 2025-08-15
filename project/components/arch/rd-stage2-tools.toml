@@ -1,0 +1,12 @@
+name = "rd-stage2-tools"
+target_set = "system"
+deps = [
+    "busybox-full",
+    "device-mapper",
+    "lunzip",
+    "smallz4",
+    "squashfs",
+    "vblade",
+    "zlib",
+    "zstd",
+]
