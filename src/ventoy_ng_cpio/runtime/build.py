@@ -73,6 +73,10 @@ def do_build_job_log(
     job: ComponentJob,
     paths: JobPaths,
 ):
+    if job.component.name.startswith("busybox"):
+        from ventoy_ng_cpio.builders.busybox import build
+        build(job, paths)
+        return
     match job.component.name:
         case "lunzip":
             from ventoy_ng_cpio.builders.lunzip import build
@@ -109,7 +113,7 @@ def do_build_job(
 
 def do_build(this: Project):
     prepare_for_build(this)
-    jobs = walk_dedup(this, component_name="xz-embedded")
+    jobs = walk_dedup(this, component_name="busybox-xzcat")
     for i, job in enumerate(jobs):
         print(f"{i:3} - {job.name}")
         do_build_job(job, this.paths)
