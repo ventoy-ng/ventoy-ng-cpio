@@ -32,7 +32,7 @@ CMAKE_TOOLCHAIN_FILE = """# the name of the target operating system
 set(CMAKE_SYSTEM_PROCESSOR  {arch})
 set(CMAKE_SYSTEM_NAME       Linux)
 
-set(TOOLCHAIN_PREFIX    {cross})
+set(TOOLCHAIN_PREFIX    {triplet})
 
 # which compilers to use for C and C++
 set(CMAKE_C_COMPILER    ${{TOOLCHAIN_PREFIX}}-gcc)
@@ -52,10 +52,10 @@ def prepare_for_build(this: Project):
     system_targets = this.target_sets["system"]
     for target in system_targets.targets:
         arch = target.info.arch
-        cross = target.get_cross()
+        triplet = target.info.get_triplet()
         txt = CMAKE_TOOLCHAIN_FILE.format(
             arch=arch,
-            cross=cross,
+            triplet=triplet.to_string(),
         )
         target_path = cmake_dir / f"{target.info.name2}.cmake"
         target_path.write_text(txt)
@@ -87,7 +87,7 @@ def do_build_job_log(
         case "xz":
             from ventoy_ng_cpio.builders.xz import build
         case "xz-embedded":
-            from ventoy_ng_cpio.builders.xzminidec import build
+            from ventoy_ng_cpio.builders.xz_embedded import build
         case "zlib":
             from ventoy_ng_cpio.builders.zlib import build
         case "zstd":
@@ -113,7 +113,7 @@ def do_build_job(
 
 def do_build(this: Project):
     prepare_for_build(this)
-    jobs = walk_dedup(this, component_name="busybox-xzcat")
+    jobs = walk_dedup(this)
     for i, job in enumerate(jobs):
         print(f"{i:3} - {job.name}")
         do_build_job(job, this.paths)

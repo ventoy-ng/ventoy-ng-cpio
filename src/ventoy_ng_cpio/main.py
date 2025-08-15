@@ -7,5 +7,5 @@ def main():
     print("Hello from ventoy-ng-cpio!")
 
     proj = Project.load("project")
-    #do_prepare(proj)
+    do_prepare(proj)
     do_build(proj)

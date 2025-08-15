@@ -14,7 +14,7 @@ def build(job: ComponentJob, paths: JobPaths):
 
     make = MakeRunner()
     make.file = str(makefile)
-    make.env["CROSS"] = f"{job.target.get_cross()}-"
+    make.env["CROSS"] = job.target.get_cross()
     make.envs_strict["srcdir"] = str(main_source_dir)
     if make.run_if_needed().is_up_to_date():
         return

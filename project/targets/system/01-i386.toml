@@ -1,0 +1,10 @@
+name = "system/i386"
+suffix = "32"
+
+[triplet]
+machine = "i386"
+#vendor = null
+operatingsystem = "linux"
+
+[triplet.extras]
+libc = "musl"

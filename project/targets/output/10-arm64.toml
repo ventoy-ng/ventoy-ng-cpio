@@ -1,0 +1,3 @@
+name = "output/arm64"
+subtargets = ["system/aarch64"]
+virtual = true

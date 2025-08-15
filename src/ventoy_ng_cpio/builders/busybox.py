@@ -47,7 +47,7 @@ def build(job: ComponentJob, paths: JobPaths):
     make = MakeRunner()
     make.file = str(makefile)
     make.env["KBUILD_SRC"] = str(main_source_dir)
-    make.env["CROSS_COMPILE"] = f"{target.get_cross()}-"
+    make.env["CROSS_COMPILE"] = target.get_cross()
     make.env["CFLAGS"] = "-Oz"
 
     config_file = Path(".config")

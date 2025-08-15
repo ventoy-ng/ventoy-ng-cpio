@@ -2,11 +2,13 @@ from dataclasses import dataclass, field
 from functools import lru_cache
 from os.path import relpath
 from pathlib import Path
+from itertools import chain
 from typing import ClassVar, Optional, Self
 
 from .paths import BUILD_DIR
+from .schemas.sources import SourceInfo
 from .schema import (
-    ComponentInfo, ProjectInfo, SourceInfo, TargetInfo,
+    ComponentInfo, ProjectInfo, TargetInfo,
 )
 from .utils.flatten import flatten
 from .utils.path import PathLike, pathlike_to_path
@@ -123,10 +125,10 @@ class Target:
             return cls._default_instance
         info = TargetInfo(
             name="TARGETLESS",
-            triplet=None,
             suffix=None,
-            use_suffix=False,
+            triplet=None,
             subtargets=None,
+            virtual=True,
         )
         cls._default_instance = cls(
             info,
@@ -142,8 +144,7 @@ class Target:
     def suffix(self) -> str:
         if self.is_default():
             return ""
-        suf = self.info.name.split("/")[1]
-        return f"-{suf}"
+        return f"-{self.info.name2}"
 
     def is_subtarget(self, other: Self) -> bool:
         if self._match_any_subtarget:
@@ -158,11 +159,10 @@ class Target:
         ])
 
     def get_cross(self) -> str:
-        return f"{self.info.arch}-unknown-linux-musl"
+        return self.info.get_cross()
 
-    @lru_cache
     def get_cmd(self, cmd: str) -> str:
-        return f"{self.get_cross()}-{cmd}"
+        return self.info.get_cross() + cmd
 
 
 @dataclass(frozen=True)
@@ -361,4 +361,26 @@ class Project:
         paths = ProjectPaths(project_dirx)
         with paths.project_toml_file.open("rt") as file:
             info = ProjectInfo.from_toml(file.read())
+        project_sources_dir = project_dirx / "sources"
+        project_targets_dir = project_dirx / "targets"
+        target_info = {
+            i: TargetInfo.from_toml(i.read_text())
+            for i in chain(
+                project_targets_dir.glob("system/*"),
+                project_targets_dir.glob("output/*"),
+            )
+            if i.is_file()
+        }
+        sources_info = {
+            i: SourceInfo.from_toml(i.read_text())
+            for i in project_sources_dir.iterdir()
+        }
+        info.target = [
+            target
+            for target in target_info.values()
+        ]
+        info.sources = [
+            source
+            for source in sources_info.values()
+        ]
         return cls.new(paths, info)

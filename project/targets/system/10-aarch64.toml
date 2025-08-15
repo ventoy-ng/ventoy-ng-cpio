@@ -1,0 +1,10 @@
+name = "system/aarch64"
+suffix = "aa64"
+
+[triplet]
+machine = "aarch64"
+#vendor = null
+operatingsystem = "linux"
+
+[triplet.extras]
+libc = "musl"

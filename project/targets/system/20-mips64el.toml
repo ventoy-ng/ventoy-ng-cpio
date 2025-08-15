@@ -1,0 +1,10 @@
+name = "system/mips64el"
+suffix = "m64e"
+
+[triplet]
+machine = "mips64el"
+#vendor = null
+operatingsystem = "linux"
+
+[triplet.extras]
+libc = "musl"

@@ -1,0 +1,10 @@
+name = "system/x86_64"
+suffix = "64"
+
+[triplet]
+machine = "x86_64"
+#vendor = null
+operatingsystem = "linux"
+
+[triplet.extras]
+libc = "musl"

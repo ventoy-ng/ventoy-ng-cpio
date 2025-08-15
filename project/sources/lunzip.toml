@@ -1,0 +1,6 @@
+name = "lunzip"
+version = "1.11"
+id = "{name}"
+url = "https://download.savannah.gnu.org/releases/lzip/{name}/{name}-{version}.tar.gz"
+hash = "sha256:21ad5f051cc516c5fc05cb6dfc9bb66737d9810cfa9349709e42c545eb1bf8a7"
+extracted_name = "{name}-{version}"

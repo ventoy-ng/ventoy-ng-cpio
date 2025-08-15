@@ -9,7 +9,7 @@ import tarfile
 from zstd import ZSTD_uncompress
 
 from ..project import Project, ProjectPaths
-from ..schema import SourceInfo
+from ..schemas.sources import SourceInfo
 
 
 TAR_REGEX = r"^(.*)\.(tar(\.[^\.]+)?|tgz)$"
