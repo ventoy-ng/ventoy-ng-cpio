@@ -52,6 +52,7 @@ def do_configure(job: ComponentJob):
 class DeviceMapperBuilder(BaseConfigureBuilder):
     NAME = "device-mapper"
     bin_name = "dmsetup"
+    bin_path = Path("dmsetup/dmsetup")
 
     def get_configure_script(self) -> Path:
         return Path("configure")
@@ -67,17 +68,16 @@ class DeviceMapperBuilder(BaseConfigureBuilder):
 
     def build(self):
         # make -q is broken here for some reason
-        bin_dmsetup = Path("dmsetup/dmsetup")
-        if bin_dmsetup.exists():
+        if self.bin_path.exists():
             return
         self.make.run()
         self.install()
 
     def install(self):
-        out_dir = self.get_output_dir()
-        out_dir.mkdir(parents=True, exist_ok=True)
+        output_dir = self.get_output_dir()
+        output_dir.mkdir(parents=True, exist_ok=True)
         strip_bin_copy(
             self.job.target,
-            self.bin_name,
-            str(out_dir / self.bin_name),
+            str(self.bin_path),
+            str(output_dir / self.bin_name),
         )
