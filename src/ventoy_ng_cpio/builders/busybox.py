@@ -48,6 +48,7 @@ class BaseBusyboxBuilder(BaseBuilder, ABC):
         if bin_busybox.exists():
             return
         self.make.run()
+        self.install()
 
     def install(self):
         output_dir = self.get_output_dir()
