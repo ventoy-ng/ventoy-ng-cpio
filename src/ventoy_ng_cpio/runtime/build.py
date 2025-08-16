@@ -54,12 +54,11 @@ def do_build_job_log(
     build_paths: BuildPaths,
     project_paths: ProjectPaths,
 ):
-    import ventoy_ng_cpio.builders
-    from ventoy_ng_cpio.builders_abc import build as builders
+    from ..builders import get_builder
 
     comp_name = job.component.info.name
-    bldr_class = builders._build_impls[comp_name]
-    bldr = bldr_class.new(
+    bldr_class = get_builder(comp_name)
+    bldr = bldr_class(
         job=job,
         project=project,
         build_paths=build_paths,

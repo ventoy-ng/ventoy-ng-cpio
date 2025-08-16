@@ -1,3 +1,4 @@
+from ..builders_abc.build import get_builder
 from .busybox import BusyboxAshBuilder, BusyboxFullBuilder
 from .device_mapper import DeviceMapperBuilder
 from .lunzip import LunzipBuilder
@@ -14,4 +15,5 @@ __all__ = [
     "LunzipBuilder", "Lz4Builder", "LzoBuilder",
     "XzBuilder", "XzEmbeddedBuilder",
     "ZlibBuilder", "ZstdBuilder",
+    "get_builder",
 ]

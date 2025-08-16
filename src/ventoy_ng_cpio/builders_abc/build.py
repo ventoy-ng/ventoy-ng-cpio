@@ -29,16 +29,6 @@ class BaseBuilder(ABC):
         assert isinstance(cls.NAME, str)
         _build_impls[cls.NAME] = cls
 
-    @classmethod
-    def new(
-        cls,
-        job: ComponentJob,
-        project: Project,
-        build_paths: BuildPaths,
-        project_paths: ProjectPaths,
-    ) -> Self:
-        return cls(job, project, build_paths, project_paths)
-
     def get_main_source(self) -> SourceInfo:
         comp = self.job.component
         return comp.sources[comp.info.name]
@@ -67,7 +57,7 @@ class BaseBuilder(ABC):
     def install(self):
         pass
 
-    @classmethod
-    def get_builder(cls, name: str) -> type["BaseBuilder"]:
-        builder_c = _build_impls[name]
-        return builder_c
+
+def get_builder(name: str) -> type[BaseBuilder]:
+    builder_c = _build_impls[name]
+    return builder_c
