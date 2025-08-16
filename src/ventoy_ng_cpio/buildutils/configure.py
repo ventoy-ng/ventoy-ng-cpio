@@ -1,10 +1,9 @@
 from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Self
 
 from ..utils.path import PathLike
 from ..utils.process import ProcessBuilder
-from ..utils.string import assert_stringifyable_value
+from ..utils.stringifyable import assert_stringifyable_value
 from .base_run import BaseCommandBuilder
 
 
