@@ -4,8 +4,8 @@ from typing import Optional
 
 from ventoy_ng_cpio.config import Config
 
-from .consts import BUILD_DIR, PROJECT_DIR
 from .config import CONFIG
+from .consts import BUILD_DIR, PROJECT_DIR
 from .projectv2.project import Project
 from .runtime.build import do_build
 from .runtime.prepare import do_prepare
