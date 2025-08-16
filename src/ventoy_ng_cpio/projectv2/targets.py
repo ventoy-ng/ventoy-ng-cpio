@@ -4,7 +4,6 @@ from typing import Optional, Self
 
 from ..schemas.targets import TargetInfo
 
-
 ARCHES_32 = ["i386"]
 
 

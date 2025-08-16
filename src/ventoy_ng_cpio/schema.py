@@ -7,9 +7,8 @@ from urllib.parse import ParseResult, urlparse
 from mashumaro import field_options
 from mashumaro.mixins.toml import DataClassTOMLMixin
 
-from .schemas.targets import TargetInfo
 from .schemas.sources import SourceInfo
-
+from .schemas.targets import TargetInfo
 
 
 @dataclass(frozen=False)

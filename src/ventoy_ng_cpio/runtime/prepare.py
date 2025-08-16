@@ -1,17 +1,17 @@
-from io import BytesIO
-from pathlib import Path
 import re
+import tarfile
 from hashlib import sha256
-from os import makedirs, chdir
+from io import BytesIO
+from os import chdir, makedirs
+from pathlib import Path
 from typing import Optional
 from urllib.request import urlopen
-import tarfile
+
 from zstd import ZSTD_uncompress
 
 from ..paths.build import BuildPaths
 from ..projectv2.project import Project
 from ..schemas.sources import SourceInfo
-
 
 TAR_REGEX = r"^(.*)\.(tar(\.[^\.]+)?|tgz)$"
 TAR_REGEX_C = re.compile(TAR_REGEX)

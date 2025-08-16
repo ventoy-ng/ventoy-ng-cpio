@@ -1,7 +1,7 @@
 from dataclasses import dataclass
+from itertools import chain
 from os import getcwd
 from pathlib import Path
-from itertools import chain
 from typing import Self
 
 from ..schemas.components import ComponentInfo

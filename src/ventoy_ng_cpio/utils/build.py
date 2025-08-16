@@ -9,8 +9,8 @@ from typing import ClassVar, Optional, Self
 
 from ventoy_ng_cpio.paths.build import BuildPaths
 
-from ..utils.process import ProcessBuilder
 from ..projectv2.targets import Target
+from ..utils.process import ProcessBuilder
 from .path import PathLike
 
 

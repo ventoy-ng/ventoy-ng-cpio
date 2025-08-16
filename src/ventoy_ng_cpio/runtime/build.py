@@ -6,7 +6,6 @@ from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
 from ..projectv2.project import Project
 
-
 CMAKE_TOOLCHAIN_FILE = """# the name of the target operating system
 set(CMAKE_SYSTEM_PROCESSOR  {arch})
 set(CMAKE_SYSTEM_NAME       Linux)
