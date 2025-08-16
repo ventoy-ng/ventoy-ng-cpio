@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2, copytree
 
-from ..builders_abc.make import BaseMakeBuilder
+from ..builders_abc.configure import BaseConfigureBuilder
 from ..buildutils.configure import ConfigureScriptBuilder
-from ..buildutils.make import MakeCommandBuilder
+from ..buildutils.strip import strip_bin_copy
 from ..consts import ENCODING
 from ..projectv2.jobs import ComponentJob
 
@@ -49,24 +49,34 @@ def do_configure(job: ComponentJob):
 
 
 @dataclass
-class DeviceMapperBuilder(BaseMakeBuilder):
+class DeviceMapperBuilder(BaseConfigureBuilder):
     NAME = "device-mapper"
-    configure_script = Path("configure")
+    bin_name = "dmsetup"
+
+    def get_configure_script(self) -> Path:
+        return Path("configure")
+
+    def do_configure(self):
+        do_configure(self.job)
 
     def prepare(self):
-        if not self.configure_script.exists():
+        configure_script = Path("configure")
+        if not configure_script.exists():
             do_copy_src(self.get_main_source_dir())
-        if self.makefile.exists():
-            return
-        do_configure(self.job)
+        super().prepare()
 
     def build(self):
         # make -q is broken here for some reason
         bin_dmsetup = Path("dmsetup/dmsetup")
         if bin_dmsetup.exists():
             return
-        make = MakeCommandBuilder()
-        make.run()
+        self.make.run()
 
     def install(self):
-        pass
+        out_dir = self.get_output_dir()
+        out_dir.mkdir(parents=True, exist_ok=True)
+        strip_bin_copy(
+            self.job.target,
+            self.bin_name,
+            str(out_dir / self.bin_name),
+        )

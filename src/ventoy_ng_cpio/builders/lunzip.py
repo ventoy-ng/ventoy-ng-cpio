@@ -1,9 +1,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..builders_abc.make import BaseMakeBuilder
+from ..builders_abc.configure import BaseConfigureBuilder
 from ..buildutils.configure import ConfigureScriptBuilder
-from ..buildutils.make import MakeCommandBuilder
 from ..buildutils.strip import strip_bin_copy
 from ..projectv2.jobs import ComponentJob
 
@@ -22,21 +21,14 @@ def do_configure(
 
 
 @dataclass
-class LunzipBuilder(BaseMakeBuilder):
+class LunzipBuilder(BaseConfigureBuilder):
     NAME = "lunzip"
 
-    def prepare(self):
-        main_source_dir = self.get_main_source_dir()
-        main_source_conf = main_source_dir / "configure"
-
-        if not self.makefile.exists():
-            do_configure(self.job, main_source_conf)
-
-    def build(self):
-        make = MakeCommandBuilder()
-        if make.run_if_needed().is_up_to_date():
-            return
-        self.install()
+    def do_configure(self):
+        do_configure(
+            self.job,
+            self.get_configure_script(),
+        )
 
     def install(self):
         out_dir = self.get_output_dir()
