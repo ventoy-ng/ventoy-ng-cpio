@@ -1,45 +1,19 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..builders_abc.make import BaseMakeBuilder
+from ..builders_abc.cmake import CMakeDefBuilder
 from ..buildutils.cmake import CMakeCommandBuilder
-from ..buildutils.make import MakeCommandBuilder
-from ..paths.build import BuildPaths
-from ..projectv2.jobs import ComponentJob
-
-
-def do_configure(
-    job: ComponentJob,
-    paths: BuildPaths,
-    main_source_cmake: Path,
-    out_dir: Path,
-):
-    target = job.target
-
-    cmake = CMakeCommandBuilder(source_dir=str(main_source_cmake))
-    cmake.install_prefix = str(out_dir.absolute())
-    cmake.set_toolchain(paths, target)
-    cmake.run()
 
 
 @dataclass
-class Lz4Builder(BaseMakeBuilder):
+class Lz4Builder(CMakeDefBuilder):
     NAME = "lz4"
 
-    def __post_init__(self):
-        main_source_dir = self.get_main_source_dir()
-        self.cmake_dir = main_source_dir / "build/cmake"
-        self.make = MakeCommandBuilder()
+    def get_cmake_dir(self) -> Path:
+        return self.get_main_source_dir() / "build/cmake"
 
-    def prepare(self):
-        if self.makefile.exists():
-            return
-        do_configure(
-            self.job,
-            self.build_paths,
-            self.cmake_dir,
-            self.get_output_dir(),
-        )
+    def cmake_configure_hook(self, cmake: CMakeCommandBuilder):
+        pass
 
     def build(self):
         # make -q is broken here due to symlinks
@@ -48,6 +22,3 @@ class Lz4Builder(BaseMakeBuilder):
             return
         self.make.run()
         self.install()
-
-    def install(self):
-        self.make.run(["install"])
