@@ -15,3 +15,24 @@ clean-dist: clean
 
 clean-pycache:
     -find {{SRC_DIR}} -iname __pycache__ -exec rm -r {} +
+
+check: mypy pylint flake8
+
+alias fmt := flake8
+alias flake := flake8
+alias lint := pylint
+alias typecheck := mypy
+
+flake8:
+    -uv run flake8 {{SRC_DIR}}
+
+isort:
+    -uv run isort {{SRC_DIR}}
+
+mypy:
+    -uv run mypy {{SRC_DIR}}
+
+pylint:
+    -uv run pylint \
+        --disable C0114,C0115,C0116 \
+        {{SRC_DIR}}
