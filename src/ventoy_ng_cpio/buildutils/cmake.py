@@ -30,8 +30,7 @@ class CMakeCommandBuilder(BaseCommandBuilder):
         self.toolchain_file /= f"{target.info.name2}.cmake"
 
     def build_process(self) -> ProcessBuilder:
-        res = ProcessBuilder([self.path])
-        res.env = self.env
+        res = self._build_process_a()
         res.args.extend(["-S", self.source_dir])
         res.args.extend(["-B", self.build_dir])
         res.args.extend(["--install-prefix", self.install_prefix])
@@ -39,15 +38,10 @@ class CMakeCommandBuilder(BaseCommandBuilder):
             res.args.extend(["-G", self.generator])
         if self.toolchain_file is not None:
             res.args.extend(["--toolchain", str(self.toolchain_file)])
-        #cmd.extend([
-        #    #"-DCMAKE_VERBOSE_MAKEFILE:BOOL=ON",
-        #    "--log-level=VERBOSE",
-        #    #"--debug-trycompile",
-        #])
         args = {
             "CMAKE_BUILD_TYPE": self.build_type,
-            #"CMAKE_INSTALL_PREFIX": self.install_prefix,
-            #"CMAKE_STAGING_PREFIX": self.install_prefix,
+            # NOTE: --prefix=/ is broken
+            # "CMAKE_INSTALL_PREFIX": self.install_prefix,
             "BUILD_SHARED_LIBS": "OFF",
         }
         args.update(self.args)

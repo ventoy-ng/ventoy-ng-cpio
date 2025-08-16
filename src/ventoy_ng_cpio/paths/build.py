@@ -29,10 +29,12 @@ class BuildPaths:
         return self.build_dir / "work" / component.info.name
 
     def component_job_work_dir(self, job: ComponentJob) -> Path:
-        return self.component_work_dir(job.component) / f"build{job.target.suffix}"
+        work_dir = self.component_work_dir(job.component)
+        return work_dir / f"build{job.target.suffix}"
 
     def component_output_dir(self, component: Component) -> Path:
         return self.build_dir / "output" / component.info.name
 
     def component_job_output_dir(self, job: ComponentJob) -> Path:
-        return self.component_output_dir(job.component) / job.target.info.name2
+        output_dir = self.component_output_dir(job.component)
+        return output_dir / job.target.info.name2

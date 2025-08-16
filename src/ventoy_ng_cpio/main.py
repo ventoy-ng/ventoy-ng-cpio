@@ -2,8 +2,6 @@ from argparse import ArgumentParser
 from pathlib import Path
 from typing import Optional
 
-from ventoy_ng_cpio.config import Config
-
 from .config import CONFIG
 from .consts import BUILD_DIR, PROJECT_DIR
 from .projectv2.project import Project
