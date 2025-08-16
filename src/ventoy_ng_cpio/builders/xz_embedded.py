@@ -27,6 +27,7 @@ class XzEmbeddedBuilder(BaseBuilder):
         make = self.make_instance
         if make.run_if_needed().is_up_to_date():
             return
+        self.install()
 
     def install(self):
         make = self.make_instance

@@ -11,7 +11,4 @@ def pathlike_to_path(pathlike: PathLike) -> Path:
         isinstance(pathlike, os.PathLike),
     ]):
         return Path(pathlike)
-    else:
-        raise TypeError("{} doesn't seem Path-like".format(
-            type(pathlike),
-        ))
+    raise TypeError(f"{type(pathlike)} doesn't seem Path-like")

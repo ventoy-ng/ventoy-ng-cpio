@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2, copytree
 
+from ..consts import ENCODING
 from ..builders_abc.build import BaseBuilder
 from ..buildutils.configure import ConfigureScriptBuilder
 from ..buildutils.make import MakeCommandBuilder
@@ -42,9 +43,9 @@ def do_configure(job: ComponentJob):
     conf.run()
 
     configure_header = Path("include/configure.h")
-    conf_h_old = configure_header.read_text()
+    conf_h_old = configure_header.read_text(encoding=ENCODING)
     conf_h = do_config_patch(conf_h_old)
-    configure_header.write_text(conf_h)
+    configure_header.write_text(conf_h, encoding=ENCODING)
 
 
 @dataclass

@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from inspect import isabstract
 from pathlib import Path
-from typing import ClassVar, Self
+from typing import ClassVar
 
 from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
@@ -25,7 +25,7 @@ class BaseBuilder(ABC):
         if isabstract(cls):
             return
         if not cls.NAME:
-            raise Exception
+            raise NotImplementedError(cls.__name__)
         assert isinstance(cls.NAME, str)
         _build_impls[cls.NAME] = cls
 
