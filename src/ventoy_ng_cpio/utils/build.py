@@ -2,7 +2,6 @@ from abc import ABC, abstractmethod
 from inspect import isabstract
 from typing import ClassVar
 
-
 _build_impls: dict[str, type["BaseBuilder"]] = {}
 
 
