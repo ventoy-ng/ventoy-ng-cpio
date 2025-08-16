@@ -5,13 +5,13 @@ build:
     uv run ventoy-ng-cpio
 
 clean:
-    -rm -r {{SRC_DIR}}/build-aux {{SRC_DIR}}/output {{SRC_DIR}}/work
+    -rm -r {{BUILD_DIR}}/build-aux {{BUILD_DIR}}/output {{BUILD_DIR}}/work
 
 clean-all:
-    -rm -r {{SRC_DIR}}
+    -rm -r {{BUILD_DIR}}
 
 clean-dist: clean
-    -rm -r {{SRC_DIR}}/dist
+    -rm -r {{BUILD_DIR}}/dist
 
 clean-pycache:
     -find {{SRC_DIR}} -iname __pycache__ -exec rm -r {} +
