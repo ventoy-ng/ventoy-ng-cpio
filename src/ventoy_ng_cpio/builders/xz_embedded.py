@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from ..builders_abc.build import BaseBuilder
+from ..builders_abc.make import BaseMakeBuilder
 from ..buildutils.make import MakeCommandBuilder
 
 
 @dataclass
-class XzEmbeddedBuilder(BaseBuilder):
+class XzEmbeddedBuilder(BaseMakeBuilder):
     NAME = "xz-embedded"
 
     def __post_init__(self):
@@ -18,19 +18,18 @@ class XzEmbeddedBuilder(BaseBuilder):
         make.file = str(makefile)
         make.env["CROSS"] = self.job.target.info.get_cross()
         make.envs_strict["srcdir"] = str(self.get_main_source_dir())
-        self.make_instance = make
+        self.make = make
 
     def prepare(self):
         pass
 
     def build(self):
-        make = self.make_instance
-        if make.run_if_needed().is_up_to_date():
+        if self.make.run_if_needed().is_up_to_date():
             return
         self.install()
 
     def install(self):
-        make = self.make_instance
+        make = self.make
 
         make.envs_strict["DESTDIR"] = str(self.get_output_dir())
         make.run(["install"])

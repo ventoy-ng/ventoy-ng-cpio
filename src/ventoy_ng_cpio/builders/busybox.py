@@ -4,13 +4,13 @@ from os import symlink
 from pathlib import Path
 from shutil import copy2
 
-from ..builders_abc.build import BaseBuilder
+from ..builders_abc.make import BaseMakeBuilder
 from ..buildutils.make import MakeCommandBuilder
 from ..schemas.sources import SourceInfo
 
 
 @dataclass
-class BaseBusyboxBuilder(BaseBuilder, ABC):
+class BaseBusyboxBuilder(BaseMakeBuilder, ABC):
     config_file: Path = Path(".config")
 
     def __post_init__(self):

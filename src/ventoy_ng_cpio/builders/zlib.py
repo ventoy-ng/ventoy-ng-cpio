@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..builders_abc.build import BaseBuilder
+from ..builders_abc.make import BaseMakeBuilder
 from ..buildutils.configure import ConfigureScriptBuilder
 from ..buildutils.make import MakeCommandBuilder
 from ..projectv2.jobs import ComponentJob
@@ -20,13 +20,13 @@ def do_configure(
 
 
 @dataclass
-class ZlibBuilder(BaseBuilder):
+class ZlibBuilder(BaseMakeBuilder):
     NAME = "zlib"
 
     def __post_init__(self):
         main_source_dir = self.get_main_source_dir()
         self.configure_script = main_source_dir / "configure"
-        self.makefile = Path("Makefile")
+        self.make = MakeCommandBuilder()
 
     def prepare(self):
         if self.makefile.exists():
@@ -34,13 +34,12 @@ class ZlibBuilder(BaseBuilder):
         do_configure(self.job, self.configure_script)
 
     def build(self):
-        make = MakeCommandBuilder()
-        if make.run_if_needed().is_up_to_date():
+        if self.make.run_if_needed().is_up_to_date():
             return
         self.install()
 
     def install(self):
-        make = MakeCommandBuilder()
+        make = self.make
 
         make.envs_strict["DESTDIR"] = str(self.get_output_dir())
         make.run(["install"])

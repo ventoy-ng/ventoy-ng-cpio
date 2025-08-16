@@ -3,7 +3,7 @@ from pathlib import Path
 from shlex import join
 from shutil import copy2, copytree
 
-from ..builders_abc.build import BaseBuilder
+from ..builders_abc.make import BaseMakeBuilder
 from ..buildutils.make import MakeCommandBuilder
 from ..buildutils.strip import strip_bin_copy
 
@@ -17,12 +17,19 @@ def do_copy_src(source_dir: Path):
 
 
 @dataclass
-class VBladeBuilder(BaseBuilder):
+class VBladeBuilder(BaseMakeBuilder):
     NAME = "vblade"
+    makefile = Path("makefile")
+    bin_name = "vblade"
 
     def __post_init__(self):
-        self.makefile = Path("makefile")
-        self.bin_name = "vblade"
+        make = MakeCommandBuilder()
+        # NOTE: doesn't accept LDFLAGS
+        # also -fcommon is needed to avoid multiple definitions
+        cc = join([self.job.target.get_cmd("cc"), "-static", "-fcommon"])
+        make.envs_strict["CC"] = cc
+        make.envs_strict["CFLAGS"] = "-Oz -Wall"
+        self.make = make
 
     def prepare(self):
         if self.makefile.exists():
@@ -30,13 +37,7 @@ class VBladeBuilder(BaseBuilder):
         do_copy_src(self.get_main_source_dir())
 
     def build(self):
-        make = MakeCommandBuilder()
-        # NOTE: doesn't accept LDFLAGS
-        # also -fcommon is needed to avoid multiple definitions
-        cc = join([self.job.target.get_cmd("cc"), "-static", "-fcommon"])
-        make.envs_strict["CC"] = cc
-        make.envs_strict["CFLAGS"] = "-Oz -Wall"
-        if make.run_if_needed().is_up_to_date():
+        if self.make.run_if_needed().is_up_to_date():
             return
         self.install()
 

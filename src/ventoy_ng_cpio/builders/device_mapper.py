@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2, copytree
 
-from ..builders_abc.build import BaseBuilder
+from ..builders_abc.make import BaseMakeBuilder
 from ..buildutils.configure import ConfigureScriptBuilder
 from ..buildutils.make import MakeCommandBuilder
 from ..consts import ENCODING
@@ -49,12 +49,9 @@ def do_configure(job: ComponentJob):
 
 
 @dataclass
-class DeviceMapperBuilder(BaseBuilder):
+class DeviceMapperBuilder(BaseMakeBuilder):
     NAME = "device-mapper"
-
-    def __post_init__(self):
-        self.configure_script = Path("configure")
-        self.makefile = Path("Makefile")
+    configure_script = Path("configure")
 
     def prepare(self):
         if not self.configure_script.exists():

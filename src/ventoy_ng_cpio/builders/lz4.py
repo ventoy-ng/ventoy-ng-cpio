@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..builders_abc.build import BaseBuilder
+from ..builders_abc.make import BaseMakeBuilder
 from ..buildutils.cmake import CMakeCommandBuilder
 from ..buildutils.make import MakeCommandBuilder
 from ..paths.build import BuildPaths
@@ -23,13 +23,13 @@ def do_configure(
 
 
 @dataclass
-class Lz4Builder(BaseBuilder):
+class Lz4Builder(BaseMakeBuilder):
     NAME = "lz4"
 
     def __post_init__(self):
         main_source_dir = self.get_main_source_dir()
         self.cmake_dir = main_source_dir / "build/cmake"
-        self.makefile = Path("Makefile")
+        self.make = MakeCommandBuilder()
 
     def prepare(self):
         if self.makefile.exists():
@@ -46,10 +46,8 @@ class Lz4Builder(BaseBuilder):
         lib_lz4 = Path("liblz4.a")
         if lib_lz4.exists():
             return
-        make = MakeCommandBuilder()
-        make.run()
+        self.make.run()
         self.install()
 
     def install(self):
-        make = MakeCommandBuilder()
-        make.run(["install"])
+        self.make.run(["install"])

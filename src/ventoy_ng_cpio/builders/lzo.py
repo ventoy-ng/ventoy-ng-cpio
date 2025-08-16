@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..builders_abc.build import BaseBuilder
+from ..builders_abc.make import BaseMakeBuilder
 from ..buildutils.configure import ConfigureScriptBuilder
 from ..buildutils.make import MakeCommandBuilder
 from ..projectv2.jobs import ComponentJob
@@ -20,13 +20,13 @@ def do_configure(
 
 
 @dataclass
-class LzoBuilder(BaseBuilder):
+class LzoBuilder(BaseMakeBuilder):
     NAME = "lzo"
 
     def __post_init__(self):
         main_source_dir = self.get_main_source_dir()
         self.configure_script = main_source_dir / "configure"
-        self.makefile = Path("Makefile")
+        self.make = MakeCommandBuilder()
 
     def prepare(self):
         if self.makefile.exists():
@@ -38,12 +38,11 @@ class LzoBuilder(BaseBuilder):
         lzo_libtool = Path("src/liblzo2.la")
         if lzo_libtool.exists():
             return
-        make = MakeCommandBuilder()
-        make.run()
+        self.make.run()
         self.install()
 
     def install(self):
-        make = MakeCommandBuilder()
+        make = self.make
 
         make.envs_strict["DESTDIR"] = str(self.get_output_dir())
         make.run(["install"])
