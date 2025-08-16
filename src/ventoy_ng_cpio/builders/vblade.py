@@ -19,10 +19,10 @@ def do_copy_src(source_dir: Path):
 @dataclass
 class VBladeBuilder(BaseMakeBuilder):
     NAME = "vblade"
-    makefile = Path("makefile")
     bin_name = "vblade"
 
     def __post_init__(self):
+        self.makefile = Path("makefile")
         make = MakeCommandBuilder()
         # NOTE: doesn't accept LDFLAGS
         # also -fcommon is needed to avoid multiple definitions
