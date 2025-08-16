@@ -5,7 +5,7 @@ from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
 from ..projectv2.project import Project
-from ..utils.build import MakeRunner
+from ..buildutils.make import MakeRunner
 
 
 def do_configure(

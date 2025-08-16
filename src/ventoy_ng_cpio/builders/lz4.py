@@ -4,7 +4,8 @@ from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
 from ..projectv2.project import Project
-from ..utils.build import CMakeBuilder, MakeRunner, NinjaRunner
+from ..buildutils.cmake import CMakeBuilder
+from ..buildutils.make import MakeRunner, NinjaRunner
 
 
 def do_configure(
