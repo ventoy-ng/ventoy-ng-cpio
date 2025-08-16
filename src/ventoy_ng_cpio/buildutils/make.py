@@ -5,11 +5,11 @@ from os import cpu_count
 from typing import Optional
 
 from ..utils.process import ProcessBuilder
-from .base_run import BaseCommandRunner
+from .base_run import BaseCommandBuilder
 
 
 @dataclass
-class MakeLikeRunner(BaseCommandRunner, ABC):
+class MakeLikeCommandBuilder(BaseCommandBuilder, ABC):
     file: Optional[str] = field(default=None)
 
     def _build_process_b(
@@ -31,7 +31,7 @@ class MakeStatus(Enum):
 
 
 @dataclass
-class MakeRunner(MakeLikeRunner):
+class MakeCommandBuilder(MakeLikeCommandBuilder):
     path: str = field(default="make")
     jobs: Optional[int] = field(default_factory=cpu_count)
     envs_strict: dict[str, str] = field(default_factory=dict)
@@ -74,7 +74,7 @@ class MakeRunner(MakeLikeRunner):
 
 
 @dataclass
-class NinjaRunner(MakeLikeRunner):
+class NinjaCommandRunner(MakeLikeCommandBuilder):
     path: str = field(default="ninja")
 
     def build_process(

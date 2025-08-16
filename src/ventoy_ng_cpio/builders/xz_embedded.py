@@ -2,7 +2,7 @@ from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
 from ..projectv2.project import Project
-from ..buildutils.make import MakeRunner
+from ..buildutils.make import MakeCommandBuilder
 
 
 def build(
@@ -20,7 +20,7 @@ def build(
     makefile /= comp.info.name
     makefile /= "Makefile"
 
-    make = MakeRunner()
+    make = MakeCommandBuilder()
     make.file = str(makefile)
     make.env["CROSS"] = job.target.info.get_cross()
     make.envs_strict["srcdir"] = str(main_source_dir)

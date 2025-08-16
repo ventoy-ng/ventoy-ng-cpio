@@ -5,7 +5,7 @@ from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
 from ..projectv2.project import Project
-from ..buildutils.make import MakeRunner
+from ..buildutils.make import MakeCommandBuilder
 
 
 def do_configure(
@@ -55,7 +55,7 @@ def build(
 
     makefile = main_source_dir / "Makefile"
 
-    make = MakeRunner()
+    make = MakeCommandBuilder()
     make.file = str(makefile)
     make.env["KBUILD_SRC"] = str(main_source_dir)
     make.env["CROSS_COMPILE"] = target.info.get_cross()

@@ -5,15 +5,11 @@ from typing import Self
 from ..utils.process import ProcessBuilder
 from ..utils.string import assert_stringifyable_value
 from ..utils.path import PathLike
-from .base_run import BaseCommandRunner
-
-
-def default_configure_name() -> Path:
-    return Path("./configure")
+from .base_run import BaseCommandBuilder
 
 
 @dataclass
-class ConfigureScriptWrapper(BaseCommandRunner):
+class ConfigureScriptBuilder(BaseCommandBuilder):
     path: str = field(default="./configure")
     args: list[str] = field(default_factory=list)
     confenv: dict[str, str] = field(default_factory=dict)

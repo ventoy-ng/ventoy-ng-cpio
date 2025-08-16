@@ -8,14 +8,10 @@ from ..utils.process import ProcessBuilder
 
 
 @dataclass
-class BaseCommandRunner(ABC):
+class BaseCommandBuilder(ABC):
     path: str
     cwd: Optional[Path] = field(default=None)
     env: dict[str, str] = field(default_factory=lambda: dict(environ))
-
-    #@abstractmethod
-    #def process_build(self) -> ProcessBuilder:
-    #    raise NotImplementedError
 
     def _build_process_a(
         self,

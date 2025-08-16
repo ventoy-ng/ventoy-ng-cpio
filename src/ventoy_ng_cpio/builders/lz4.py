@@ -4,8 +4,8 @@ from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
 from ..projectv2.project import Project
-from ..buildutils.cmake import CMakeBuilder
-from ..buildutils.make import MakeRunner, NinjaRunner
+from ..buildutils.cmake import CMakeCommandBuilder
+from ..buildutils.make import MakeCommandBuilder, NinjaCommandRunner
 
 
 def do_configure(
@@ -16,7 +16,7 @@ def do_configure(
     target = job.target
     out_dir = paths.component_job_output_dir(job)
 
-    cmake = CMakeBuilder(source_dir=str(main_source_cmake))
+    cmake = CMakeCommandBuilder(source_dir=str(main_source_cmake))
     cmake.install_prefix = str(out_dir.absolute())
     cmake.set_toolchain(paths, target)
     cmake.generator = "Ninja"
@@ -46,7 +46,7 @@ def build(
     #if make.run_if_needed().is_up_to_date():
     #    return
 
-    ninja = NinjaRunner()
+    ninja = NinjaCommandRunner()
     if ninja.run_if_needed().is_up_to_date():
         return
 

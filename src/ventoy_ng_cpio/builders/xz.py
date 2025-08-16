@@ -4,15 +4,15 @@ from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
 from ..projectv2.project import Project
-from ..buildutils.configure import ConfigureScriptWrapper
-from ..buildutils.make import MakeRunner
+from ..buildutils.configure import ConfigureScriptBuilder
+from ..buildutils.make import MakeCommandBuilder
 
 
 def do_configure(
     job: ComponentJob,
     main_source_conf: Path,
 ):
-    conf = ConfigureScriptWrapper.new(main_source_conf)
+    conf = ConfigureScriptBuilder.new(main_source_conf)
     conf.add_arguments(f"--host={job.target.info.arch}-linux")
     conf.add_arguments("--prefix=/")
     conf.add_arguments("--enable-shared=no", "--enable-static=yes")
@@ -41,7 +41,7 @@ def build(
 
     if not makefile.exists():
         do_configure(job, main_source_conf)
-    make = MakeRunner()
+    make = MakeCommandBuilder()
     if make.run_if_needed().is_up_to_date():
         return
 

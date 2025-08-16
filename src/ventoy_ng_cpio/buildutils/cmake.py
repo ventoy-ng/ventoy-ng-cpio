@@ -1,20 +1,15 @@
-from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
-from inspect import isabstract
 from pathlib import Path
-from shutil import copy2
-from typing import ClassVar, Optional, Self
+from typing import Optional
 
 from ..paths.build import BuildPaths
 from ..projectv2.targets import Target
 from ..utils.process import ProcessBuilder
-from ..utils.string import assert_stringifyable_value
-from ..utils.path import PathLike
-from .base_run import BaseCommandRunner
+from .base_run import BaseCommandBuilder
 
 
 @dataclass
-class CMakeBuilder(BaseCommandRunner):
+class CMakeCommandBuilder(BaseCommandBuilder):
     path: str = field(default="cmake")
 
     build_dir: str = field(default=".")
