@@ -1,5 +1,6 @@
 from os import chdir
 from pathlib import Path
+from typing import Optional
 
 from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
@@ -85,9 +86,12 @@ def do_build_job(
     chdir(project.info.cwd)
 
 
-def do_build(project: Project):
+def do_build(
+    project: Project,
+    target_components: Optional[list[str]] = None,
+):
     prepare_for_build(project)
-    jobs = project.walk_dedup()
+    jobs = project.walk_dedup(target_components)
     for i, job in enumerate(jobs):
         print(f"{i:3} - {job.name}")
         do_build_job(job, project)

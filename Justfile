@@ -2,7 +2,7 @@ BUILD_DIR := "build"
 SRC_DIR := "src"
 
 build:
-    uv run ventoy-ng-cpio
+    uv run ventoy-ng-cpio build
 
 clean:
     -rm -r {{BUILD_DIR}}/build-aux {{BUILD_DIR}}/output {{BUILD_DIR}}/work

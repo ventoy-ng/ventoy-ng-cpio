@@ -3,7 +3,6 @@ from os.path import relpath
 from pathlib import Path
 from typing import Optional, Self
 
-from ..consts import BUILD_DIR
 from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..schemas.sources import SourceInfo
@@ -48,7 +47,7 @@ class Project:
         return this
 
     @classmethod
-    def load(cls, root: PathLike, build_dir: PathLike = BUILD_DIR) -> Self:
+    def load(cls, root: PathLike, build_dir: PathLike) -> Self:
         project_dir = pathlike_to_path(root)
         build_dir = pathlike_to_path(build_dir)
         info = ProjectInfoX.load(project_dir)
@@ -76,13 +75,18 @@ class Project:
 
     def walk_dedup(
         self,
-        component_name: str = "main",
+        component_names: Optional[list[str]] = None,
     ) -> list[ComponentJob]:
-        main_comp = self.components[component_name]
+        if component_names is None:
+            component_names = ["main"]
+        main_comp = [
+            self.components[comp_name]
+            for comp_name in component_names
+        ]
         main_jobs = [
             job
             for job in self.component_jobs.values()
-            if job.component == main_comp
+            if job.component in main_comp
         ]
         dup_deps_2d = [
             job.walk()
