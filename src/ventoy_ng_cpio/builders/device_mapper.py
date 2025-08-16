@@ -2,10 +2,10 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2, copytree
 
-from ..consts import ENCODING
 from ..builders_abc.build import BaseBuilder
 from ..buildutils.configure import ConfigureScriptBuilder
 from ..buildutils.make import MakeCommandBuilder
+from ..consts import ENCODING
 from ..projectv2.jobs import ComponentJob
 
 
