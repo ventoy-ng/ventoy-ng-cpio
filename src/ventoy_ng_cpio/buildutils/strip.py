@@ -7,7 +7,7 @@ from ..utils.process import ProcessBuilder
 
 def strip_bin(
     target: Target,
-    bin: str,
+    binary: str,
     cmdname: Optional[str] = None,
     strip_all: bool = True,
 ):
@@ -17,16 +17,16 @@ def strip_bin(
     if strip_all:
         cmd.args.append("--strip-all")
     cmd.args.append("--")
-    cmd.args.append(bin)
+    cmd.args.append(binary)
     cmd.run()
 
 
 def strip_bin_copy(
     target: Target,
-    bin: str,
-    starg: str,
+    source: str,
+    dest: str,
     cmdname: Optional[str] = None,
     strip_all: bool = True,
 ):
-    copy2(bin, starg)
-    strip_bin(target, starg, cmdname, strip_all)
+    copy2(source, dest)
+    strip_bin(target, dest, cmdname, strip_all)
