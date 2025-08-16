@@ -5,6 +5,7 @@ from .lunzip import LunzipBuilder
 from .lz4 import Lz4Builder
 from .lzo import LzoBuilder
 from .smallz4 import Smallz4Builder
+from .squashfs import SquashfsBuilder
 from .xz import XzBuilder
 from .xz_embedded import XzEmbeddedBuilder
 from .zlib import ZlibBuilder
@@ -14,7 +15,7 @@ __all__ = [
     "BusyboxAshBuilder", "BusyboxFullBuilder",
     "DeviceMapperBuilder",
     "LunzipBuilder", "Lz4Builder", "LzoBuilder",
-    "Smallz4Builder",
+    "Smallz4Builder", "SquashfsBuilder",
     "XzBuilder", "XzEmbeddedBuilder",
     "ZlibBuilder", "ZstdBuilder",
     "get_builder",
