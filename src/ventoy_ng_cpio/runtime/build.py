@@ -14,8 +14,8 @@ set(CMAKE_SYSTEM_NAME       Linux)
 set(TOOLCHAIN_PREFIX    {triplet})
 
 # which compilers to use for C and C++
-set(CMAKE_C_COMPILER    ${{TOOLCHAIN_PREFIX}}-gcc)
-set(CMAKE_CXX_COMPILER  ${{TOOLCHAIN_PREFIX}}-g++)
+set(CMAKE_C_COMPILER    ${{TOOLCHAIN_PREFIX}}-cc)
+set(CMAKE_CXX_COMPILER  ${{TOOLCHAIN_PREFIX}}-c++)
 
 # NOTE: cmake uses -Os by default, but our version of gcc supports it
 #set(CMAKE_C_FLAGS_MINSIZEREL    -Oz -DNDEBUG)

@@ -14,7 +14,7 @@ def do_configure(
     conf = ConfigureScriptBuilder.new(configure_script)
     conf.add_arguments(f"--host={job.target.info.arch}-linux")
     conf.add_arguments("--prefix=/")
-    conf.confenv["CC"] = job.target.get_cmd("gcc")
+    conf.confenv["CC"] = job.target.get_cmd("cc")
     conf.confenv["CFLAGS"] = "-Oz"
     conf.run()
 

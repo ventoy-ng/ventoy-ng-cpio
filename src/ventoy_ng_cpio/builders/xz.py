@@ -20,7 +20,7 @@ def do_configure(
         "lzmadec", "lzmainfo", "lzma-links",
         "scripts", "assembler",
     )
-    conf.confenv["CC"] = job.target.get_cmd("gcc")
+    conf.confenv["CC"] = job.target.get_cmd("cc")
     conf.confenv["CFLAGS"] = "-Oz"
     conf.run()
 
