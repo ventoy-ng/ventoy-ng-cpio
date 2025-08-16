@@ -269,13 +269,12 @@ _build_impls: dict[str, type["BaseBuilder"]] = {}
 
 
 class BaseBuilder(ABC):
-    name: ClassVar[str] = NotImplemented
+    name: ClassVar[str] = ""
 
     def __init_subclass__(cls) -> None:
-        this = cls.__class__
         if isabstract(cls):
             return
-        if cls.name == this.name:
+        if not cls.name:
             raise Exception
         assert isinstance(cls.name, str)
         _build_impls[cls.name] = cls
