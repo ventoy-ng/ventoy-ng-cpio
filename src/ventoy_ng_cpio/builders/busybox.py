@@ -2,6 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from os import symlink
 from pathlib import Path
+from shutil import copy2
 
 from ..builders_abc.build import BaseBuilder
 from ..buildutils.make import MakeCommandBuilder
@@ -49,7 +50,9 @@ class BaseBusyboxBuilder(BaseBuilder, ABC):
         self.make.run()
 
     def install(self):
-        pass
+        output_dir = self.get_output_dir()
+        output_dir.mkdir(parents=True, exist_ok=True)
+        copy2("busybox", output_dir / "busybox")
 
 
 @dataclass
