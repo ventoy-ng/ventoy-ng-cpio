@@ -1,19 +1,12 @@
 from dataclasses import dataclass, field
 
 
-def default_cflags() -> list[str]:
-    return ["-Oz"]
-
-
-@dataclass
-class ProjectConfig:
-    cflags: list[str] = field(default_factory=default_cflags)
-
-
 @dataclass
 class Config:
     cleanbuild: bool = field(default=False)
-    project: ProjectConfig = field(default_factory=ProjectConfig)
+    c_flags: list[str] = field(default_factory=list)
+    c_opt_level: str = field(default="z")
+    c_lto: bool = field(default=True)
 
 
 CONFIG = Config()

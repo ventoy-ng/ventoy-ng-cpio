@@ -2,6 +2,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional, Self
 
+from ventoy_ng_cpio.config import CONFIG
+
 from ..schemas.targets import TargetInfo
 
 ARCHES_32 = ["i386"]
@@ -70,6 +72,13 @@ class Target:
 
     def get_cmd(self, command: str) -> str:
         return self.info.get_cross() + command
+
+    def get_cflags(self) -> list[str]:
+        res = CONFIG.c_flags.copy()
+        res.append("-O" + CONFIG.c_opt_level)
+        if CONFIG.c_lto:
+            res.append("-flto")
+        return res
 
 
 DEFAULT_TARGET_INFO = TargetInfo(
