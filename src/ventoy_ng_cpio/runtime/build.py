@@ -58,7 +58,11 @@ def do_build_job_log(
     from ..builders import get_builder
 
     comp_name = job.component.info.name
-    bldr_class = get_builder(comp_name)
+    try:
+        bldr_class = get_builder(comp_name)
+    except KeyError:
+        print("WARNING: NOT IMPLEMENTED FOR NOW")
+        return
     bldr = bldr_class(
         job=job,
         project=project,
