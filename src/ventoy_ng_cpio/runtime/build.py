@@ -65,6 +65,8 @@ def do_build_job_log(
         )
         return
     match comp_name:
+        case "device-mapper":
+            from ventoy_ng_cpio.builders.device_mapper import build
         case "lunzip":
             from ventoy_ng_cpio.builders.lunzip import build
         case "lz4":
