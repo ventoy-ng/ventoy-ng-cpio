@@ -1,4 +1,4 @@
-from abc import abstractmethod
+from abc import ABC, abstractmethod
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
@@ -26,7 +26,7 @@ def do_cmake_configure(
 
 
 @dataclass
-class BaseCMakeBuilder(BaseBuilder):
+class BaseCMakeBuilder(BaseBuilder, ABC):
     @abstractmethod
     def is_configured(self) -> bool:
         pass
@@ -52,7 +52,7 @@ class BaseCMakeBuilder(BaseBuilder):
 
 
 @dataclass
-class CMakeDefBuilder(BaseCMakeBuilder, BaseMakeBuilder):
+class CMakeDefBuilder(BaseCMakeBuilder, BaseMakeBuilder, ABC):
     make: MakeCommandBuilder = field(default_factory=MakeCommandBuilder)
 
     def is_configured(self) -> bool:
