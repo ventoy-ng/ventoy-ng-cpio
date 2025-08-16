@@ -54,42 +54,19 @@ def do_build_job_log(
     build_paths: BuildPaths,
     project_paths: ProjectPaths,
 ):
+    import ventoy_ng_cpio.builders
+    from ventoy_ng_cpio.builders_abc import build as builders
+
     comp_name = job.component.info.name
-    if comp_name.startswith("busybox"):
-        from ventoy_ng_cpio.builders.busybox import build
-        build(
-            job=job,
-            project=project,
-            build_paths=build_paths,
-            project_paths=project_paths,
-        )
-        return
-    match comp_name:
-        case "device-mapper":
-            from ventoy_ng_cpio.builders.device_mapper import build
-        case "lunzip":
-            from ventoy_ng_cpio.builders.lunzip import build
-        case "lz4":
-            from ventoy_ng_cpio.builders.lz4 import build
-        case "lzo":
-            from ventoy_ng_cpio.builders.lzo import build
-        case "xz":
-            from ventoy_ng_cpio.builders.xz import build
-        case "xz-embedded":
-            from ventoy_ng_cpio.builders.xz_embedded import build
-        case "zlib":
-            from ventoy_ng_cpio.builders.zlib import build
-        case "zstd":
-            from ventoy_ng_cpio.builders.zstd import build
-        case _:
-            print("Not implemented for now")
-            return
-    build(
+    bldr_class = builders._build_impls[comp_name]
+    bldr = bldr_class.new(
         job=job,
         project=project,
         build_paths=build_paths,
         project_paths=project_paths,
     )
+    bldr.prepare()
+    bldr.build()
 
 
 def do_build_job(

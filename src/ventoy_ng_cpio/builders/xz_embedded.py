@@ -1,33 +1,35 @@
+from dataclasses import dataclass
+
+from ..builders_abc.build import BaseBuilder
 from ..buildutils.make import MakeCommandBuilder
-from ..paths.build import BuildPaths
-from ..paths.project import ProjectPaths
-from ..projectv2.jobs import ComponentJob
-from ..projectv2.project import Project
 
 
-def build(
-    job: ComponentJob,
-    project: Project,
-    build_paths: BuildPaths,
-    project_paths: ProjectPaths,
-):
-    comp = job.component
-    main_source = comp.sources[comp.info.name]
-    main_source_dir = build_paths.sources_dir / main_source.get_extracted_name()
+@dataclass
+class XzEmbeddedBuilder(BaseBuilder):
+    NAME = "xz-embedded"
 
-    makefile = project_paths.project_dir
-    makefile /= "extras"
-    makefile /= comp.info.name
-    makefile /= "Makefile"
+    def __post_init__(self):
+        makefile = self.project_paths.project_dir
+        makefile /= "extras"
+        makefile /= self.job.component.info.name
+        makefile /= "Makefile"
 
-    make = MakeCommandBuilder()
-    make.file = str(makefile)
-    make.env["CROSS"] = job.target.info.get_cross()
-    make.envs_strict["srcdir"] = str(main_source_dir)
-    if make.run_if_needed().is_up_to_date():
-        return
+        make = MakeCommandBuilder()
+        make.file = str(makefile)
+        make.env["CROSS"] = self.job.target.info.get_cross()
+        make.envs_strict["srcdir"] = str(self.get_main_source_dir())
+        self.make_instance = make
 
-    out_dir = build_paths.component_job_output_dir(job)
+    def prepare(self):
+        pass
 
-    make.envs_strict["DESTDIR"] = str(out_dir.absolute())
-    make.run(["install"])
+    def build(self):
+        make = self.make_instance
+        if make.run_if_needed().is_up_to_date():
+            return
+
+    def install(self):
+        make = self.make_instance
+
+        make.envs_strict["DESTDIR"] = str(self.get_output_dir())
+        make.run(["install"])

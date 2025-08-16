@@ -1,18 +1,17 @@
+from dataclasses import dataclass
 from pathlib import Path
 
+from ..builders_abc.build import BaseBuilder
 from ..buildutils.configure import ConfigureScriptBuilder
 from ..buildutils.make import MakeCommandBuilder
-from ..paths.build import BuildPaths
-from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
-from ..projectv2.project import Project
 
 
 def do_configure(
     job: ComponentJob,
-    main_source_conf: Path,
+    configure_script: Path,
 ):
-    conf = ConfigureScriptBuilder.new(main_source_conf)
+    conf = ConfigureScriptBuilder.new(configure_script)
     conf.add_arguments(f"--host={job.target.info.arch}-linux")
     conf.add_arguments("--prefix=/")
     conf.confenv["CC"] = job.target.get_cmd("gcc")
@@ -20,26 +19,31 @@ def do_configure(
     conf.run()
 
 
-def build(
-    job: ComponentJob,
-    project: Project,
-    build_paths: BuildPaths,
-    project_paths: ProjectPaths,
-):
-    comp = job.component
-    main_source = comp.sources[comp.info.name]
-    main_source_dir = build_paths.sources_dir / main_source.get_extracted_name()
-    main_source_conf = main_source_dir / "configure"
+@dataclass
+class LzoBuilder(BaseBuilder):
+    NAME = "lzo"
 
-    makefile = Path("Makefile")
+    def __post_init__(self):
+        main_source_dir = self.get_main_source_dir()
+        self.configure_script = main_source_dir / "configure"
+        self.makefile = Path("Makefile")
 
-    if not makefile.exists():
-        do_configure(job, main_source_conf)
-    make = MakeCommandBuilder()
-    if make.run_if_needed().is_up_to_date():
-        return
+    def prepare(self):
+        if self.makefile.exists():
+            return
+        do_configure(self.job, self.configure_script)
 
-    out_dir = build_paths.component_job_output_dir(job)
+    def build(self):
+        # make -q is broken here for some reason
+        lzo_libtool = Path("src/liblzo2.la")
+        if lzo_libtool.exists():
+            return
+        make = MakeCommandBuilder()
+        make.run()
+        self.install()
 
-    make.envs_strict["DESTDIR"] = str(out_dir.absolute())
-    make.run(["install"])
+    def install(self):
+        make = MakeCommandBuilder()
+
+        make.envs_strict["DESTDIR"] = str(self.get_output_dir())
+        make.run(["install"])
