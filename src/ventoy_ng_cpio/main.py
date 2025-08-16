@@ -1,6 +1,6 @@
 from .runtime.prepare import do_prepare
 from .runtime.build import do_build
-from .project import Project
+from .projectv2.project import Project
 
 
 def main():

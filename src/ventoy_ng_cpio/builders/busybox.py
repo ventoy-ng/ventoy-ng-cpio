@@ -1,7 +1,10 @@
 from os import symlink
 from pathlib import Path
 
-from ..project import ComponentJob, JobPaths
+from ..paths.build import BuildPaths
+from ..paths.project import ProjectPaths
+from ..projectv2.jobs import ComponentJob
+from ..projectv2.project import Project
 from ..utils.build import MakeRunner
 
 
@@ -35,24 +38,29 @@ def do_configure(
     symlink(config_file, ".config")
 
 
-def build(job: ComponentJob, paths: JobPaths):
+def build(
+    job: ComponentJob,
+    project: Project,
+    build_paths: BuildPaths,
+    project_paths: ProjectPaths,
+):
     comp = job.component
     target = job.target
-    (b_name, b_bin) = comp.name.split("-")
+    (b_name, b_bin) = comp.info.name.split("-")
     main_source = comp.sources[b_name]
-    main_source_dir = paths.sources_dir / main_source.get_extracted_name()
+    main_source_dir = build_paths.sources_dir / main_source.get_extracted_name()
 
     makefile = main_source_dir / "Makefile"
 
     make = MakeRunner()
     make.file = str(makefile)
     make.env["KBUILD_SRC"] = str(main_source_dir)
-    make.env["CROSS_COMPILE"] = target.get_cross()
+    make.env["CROSS_COMPILE"] = target.info.get_cross()
     make.env["CFLAGS"] = "-Oz"
 
     config_file = Path(".config")
 
-    configs_dir = paths.project_dir
+    configs_dir = project_paths.project_dir
     configs_dir /= "extras"
     configs_dir /= b_name
 
@@ -62,7 +70,7 @@ def build(job: ComponentJob, paths: JobPaths):
     if make.run_if_needed().is_up_to_date():
         return
 
-    output_dir = paths.my_output_dir.absolute()
+    out_dir = build_paths.component_job_output_dir(job)
 
-    make.envs_strict["DESTDIR"] = str(output_dir)
+    make.envs_strict["DESTDIR"] = str(out_dir.absolute())
     make.run(["install"])

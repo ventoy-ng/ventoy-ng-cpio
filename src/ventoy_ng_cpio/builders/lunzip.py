@@ -1,6 +1,9 @@
 from pathlib import Path
 
-from ..project import ComponentJob, JobPaths
+from ..paths.build import BuildPaths
+from ..paths.project import ProjectPaths
+from ..projectv2.jobs import ComponentJob
+from ..projectv2.project import Project
 from ..utils.build import ConfigureScriptWrapper, MakeRunner, strip_bin_copy
 
 
@@ -17,10 +20,15 @@ def do_configure(
     conf.run()
 
 
-def build(job: ComponentJob, paths: JobPaths):
+def build(
+    job: ComponentJob,
+    project: Project,
+    build_paths: BuildPaths,
+    project_paths: ProjectPaths,
+):
     comp = job.component
-    main_source = comp.sources[comp.name]
-    main_source_dir = paths.sources_dir / main_source.get_extracted_name()
+    main_source = comp.sources[comp.info.name]
+    main_source_dir = build_paths.sources_dir / main_source.get_extracted_name()
     main_source_conf = main_source_dir / "configure"
 
     makefile = Path("Makefile")
@@ -30,9 +38,10 @@ def build(job: ComponentJob, paths: JobPaths):
     make = MakeRunner()
     if make.run_if_needed().is_up_to_date():
         return
-    paths.my_output_dir.mkdir(parents=True, exist_ok=True)
+    out_dir = build_paths.component_job_output_dir(job)
+    out_dir.mkdir(parents=True, exist_ok=True)
     strip_bin_copy(
         job.target,
-        job.component.name,
-        str(paths.my_output_dir / job.component.name),
+        job.component.info.name,
+        str(out_dir / job.component.info.name),
     )

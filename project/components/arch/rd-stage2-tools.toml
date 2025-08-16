@@ -1,12 +1,19 @@
 name = "rd-stage2-tools"
 target_set = "system"
 deps = [
-    "busybox-full",
     "device-mapper",
-    "lunzip",
     "smallz4",
+    # "vtoytool",
+]
+
+[[per_target]]
+# anything except mips64el
+rule = "^(?!mips64el).*$"
+deps = [
+    "lunzip",
     "squashfs",
     "vblade",
+    # "vtoy_fuse_iso",
     "zlib",
     "zstd",
 ]

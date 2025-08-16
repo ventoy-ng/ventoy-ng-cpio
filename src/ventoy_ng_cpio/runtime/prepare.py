@@ -8,7 +8,8 @@ from urllib.request import urlopen
 import tarfile
 from zstd import ZSTD_uncompress
 
-from ..project import Project, ProjectPaths
+from ..paths.build import BuildPaths
+from ..projectv2.project import Project
 from ..schemas.sources import SourceInfo
 
 
@@ -46,7 +47,7 @@ def verify_source(this: SourceInfo, data: bytes):
 
 
 def extract_source_tar_builtin(
-    paths: ProjectPaths,
+    paths: BuildPaths,
     data: bytes,
 ):
     stream = BytesIO(data)
@@ -60,7 +61,7 @@ def extract_source_tar_builtin(
 
 
 def extract_source_tar_any(
-    paths: ProjectPaths,
+    paths: BuildPaths,
     data: bytes,
     extension: str
 ):
@@ -74,7 +75,7 @@ def extract_source_tar_any(
 
 
 def extract_source_archive(
-    paths: ProjectPaths,
+    paths: BuildPaths,
     filename: str,
     target_file: Path,
     data: Optional[bytes],
@@ -114,7 +115,7 @@ def handle_source_url(
 
 def handle_source_archive(
     this: SourceInfo,
-    paths: ProjectPaths,
+    paths: BuildPaths,
     filename: str,
     target_file: Path,
     data: Optional[bytes],
@@ -129,7 +130,7 @@ def handle_source_archive(
     print("  Done!")
 
 
-def prepare_source(this: SourceInfo, paths: ProjectPaths):
+def prepare_source(this: SourceInfo, paths: BuildPaths):
     url = this.get_url()
     assert url is not None
     filename = this.get_filename()
@@ -147,8 +148,8 @@ def prepare_source(this: SourceInfo, paths: ProjectPaths):
         handle_source_archive(this, paths, filename, target_file, data)
 
 
-def do_prepare(this: Project):
-    for source in this.sources.values():
+def do_prepare(project: Project):
+    for source in project.sources.values():
         if source.url is None:
             raise NotImplementedError
-        prepare_source(source, this.paths)
+        prepare_source(source, project.get_build_paths())

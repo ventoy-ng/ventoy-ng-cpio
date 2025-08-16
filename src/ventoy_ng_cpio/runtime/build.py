@@ -1,31 +1,10 @@
 from os import chdir
 from pathlib import Path
 
-from ..utils.flatten import flatten
-from ..project import ComponentJob, JobPaths, Project, ProjectPaths
-
-
-def walk_dedup(
-    this: Project,
-    component_name: str = "main",
-) -> list[ComponentJob]:
-    main_comp = this.components[component_name]
-    main_jobs = [
-        job
-        for job in this.component_jobs.values()
-        if job.component == main_comp
-    ]
-    dup_deps_2d = [
-        job.walk()
-        for job in main_jobs
-    ]
-    dup_deps = flatten(dup_deps_2d)
-    all_deps = []
-    for dep in dup_deps:
-        if dep in all_deps:
-            continue
-        all_deps.append(dep)
-    return all_deps
+from ..paths.build import BuildPaths
+from ..paths.project import ProjectPaths
+from ..projectv2.jobs import ComponentJob
+from ..projectv2.project import Project
 
 
 CMAKE_TOOLCHAIN_FILE = """# the name of the target operating system
@@ -44,12 +23,13 @@ set(CMAKE_EXE_LINKER_FLAGS      -static)
 """
 
 
-def prepare_for_build(this: Project):
-    build_aux_dir = this.paths.build_aux_dir
+def prepare_for_build(project: Project):
+    paths = project.get_build_paths()
+    build_aux_dir = paths.build_aux_dir
 
     cmake_dir = build_aux_dir / "cmake"
     cmake_dir.mkdir(parents=True, exist_ok=True)
-    system_targets = this.target_sets["system"]
+    system_targets = project.target_sets["system"]
     for target in system_targets.targets:
         arch = target.info.arch
         triplet = target.info.get_triplet()
@@ -63,21 +43,29 @@ def prepare_for_build(this: Project):
 
 def prepare_job(
     job: ComponentJob,
-    paths: ProjectPaths,
-    root_dir: Path,
+    paths: BuildPaths,
+    job_work_dir: Path,
 ):
-    root_dir.mkdir(parents=True, exist_ok=True)
+    job_work_dir.mkdir(parents=True, exist_ok=True)
 
 
 def do_build_job_log(
     job: ComponentJob,
-    paths: JobPaths,
+    project: Project,
+    build_paths: BuildPaths,
+    project_paths: ProjectPaths,
 ):
-    if job.component.name.startswith("busybox"):
+    comp_name = job.component.info.name
+    if comp_name.startswith("busybox"):
         from ventoy_ng_cpio.builders.busybox import build
-        build(job, paths)
+        build(
+            job=job,
+            project=project,
+            build_paths=build_paths,
+            project_paths=project_paths,
+        )
         return
-    match job.component.name:
+    match comp_name:
         case "lunzip":
             from ventoy_ng_cpio.builders.lunzip import build
         case "lz4":
@@ -95,25 +83,34 @@ def do_build_job_log(
         case _:
             print("Not implemented for now")
             return
-    build(job, paths)
+    build(
+        job=job,
+        project=project,
+        build_paths=build_paths,
+        project_paths=project_paths,
+    )
 
 
 def do_build_job(
     job: ComponentJob,
-    paths: ProjectPaths,
+    project: Project,
 ):
-    job_paths = paths.with_component_job(job)
-    prepare_job(job, paths, job_paths.cwd)
-    chdir(job_paths.cwd)
+    build_paths = project.get_build_paths()
+    job_work = build_paths.component_job_work_dir(job)
+    prepare_job(job, build_paths, job_work)
+
+    build_paths = project.get_build_paths(relative_to=job_work)
+    project_paths = project.get_project_paths(relative_to=job_work)
+    chdir(job_work)
     #with open("vtbuild.log", "wt") as file:
     #    file.write("test\n")
-    do_build_job_log(job, job_paths)
-    chdir(paths.cwd)
+    do_build_job_log(job, project, build_paths, project_paths)
+    chdir(project.info.cwd)
 
 
-def do_build(this: Project):
-    prepare_for_build(this)
-    jobs = walk_dedup(this)
+def do_build(project: Project):
+    prepare_for_build(project)
+    jobs = project.walk_dedup()
     for i, job in enumerate(jobs):
         print(f"{i:3} - {job.name}")
-        do_build_job(job, this.paths)
+        do_build_job(job, project)

@@ -7,7 +7,6 @@ arch/tools/zstd.toml
 
 # utils
 arch/tools/busybox/full.toml
-arch/tools/busybox/hexdump.toml
 arch/tools/device-mapper.toml
 arch/tools/lunzip.toml
 arch/tools/smallz4.toml
@@ -20,7 +19,6 @@ arch/rd-stage2.toml
 
 # stage 1 tools
 arch/tools/busybox/ash.toml
-arch/tools/busybox/xzcat.toml
 arch/tools/xz-embedded.toml
 
 # stage 1: uncompressed ramdisk

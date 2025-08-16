@@ -1,7 +1,3 @@
 name = "arch-ramdisks"
 target_set = "output"
 deps = ["rd-stage2", "rd-stage1-tools"]
-build_file = "components/cpio/build.py"
-build_args.cpio_dir = "ramdisk"
-build_args.cpio_files = "."
-build_args.cpio_target = "ventoy_{target}.cpio"

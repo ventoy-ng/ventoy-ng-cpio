@@ -1,4 +1,3 @@
 name = "busybox-ash"
 target_set = "system"
 sources = ["busybox"]
-build_file = "components/busybox/build.py"

@@ -1,17 +1,17 @@
 from abc import ABC, abstractmethod
-from copy import copy
 from dataclasses import dataclass, field
 from enum import Enum, auto
 from inspect import isabstract
 from os import cpu_count, environ
 from pathlib import Path
 from shutil import copy2
-from subprocess import Popen
 from typing import ClassVar, Optional, Self
 
+from ventoy_ng_cpio.paths.build import BuildPaths
+
 from ..utils.process import ProcessBuilder
-from ..project import JobPaths, Target
-from .path import PathLike, pathlike_to_path
+from ..projectv2.targets import Target
+from .path import PathLike
 
 
 def assert_stringifyable_value(v: object) -> bool:
@@ -201,7 +201,7 @@ class CMakeBuilder(BaseCommandRunner):
     def add_arg(self, k: str, v: str):
         self.args[k] = v
 
-    def set_toolchain(self, paths: JobPaths, target: Target):
+    def set_toolchain(self, paths: BuildPaths, target: Target):
         self.toolchain_file = paths.build_aux_dir / "cmake"
         self.toolchain_file /= f"{target.info.name2}.cmake"
 
@@ -245,7 +245,7 @@ def strip_bin(
     strip_all: bool = True,
 ):
     if cmdname is None:
-        cmdname = target.get_cmd("strip")
+        cmdname = target.info.get_cross() + "strip"
     cmd = ProcessBuilder([cmdname])
     if strip_all:
         cmd.args.append("--strip-all")

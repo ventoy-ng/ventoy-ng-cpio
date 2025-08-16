@@ -1,7 +1,3 @@
 name = "rd-stage2"
 target_set = "output"
 deps = ["rd-stage2-tools"]
-build_file = "components/cpio/build.py"
-build_args.cpio_dir = "."
-build_args.cpio_files = "tool"
-build_args.cpio_target = "tool.cpio.xz"
