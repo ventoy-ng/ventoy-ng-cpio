@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from ..buildutils.cmake import CMakeCommandBuilder
-from ..buildutils.make import MakeCommandBuilder, NinjaCommandRunner
+from ..buildutils.make import MakeCommandBuilder
 from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
@@ -19,7 +19,6 @@ def do_configure(
     cmake = CMakeCommandBuilder(source_dir=str(main_source_cmake))
     cmake.install_prefix = str(out_dir.absolute())
     cmake.set_toolchain(paths, target)
-    cmake.generator = "Ninja"
     cmake.args["ZSTD_BUILD_SHARED"] = "OFF"
     cmake.args["ZSTD_PROGRAMS_LINK_SHARED"] = "OFF"
     cmake.run()
@@ -37,23 +36,15 @@ def build(
     main_source_dir = sources_dir / main_source.get_extracted_name()
     main_source_cmake = main_source_dir / "build/cmake"
 
-    #makefile = Path("Makefile")
-    makefile = Path("build.ninja")
+    makefile = Path("Makefile")
 
     if not makefile.exists():
         do_configure(job, build_paths, main_source_cmake)
-    #make = MakeWrapper()
-    #if make.run_if_needed().is_up_to_date():
-    #    return
-
-    ninja = NinjaCommandRunner()
-    if ninja.run_if_needed().is_up_to_date():
+    make = MakeCommandBuilder()
+    if make.run_if_needed().is_up_to_date():
         return
 
-    #output_dir = paths.my_output_dir.absolute()
+    out_dir = build_paths.component_job_output_dir(job)
 
-    #make.envs_strict["DESTDIR"] = str(output_dir)
-    #make.run(["install"])
-
-    #ninja.env["DESTDIR"] = str(output_dir)
-    ninja.run(["install"])
+    make.envs_strict["DESTDIR"] = str(out_dir.absolute())
+    make.run(["install"])
