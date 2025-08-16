@@ -1,15 +1,12 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from pathlib import Path
 
 from ..builders_abc.make import BaseMakeBuilder
-from ..buildutils.make import MakeCommandBuilder
 
 
 @dataclass
 class BaseConfigureBuilder(BaseMakeBuilder, ABC):
-    make: MakeCommandBuilder = field(default_factory=MakeCommandBuilder)
-
     def is_configured(self) -> bool:
         return self.makefile.exists()
 
@@ -25,11 +22,6 @@ class BaseConfigureBuilder(BaseMakeBuilder, ABC):
         if self.is_configured():
             return
         self.do_configure()
-
-    def build(self):
-        if self.make.run_if_needed().is_up_to_date():
-            return
-        self.install()
 
     def install(self):
         make = self.make

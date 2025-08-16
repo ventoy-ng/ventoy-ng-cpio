@@ -23,11 +23,6 @@ class XzEmbeddedBuilder(BaseMakeBuilder):
     def prepare(self):
         pass
 
-    def build(self):
-        if self.make.run_if_needed().is_up_to_date():
-            return
-        self.install()
-
     def install(self):
         make = self.make
 

@@ -71,6 +71,7 @@ class DeviceMapperBuilder(BaseConfigureBuilder):
         if bin_dmsetup.exists():
             return
         self.make.run()
+        self.install()
 
     def install(self):
         out_dir = self.get_output_dir()

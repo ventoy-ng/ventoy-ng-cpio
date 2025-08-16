@@ -36,11 +36,6 @@ class VBladeBuilder(BaseMakeBuilder):
             return
         do_copy_src(self.get_main_source_dir())
 
-    def build(self):
-        if self.make.run_if_needed().is_up_to_date():
-            return
-        self.install()
-
     def install(self):
         output_dir = self.get_output_dir()
         output_dir.mkdir(parents=True, exist_ok=True)

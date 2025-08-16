@@ -60,10 +60,8 @@ class SquashfsBuilder(BaseMakeBuilder):
             cmd.args.extend(["-i", str(patch)])
             cmd.run()
 
-    def build(self):
-        if self.make.run_if_needed([self.bin_name]).is_up_to_date():
-            return
-        self.install()
+    def get_make_targets(self):
+        return [self.bin_name]
 
     def install(self):
         output_dir = self.get_output_dir()
