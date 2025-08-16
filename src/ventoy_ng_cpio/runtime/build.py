@@ -1,7 +1,9 @@
 from os import chdir
 from pathlib import Path
+from shutil import rmtree
 from typing import Optional
 
+from ..config import CONFIG
 from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..projectv2.jobs import ComponentJob
@@ -41,12 +43,26 @@ def prepare_for_build(project: Project):
         target_path.write_text(txt)
 
 
+def do_clean_build(
+    job: ComponentJob,
+    paths: BuildPaths,
+    work_dir: Path,
+):
+    output_dir = paths.component_job_output_dir(job)
+    if output_dir.exists():
+        rmtree(output_dir)
+    if work_dir.exists():
+        rmtree(work_dir)
+
+
 def prepare_job(
     job: ComponentJob,
     paths: BuildPaths,
-    job_work_dir: Path,
+    work_dir: Path,
 ):
-    job_work_dir.mkdir(parents=True, exist_ok=True)
+    if CONFIG.cleanbuild:
+        do_clean_build(job, paths, work_dir)
+    work_dir.mkdir(parents=True, exist_ok=True)
 
 
 def do_build_job_log(
@@ -78,12 +94,12 @@ def do_build_job(
     project: Project,
 ):
     build_paths = project.get_build_paths()
-    job_work = build_paths.component_job_work_dir(job)
-    prepare_job(job, build_paths, job_work)
+    work_dir = build_paths.component_job_work_dir(job)
+    prepare_job(job, build_paths, work_dir)
 
-    build_paths = project.get_build_paths(relative_to=job_work)
-    project_paths = project.get_project_paths(relative_to=job_work)
-    chdir(job_work)
+    build_paths = project.get_build_paths(relative_to=work_dir)
+    project_paths = project.get_project_paths(relative_to=work_dir)
+    chdir(work_dir)
     #with open("vtbuild.log", "wt") as file:
     #    file.write("test\n")
     do_build_job_log(job, project, build_paths, project_paths)
