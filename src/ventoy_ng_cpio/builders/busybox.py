@@ -14,11 +14,14 @@ def do_configure(
     b_bin: str,
 ):
     target = job.target
+    use_lfs = target.get_bitness() != 64
+
     filename = ""
+
     match b_bin:
         case "ash":
             filename = "03-ash-extras.config"
-            if target.info.arch == "i386":
+            if use_lfs:
                 filename = "04-ash-lfs.config"
             elif target.info.arch == "mips64el":
                 filename = "02-ash-only.config"
@@ -26,11 +29,11 @@ def do_configure(
             filename = "02-custom-static.config"
         case "hexdump":
             filename = "03-hexdump.config"
-            if target.info.arch == "i386":
+            if use_lfs:
                 filename = "04-hexdump-lfs.config"
         case "xzcat":
             filename = "03-xzcat-only.config"
-            if target.info.arch == "i386":
+            if use_lfs:
                 filename = "04-xzcat-lfs.config"
         case _:
             raise ValueError

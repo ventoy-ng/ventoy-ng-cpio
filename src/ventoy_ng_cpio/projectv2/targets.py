@@ -5,6 +5,9 @@ from typing import Optional, Self
 from ..schemas.targets import TargetInfo
 
 
+ARCHES_32 = ["i386"]
+
+
 @dataclass(frozen=True)
 class Target:
     info: TargetInfo
@@ -60,6 +63,11 @@ class Target:
             target.is_subtarget(other)
             for target in self.subtargets
         ])
+
+    def get_bitness(self) -> int:
+        if self.info.arch in ARCHES_32:
+            return 32
+        return 64
 
     def get_cmd(self, command: str) -> str:
         return self.info.get_cross() + command
