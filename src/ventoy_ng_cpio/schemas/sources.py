@@ -1,7 +1,6 @@
 from dataclasses import dataclass, field
-from functools import lru_cache
 from pathlib import Path
-from typing import Any, Optional
+from typing import Optional
 from urllib.parse import ParseResult, urlparse
 
 from mashumaro import field_options
@@ -25,14 +24,12 @@ class SourceInfo(DataClassTOMLMixin):
     )
     extracted_name: Optional[str] = field(default=None)
 
-    @lru_cache(1)
     def get_id(self) -> str:
         return self.raw_id.format(
             name=self.name,
             version=self.version,
         )
 
-    @lru_cache(1)
     def get_url(self) -> Optional[str]:
         url = self.url
         if url is None:
@@ -42,7 +39,6 @@ class SourceInfo(DataClassTOMLMixin):
             version=self.version,
         )
 
-    @lru_cache(1)
     def get_url_obj(self) -> Optional[ParseResult]:
         url_str = self.get_url()
         if url_str is None:
@@ -51,7 +47,6 @@ class SourceInfo(DataClassTOMLMixin):
         assert isinstance(url, ParseResult)
         return url
 
-    @lru_cache(1)
     def get_filename(self) -> str:
         filename = self.filename
         if filename is not None:
@@ -64,7 +59,6 @@ class SourceInfo(DataClassTOMLMixin):
             return Path(url.path).name
         raise ValueError
 
-    @lru_cache(1)
     def get_extracted_name(self) -> str:
         extracted_name = self.extracted_name
         assert extracted_name is not None

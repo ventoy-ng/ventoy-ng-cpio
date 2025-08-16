@@ -63,7 +63,7 @@ def extract_source_tar_builtin(
 def extract_source_tar_any(
     paths: BuildPaths,
     data: bytes,
-    extension: str
+    extension: str,
 ):
     if extension == "zst":
         data = ZSTD_uncompress(data)

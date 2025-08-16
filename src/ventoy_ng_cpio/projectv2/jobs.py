@@ -1,9 +1,6 @@
 from dataclasses import dataclass
-from pathlib import Path
-from typing import Optional, Self
+from typing import Self
 
-from ..schemas.components import ComponentInfo
-from ..schemas.sources import SourceInfo
 from ..utils.flatten import flatten
 from .components import Component
 from .targets import Target

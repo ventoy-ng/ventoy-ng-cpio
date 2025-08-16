@@ -27,7 +27,7 @@ class Target:
             ]
         else:
             subtargets = None
-        this = cls(info, subtargets) # type: ignore
+        this = cls(info, subtargets)  # type: ignore
         assert DEFAULT_TARGET.subtargets is not None
         DEFAULT_TARGET.subtargets.append(this)
         return this
