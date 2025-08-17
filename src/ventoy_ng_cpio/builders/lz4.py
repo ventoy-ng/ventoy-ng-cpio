@@ -20,5 +20,5 @@ class Lz4Builder(CMakeDefBuilder):
         lib_lz4 = Path("liblz4.a")
         if lib_lz4.exists():
             return
+        self._flagged_for_install = True
         self.make.run()
-        self.install()

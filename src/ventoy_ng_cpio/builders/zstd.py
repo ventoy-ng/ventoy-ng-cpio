@@ -21,5 +21,5 @@ class ZstdBuilder(CMakeDefBuilder):
         zstd_bin = Path("programs/zstd")
         if zstd_bin.exists():
             return
+        self._flagged_for_install = True
         self.make.run()
-        self.install()

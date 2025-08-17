@@ -23,7 +23,7 @@ class BaseConfigureBuilder(BaseMakeBuilder, ABC):
             return
         self.do_configure()
 
-    def install(self):
+    def do_install(self):
         make = self.make
 
         make.envs_strict["DESTDIR"] = str(self.get_output_dir())

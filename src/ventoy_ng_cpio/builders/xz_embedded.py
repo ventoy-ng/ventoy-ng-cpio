@@ -23,7 +23,7 @@ class XzEmbeddedBuilder(BaseMakeBuilder):
     def prepare(self):
         pass
 
-    def install(self):
+    def do_install(self):
         make = self.make
 
         make.envs_strict["DESTDIR"] = str(self.get_output_dir())

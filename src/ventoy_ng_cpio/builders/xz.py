@@ -39,5 +39,5 @@ class XzBuilder(BaseConfigureBuilder):
         lib_lzma = Path("src/liblzma/.libs/liblzma.a")
         if lib_lzma.exists():
             return
+        self._flagged_for_install = True
         self.make.run()
-        self.install()

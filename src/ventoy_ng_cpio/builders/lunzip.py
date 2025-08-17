@@ -30,7 +30,7 @@ class LunzipBuilder(BaseConfigureBuilder):
             self.get_configure_script(),
         )
 
-    def install(self):
+    def do_install(self):
         out_dir = self.get_output_dir()
         out_dir.mkdir(parents=True, exist_ok=True)
         strip_bin_copy(

@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from inspect import isabstract
 from pathlib import Path
 from typing import ClassVar
@@ -19,6 +19,7 @@ class BaseBuilder(ABC):
     project: Project
     build_paths: BuildPaths
     project_paths: ProjectPaths
+    _flagged_for_install: bool = field(default=False)
     NAME: ClassVar[str] = ""
 
     def __init_subclass__(cls) -> None:
@@ -54,8 +55,13 @@ class BaseBuilder(ABC):
         pass
 
     @abstractmethod
-    def install(self):
+    def do_install(self):
         pass
+
+    def install(self):
+        if not self._flagged_for_install:
+            return
+        self.do_install()
 
 
 def get_builder(name: str) -> type[BaseBuilder]:

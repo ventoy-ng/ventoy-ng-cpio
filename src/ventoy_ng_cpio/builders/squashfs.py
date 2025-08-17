@@ -63,7 +63,7 @@ class SquashfsBuilder(BaseMakeBuilder):
     def get_make_targets(self):
         return [self.bin_name]
 
-    def install(self):
+    def do_install(self):
         output_dir = self.get_output_dir()
         output_dir.mkdir(parents=True, exist_ok=True)
         strip_bin_copy(

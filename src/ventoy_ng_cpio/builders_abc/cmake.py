@@ -58,5 +58,5 @@ class CMakeDefBuilder(BaseCMakeBuilder, BaseMakeBuilder, ABC):
     def is_configured(self) -> bool:
         return self.makefile.exists()
 
-    def install(self):
+    def do_install(self):
         self.make.run(["install"])

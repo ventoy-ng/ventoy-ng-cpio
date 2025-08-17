@@ -44,13 +44,13 @@ class BaseBusyboxBuilder(BaseMakeBuilder, ABC):
 
     def build(self):
         # make -q is broken here for some reason
-        bin_busybox = Path("busybox")
+        bin_busybox = self.get_output_dir() / "busybox"
         if bin_busybox.exists():
             return
+        self._flagged_for_install = True
         self.make.run()
-        self.install()
 
-    def install(self):
+    def do_install(self):
         output_dir = self.get_output_dir()
         output_dir.mkdir(parents=True, exist_ok=True)
         copy2("busybox", output_dir / "busybox")

@@ -70,8 +70,8 @@ class DeviceMapperBuilder(BaseConfigureBuilder):
         # make -q is broken here for some reason
         if self.bin_path.exists():
             return
+        self._flagged_for_install = True
         self.make.run()
-        self.install()
 
     def install(self):
         output_dir = self.get_output_dir()

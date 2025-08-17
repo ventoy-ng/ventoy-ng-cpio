@@ -33,5 +33,5 @@ class LzoBuilder(BaseConfigureBuilder):
         lzo_libtool = Path("src/liblzo2.la")
         if lzo_libtool.exists():
             return
+        self._flagged_for_install = True
         self.make.run()
-        self.install()

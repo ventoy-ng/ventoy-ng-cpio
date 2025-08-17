@@ -26,6 +26,7 @@ class Smallz4Builder(BaseBuilder):
     def build(self):
         if self.bin_build_path.exists():
             return
+        self._flagged_for_install = True
         target = self.job.target
         cmd = CcBuilder(target.get_cmd("cc"))
         cmd.output_file = self.bin_build_path
@@ -35,9 +36,8 @@ class Smallz4Builder(BaseBuilder):
         cmd.args.append("-Oz")
         cmd.args.append("-MMD")
         cmd.run()
-        self.install()
 
-    def install(self):
+    def do_install(self):
         output_dir = self.get_output_dir()
         output_dir.mkdir(parents=True, exist_ok=True)
         strip_bin_copy(

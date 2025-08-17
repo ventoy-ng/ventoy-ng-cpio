@@ -87,6 +87,7 @@ def do_build_job_log(
     )
     bldr.prepare()
     bldr.build()
+    bldr.install()
 
 
 def do_build_job(

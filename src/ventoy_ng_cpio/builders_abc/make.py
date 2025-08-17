@@ -22,4 +22,4 @@ class BaseMakeBuilder(BaseBuilder):
         targets = self.get_make_targets()
         if self.make.run_if_needed(targets).is_up_to_date():
             return
-        self.install()
+        self._flagged_for_install = True
