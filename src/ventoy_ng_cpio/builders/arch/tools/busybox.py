@@ -21,6 +21,7 @@ class BaseBusyboxBuilder(BaseMakeBuilder, ABC):
         make.env["KBUILD_SRC"] = str(source_dir)
         make.env["CROSS_COMPILE"] = self.job.target.info.get_cross()
         make.env["CFLAGS"] = "-Oz"
+        make.env["KCONFIG_NOTIMESTAMP"] = "1"
         self.make = make
 
     def get_main_source(self) -> SourceInfo:
