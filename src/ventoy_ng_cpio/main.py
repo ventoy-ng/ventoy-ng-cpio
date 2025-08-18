@@ -28,13 +28,17 @@ def main():
     subparsers = parser.add_subparsers(dest="command", required=True)
     parser_build = subparsers.add_parser("build")
     parser_build.add_argument(
-        "target_components",
+        "components",
         nargs="*",
     )
+    parser_build.add_argument(
+        "--target-filter",
+        help="regex used to filter jobs idk i'm tired",
+    )
     args = parser.parse_args()
-    target_components: Optional[list[str]] = None
-    if args.target_components:
-        target_components = args.target_components
+    components: Optional[list[str]] = None
+    if args.components:
+        components = args.components
 
     CONFIG.cleanbuild = args.cleanbuild
     project = Project.load(args.project_dir, args.build_dir)
@@ -42,6 +46,6 @@ def main():
     match args.command:
         case "build":
             do_prepare(project)
-            do_build(project, target_components)
+            do_build(project, components, args.target_filter)
         case _:
             raise RuntimeError

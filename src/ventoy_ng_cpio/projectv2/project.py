@@ -1,3 +1,4 @@
+import re
 from dataclasses import dataclass
 from os.path import relpath
 from pathlib import Path
@@ -76,23 +77,35 @@ class Project:
     def walk_dedup(
         self,
         component_names: Optional[list[str]] = None,
+        target_filter: Optional[str] = None,
     ) -> list[ComponentJob]:
         if component_names is None:
             component_names = ["main"]
+        # 1 - find the requested components
         main_comp = [
             self.components[comp_name]
             for comp_name in component_names
         ]
+        # 2 - find the jobs of those components
         main_jobs = [
             job
             for job in self.component_jobs.values()
             if job.component in main_comp
         ]
+        # 2.1 - only select jobs that match user-given regex
+        if target_filter is not None:
+            pat = re.compile(target_filter)
+            def matches_user_pattern(job: ComponentJob) -> bool:
+                return pat.match(job.target.info.name) is not None
+            main_jobs = list(filter(matches_user_pattern, main_jobs))
+        # 3 - walk the dependency tree for each of those jobs
         dup_deps_2d = [
             job.walk()
             for job in main_jobs
         ]
+        # 4 - flatten to get one list
         dup_deps = flatten(dup_deps_2d)
+        # 5 - de-duplicate
         all_deps = []
         for dep in dup_deps:
             if dep in all_deps:
