@@ -34,9 +34,8 @@ class SquashfsBuilder(BaseMakeBuilder):
         for alg in ALGOS:
             alg_key = alg.upper() + "_SUPPORT"
             make.env[alg_key] = "1"
-        build_paths = self.build_paths
         for jobd in self.job.dependencies.values():
-            dep_output_dir = build_paths.component_job_output_dir(jobd)
+            dep_output_dir = self.get_input_dir(jobd)
             cppflags.append("-I" + str(dep_output_dir / "include"))
             ldflags.append("-L" + str(dep_output_dir / "lib"))
         make.env["CPPFLAGS"] = join(cppflags)

@@ -1,0 +1,2 @@
+name = "arch-ramdisks"
+deps = ["rd-stage1"]

@@ -18,6 +18,10 @@ class BuildPaths:
         return self.build_dir / "build-aux"
 
     @property
+    def output_dir(self) -> Path:
+        return self.build_dir / "output"
+
+    @property
     def sources_dir(self) -> Path:
         return self.build_dir / "sources"
 
@@ -33,8 +37,11 @@ class BuildPaths:
         return work_dir / f"build{job.target.suffix}"
 
     def component_output_dir(self, component: Component) -> Path:
-        return self.build_dir / "output" / component.info.name
+        return self.output_dir / component.info.name
 
     def component_job_output_dir(self, job: ComponentJob) -> Path:
+        target = job.target
         output_dir = self.component_output_dir(job.component)
+        if target.is_default():
+            return output_dir
         return output_dir / job.target.info.name2

@@ -40,6 +40,9 @@ class BaseBuilder(ABC):
 
         return sources_dir / main_source.get_extracted_name()
 
+    def get_input_dir(self, job: ComponentJob):
+        return self.build_paths.component_job_output_dir(job)
+
     def get_output_dir(self, absolute: bool = True) -> Path:
         out_dir = self.build_paths.component_job_output_dir(self.job)
         if absolute:

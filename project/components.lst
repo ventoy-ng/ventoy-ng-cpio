@@ -23,9 +23,11 @@ arch/tools/xz-embedded.toml
 
 # stage 1: uncompressed ramdisk
 arch/rd-stage1-tools.toml
-arch/arch-ramdisks.toml
+arch/rd-stage1.toml
 
 # base ramdisk
 base.toml
+# all arch ramdisks
+arch-ramdisks.toml
 
 main.toml

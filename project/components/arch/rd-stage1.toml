@@ -1,3 +1,3 @@
-name = "arch-ramdisks"
+name = "rd-stage1"
 target_set = "output"
 deps = ["rd-stage2", "rd-stage1-tools"]

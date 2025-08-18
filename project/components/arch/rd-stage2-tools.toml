@@ -14,6 +14,5 @@ deps = [
     "squashfs",
     "vblade",
     # "vtoy_fuse_iso",
-    "zlib",
     "zstd",
 ]
