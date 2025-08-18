@@ -3,10 +3,10 @@ from pathlib import Path
 from shlex import join
 from shutil import copy2, copytree
 
-from ..builders_abc.make import BaseMakeBuilder
-from ..buildutils.make import MakeCommandBuilder
-from ..buildutils.strip import strip_bin_copy
-from ..utils.process import ProcessBuilder
+from ....builders_abc.make import BaseMakeBuilder
+from ....buildutils.make import MakeCommandBuilder
+from ....buildutils.strip import strip_bin_copy
+from ....utils.process import ProcessBuilder
 
 
 def do_copy_src(source_dir: Path):

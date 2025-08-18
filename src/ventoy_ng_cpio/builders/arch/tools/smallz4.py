@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..builders_abc.build import BaseBuilder
-from ..buildutils.cc import CcBuilder
-from ..buildutils.strip import strip_bin_copy
+from ....builders_abc.build import BaseBuilder
+from ....buildutils.cc import CcBuilder
+from ....buildutils.strip import strip_bin_copy
 
 
 @dataclass

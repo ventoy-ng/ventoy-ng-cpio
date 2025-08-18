@@ -4,9 +4,9 @@ from os import symlink
 from pathlib import Path
 from shutil import copy2
 
-from ..builders_abc.make import BaseMakeBuilder
-from ..buildutils.make import MakeCommandBuilder
-from ..schemas.sources import SourceInfo
+from ....builders_abc.make import BaseMakeBuilder
+from ....buildutils.make import MakeCommandBuilder
+from ....schemas.sources import SourceInfo
 
 
 @dataclass

@@ -2,11 +2,11 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2, copytree
 
-from ..builders_abc.configure import BaseConfigureBuilder
-from ..buildutils.configure import ConfigureScriptBuilder
-from ..buildutils.strip import strip_bin_copy
-from ..consts import ENCODING
-from ..projectv2.jobs import ComponentJob
+from ....builders_abc.configure import BaseConfigureBuilder
+from ....buildutils.configure import ConfigureScriptBuilder
+from ....buildutils.strip import strip_bin_copy
+from ....consts import ENCODING
+from ....projectv2.jobs import ComponentJob
 
 
 def do_copy_src(source_dir: Path):

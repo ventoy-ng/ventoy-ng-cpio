@@ -3,19 +3,19 @@ from .arch.rd_stage1 import RamdiskStage1Builder
 from .arch.rd_stage1_tools import RamdiskStage1ToolsBuilder
 from .arch.rd_stage2 import RamdiskStage2Builder
 from .arch.rd_stage2_tools import RamdiskStage2ToolsBuilder
+from .arch.tools.busybox import BusyboxAshBuilder, BusyboxFullBuilder
+from .arch.tools.device_mapper import DeviceMapperBuilder
+from .arch.tools.lunzip import LunzipBuilder
+from .arch.tools.lz4 import Lz4Builder
+from .arch.tools.lzo import LzoBuilder
+from .arch.tools.smallz4 import Smallz4Builder
+from .arch.tools.squashfs import SquashfsBuilder
+from .arch.tools.vblade import VBladeBuilder
+from .arch.tools.xz import XzBuilder
+from .arch.tools.xz_embedded import XzEmbeddedBuilder
+from .arch.tools.zlib import ZlibBuilder
+from .arch.tools.zstd import ZstdBuilder
 from .arch_ramdisks import ArchRamdisksBuilder
-from .busybox import BusyboxAshBuilder, BusyboxFullBuilder
-from .device_mapper import DeviceMapperBuilder
-from .lunzip import LunzipBuilder
-from .lz4 import Lz4Builder
-from .lzo import LzoBuilder
-from .smallz4 import Smallz4Builder
-from .squashfs import SquashfsBuilder
-from .vblade import VBladeBuilder
-from .xz import XzBuilder
-from .xz_embedded import XzEmbeddedBuilder
-from .zlib import ZlibBuilder
-from .zstd import ZstdBuilder
 
 __all__ = [
     "ArchRamdisksBuilder",

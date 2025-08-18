@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..builders_abc.configure import BaseConfigureBuilder
-from ..buildutils.configure import ConfigureScriptBuilder
-from ..projectv2.jobs import ComponentJob
+from ....builders_abc.configure import BaseConfigureBuilder
+from ....buildutils.configure import ConfigureScriptBuilder
+from ....projectv2.jobs import ComponentJob
 
 
 def do_configure(
