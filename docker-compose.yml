@@ -1,0 +1,10 @@
+---
+services:
+  builder:
+    build: docker
+    privileged: true
+    volumes:
+      - .:/usr/src/ventoy-ng-cpio
+      - ./.local/var/docker/uv_cache:/home/builder/.cache/uv
+      - ./.local/var/docker/uv_data:/home/builder/.local/share/uv
+      - ./.local/var/docker/venv:/usr/src/ventoy-ng-cpio/.venv

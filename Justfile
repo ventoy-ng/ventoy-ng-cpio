@@ -4,6 +4,18 @@ SRC_DIR := "src"
 build:
     uv run ventoy-ng-cpio build
 
+_docker_cache:
+    @mkdir -p .local/var/docker/{uv_cache,uv_data,venv}
+
+docker-build-image:
+    docker compose build
+
+docker-enter-image: _docker_cache
+    docker compose run --rm builder
+
+build-in-docker: _docker_cache
+    docker compose run --rm builder just
+
 clean:
     -rm -r {{BUILD_DIR}}/build-aux {{BUILD_DIR}}/output {{BUILD_DIR}}/work
 
