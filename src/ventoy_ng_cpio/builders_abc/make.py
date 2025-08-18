@@ -19,6 +19,7 @@ class BaseMakeBuilder(BaseBuilder):
         return None
 
     def build(self):
+        # pylint: disable=assignment-from-none
         targets = self.get_make_targets()
         if self.make.run_if_needed(targets).is_up_to_date():
             return

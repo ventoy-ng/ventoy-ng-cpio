@@ -41,10 +41,5 @@ class XzCommandBuilder(BaseCommandBuilder):
 
 
 def compress_file_with_xz(filename: Path):
-    #cmd = ProcessBuilder(["xz"])
-    #cmd.args.append(preset)
-    #cmd.args.append("--")
-    #cmd.args.append(str(filename))
-    #cmd.run()
     cmd = XzCommandBuilder.get_def()
     cmd.run(filename)

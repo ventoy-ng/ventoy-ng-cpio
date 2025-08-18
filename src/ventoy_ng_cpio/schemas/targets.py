@@ -18,7 +18,7 @@ class TargetTriplet(DataClassTOMLMixin):
     def get_vendor(self, default: Optional[str] = None) -> str:
         if self.vendor is not None:
             return self.vendor
-        elif default is not None:
+        if default is not None:
             return default
         return "unknown"
 

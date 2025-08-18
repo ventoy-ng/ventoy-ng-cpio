@@ -22,12 +22,12 @@ class MakeLikeCommandBuilder(BaseCommandBuilder, ABC):
 
 
 class MakeStatus(Enum):
-    Done = 0
-    UpToDate = auto()
-    #Failed = auto()
+    DONE = 0
+    UP_TO_DATE = auto()
+    #FAILED = auto()
 
     def is_up_to_date(self) -> bool:
-        return self == self.__class__.UpToDate
+        return self == self.__class__.UP_TO_DATE
 
 
 @dataclass
@@ -68,9 +68,9 @@ class MakeCommandBuilder(MakeLikeCommandBuilder):
         cmd_check = cmd.copy()
         cmd_check.args.insert(1, "-q")
         if cmd_check.spawn().wait() == 0:
-            return MakeStatus.UpToDate
+            return MakeStatus.UP_TO_DATE
         cmd.run()
-        return MakeStatus.Done
+        return MakeStatus.DONE
 
 
 @dataclass
@@ -103,6 +103,6 @@ class NinjaCommandRunner(MakeLikeCommandBuilder):
         cmd_check = cmd.copy()
         cmd_check.args.insert(1, "--quiet")
         if cmd_check.spawn().wait() == 0:
-            return MakeStatus.UpToDate
+            return MakeStatus.UP_TO_DATE
         cmd.run()
-        return MakeStatus.Done
+        return MakeStatus.DONE

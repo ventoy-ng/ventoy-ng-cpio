@@ -25,7 +25,7 @@ def rd_stage_2_cvt(job: ComponentJob) -> list[tuple[str, str]]:
     elif info.name == "xz-embedded":
         binname = "xzminidec"
     else:
-        raise Exception(job.name)
+        raise NotImplementedError(job.name)
     return [(binname, binname + binsuffix)]
 
 

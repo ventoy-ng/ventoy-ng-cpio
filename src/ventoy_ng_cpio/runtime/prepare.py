@@ -28,8 +28,8 @@ def is_archive_file(filename: str) -> bool:
 
 
 def download_source(url: str) -> bytes:
-    req = urlopen(url)
-    data = req.read()
+    with urlopen(url) as req:
+        data = req.read()
     assert isinstance(data, bytes)
     return data
 

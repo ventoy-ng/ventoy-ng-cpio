@@ -9,7 +9,7 @@ if TYPE_CHECKING:
     from _typeshed import FileDescriptor
 
 
-_FILE: TypeAlias = IO[Any] | "FileDescriptor" | None
+FileLike: TypeAlias = IO[Any] | "FileDescriptor" | None
 
 
 class PopenX(Popen):
@@ -25,9 +25,9 @@ class ProcessBuilder:
     args: list[str] = field(default_factory=list)
     cwd: Optional[Path] = None
     env: dict[str, str] = field(default_factory=lambda: dict(environ))
-    stdin: _FILE = field(default=None)
-    stdout: _FILE = field(default=None)
-    stderr: _FILE = field(default=None)
+    stdin: FileLike = field(default=None)
+    stdout: FileLike = field(default=None)
+    stderr: FileLike = field(default=None)
 
     def copy(self):
         return ProcessBuilder(
