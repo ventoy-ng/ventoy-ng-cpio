@@ -1,5 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Self
+
+from typing_extensions import Self
 
 from ...utils.path import PathLike
 from ...utils.process import ProcessBuilder

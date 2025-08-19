@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Optional, Self
+from typing import Optional
 
-from ventoy_ng_cpio.utils.path import PathLike
+from typing_extensions import Self
 
+from ...utils.path import PathLike
 from ...utils.process import ProcessBuilder
 from .base import BaseCommandBuilder
 

@@ -2,7 +2,9 @@ import re
 from dataclasses import dataclass
 from os.path import relpath
 from pathlib import Path
-from typing import Optional, Self
+from typing import Optional
+
+from typing_extensions import Self
 
 from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths

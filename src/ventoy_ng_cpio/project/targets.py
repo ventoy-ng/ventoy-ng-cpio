@@ -1,6 +1,8 @@
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Optional, Self
+from typing import Optional
+
+from typing_extensions import Self
 
 from ..config import CONFIG
 from ..schemas.targets import TargetInfo

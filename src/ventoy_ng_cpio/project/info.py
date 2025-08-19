@@ -2,7 +2,8 @@ from dataclasses import dataclass
 from itertools import chain
 from os import getcwd
 from pathlib import Path
-from typing import Self
+
+from typing_extensions import Self
 
 from ..schemas.components import ComponentInfo
 from ..schemas.sources import SourceInfo
