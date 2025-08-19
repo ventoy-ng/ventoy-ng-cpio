@@ -10,7 +10,7 @@ from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
 from ..schemas.sources import SourceInfo
 from ..utils.flatten import flatten
-from ..utils.path import PathLike, pathlike_to_path
+from ..utils.path import PathLike
 from .components import Component
 from .info import ProjectInfoX
 from .jobs import ComponentJob
@@ -54,8 +54,8 @@ class Project:
 
     @classmethod
     def load(cls, root: PathLike, build_dir: PathLike) -> Self:
-        project_dir = pathlike_to_path(root)
-        build_dir = pathlike_to_path(build_dir)
+        project_dir = Path(root)
+        build_dir = Path(build_dir)
         info = ProjectInfoX.load(project_dir)
         return cls.new(info, build_dir)
 

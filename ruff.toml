@@ -26,6 +26,7 @@ select = [
     "UP",   # pyupgrade
     "FURB", # refurb
     "RUF",  # ruff-specific rules
+    "TRY",  # tryceratops
 ]
 ignore = [
     # https://github.com/astral-sh/ruff/issues/9216

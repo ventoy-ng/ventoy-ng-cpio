@@ -4,7 +4,6 @@ from typing_extensions import Self
 
 from ...utils.path import PathLike
 from ...utils.process import ProcessBuilder
-from ...utils.stringifyable import assert_stringifyable_value
 from .base import BaseCommandBuilder
 
 
@@ -20,7 +19,7 @@ class ConfigureScriptBuilder(BaseCommandBuilder):
 
     def add_arguments(self, *args: object):
         self.args.extend(
-            [str(arg) for arg in args if assert_stringifyable_value(arg)],
+            [str(arg) for arg in args],
         )
 
     def disable_features(self, *args: str):
