@@ -3,8 +3,8 @@ from glob import glob
 from os import utime
 from typing import Optional, Self
 
-from ..utils.process import ProcessBuilder
-from .base_run import BaseCommandBuilder
+from ...utils.process import ProcessBuilder
+from .base import BaseCommandBuilder
 
 
 def reset_mtime_for_files(files: list[str]):

@@ -4,9 +4,9 @@ from typing import Optional
 
 from .config import CONFIG
 from .consts import BUILD_DIR, PROJECT_DIR
-from .projectv2.project import Project
-from .runtime.build import do_build
-from .runtime.prepare import do_prepare
+from .project.project import Project
+from .stages.build import do_build
+from .stages.prepare import do_prepare
 
 
 def main():

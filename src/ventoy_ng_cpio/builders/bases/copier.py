@@ -1,7 +1,7 @@
 from abc import ABC
 from dataclasses import dataclass
 
-from ..builders_abc.build import BaseBuilder
+from .base import BaseBuilder
 
 
 @dataclass

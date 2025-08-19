@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ....builders_abc.cmake import CMakeDefBuilder
-from ....buildutils.cmake import CMakeCommandBuilder
+from ...bases.cmake import CMakeDefBuilder
+from ...utils.cmake import CMakeCommandBuilder
 
 
 @dataclass

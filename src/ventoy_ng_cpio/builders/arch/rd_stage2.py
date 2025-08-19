@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2
 
-from ...builders_abc.cpio import BaseCpioBuilder
-from ...buildutils.xz import compress_file_with_xz
-from ...projectv2.jobs import ComponentJob
+from ...project.jobs import ComponentJob
+from ..bases.cpio import BaseCpioBuilder
+from ..utils.xz import compress_file_with_xz
 
 
 @dataclass

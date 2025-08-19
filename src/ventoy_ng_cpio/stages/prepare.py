@@ -10,7 +10,7 @@ from urllib.request import urlopen
 from zstd import ZSTD_uncompress
 
 from ..paths.build import BuildPaths
-from ..projectv2.project import Project
+from ..project.project import Project
 from ..schemas.sources import SourceInfo
 
 TAR_REGEX = r"^(.*)\.(tar(\.[^\.]+)?|tgz)$"

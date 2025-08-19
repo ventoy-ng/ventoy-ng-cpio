@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..builders_abc.make import BaseMakeBuilder
+from .make import BaseMakeBuilder
 
 
 @dataclass

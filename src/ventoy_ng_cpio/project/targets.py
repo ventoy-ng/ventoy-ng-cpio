@@ -2,8 +2,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Optional, Self
 
-from ventoy_ng_cpio.config import CONFIG
-
+from ..config import CONFIG
 from ..schemas.targets import TargetInfo
 
 ARCHES_32 = ["i386"]

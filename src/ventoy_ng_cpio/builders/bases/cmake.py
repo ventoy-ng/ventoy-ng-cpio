@@ -3,11 +3,11 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable
 
-from ..buildutils.cmake import CMakeCommandBuilder
-from ..buildutils.make import MakeCommandBuilder
-from ..paths.build import BuildPaths
-from ..projectv2.targets import Target
-from .build import BaseBuilder
+from ...paths.build import BuildPaths
+from ...project.targets import Target
+from ..utils.cmake import CMakeCommandBuilder
+from ..utils.make import MakeCommandBuilder
+from .base import BaseBuilder
 from .make import BaseMakeBuilder
 
 

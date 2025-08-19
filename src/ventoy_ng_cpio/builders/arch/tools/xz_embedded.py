@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from ....builders_abc.make import BaseMakeBuilder
-from ....buildutils.make import MakeCommandBuilder
+from ...bases.make import BaseMakeBuilder
+from ...utils.make import MakeCommandBuilder
 
 
 @dataclass

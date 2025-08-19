@@ -3,9 +3,9 @@ from pathlib import Path
 from shlex import join
 from shutil import copy2, copytree
 
-from ....builders_abc.make import BaseMakeBuilder
-from ....buildutils.make import MakeCommandBuilder
-from ....buildutils.strip import strip_bin_copy
+from ...bases.make import BaseMakeBuilder
+from ...utils.make import MakeCommandBuilder
+from ...utils.strip import strip_bin_copy
 
 
 def do_copy_src(source_dir: Path):

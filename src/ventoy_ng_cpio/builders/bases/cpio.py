@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from ..builders_abc.build import BaseBuilder
-from ..buildutils.cpio import CpioCommandBuilder
+from ..utils.cpio import CpioCommandBuilder
+from .base import BaseBuilder
 
 
 @dataclass

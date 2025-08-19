@@ -1,4 +1,3 @@
-from ..builders_abc.build import get_builder
 from .arch.rd_stage1 import RamdiskStage1Builder
 from .arch.rd_stage1_tools import RamdiskStage1ToolsBuilder
 from .arch.rd_stage2 import RamdiskStage2Builder
@@ -16,6 +15,7 @@ from .arch.tools.xz_embedded import XzEmbeddedBuilder
 from .arch.tools.zlib import ZlibBuilder
 from .arch.tools.zstd import ZstdBuilder
 from .arch_ramdisks import ArchRamdisksBuilder
+from .bases.base import get_builder
 
 __all__ = [
     "ArchRamdisksBuilder",

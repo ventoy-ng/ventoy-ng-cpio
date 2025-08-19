@@ -2,10 +2,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-from ..paths.build import BuildPaths
-from ..projectv2.targets import Target
-from ..utils.process import ProcessBuilder
-from .base_run import BaseCommandBuilder
+from ...paths.build import BuildPaths
+from ...project.targets import Target
+from ...utils.process import ProcessBuilder
+from .base import BaseCommandBuilder
 
 
 @dataclass

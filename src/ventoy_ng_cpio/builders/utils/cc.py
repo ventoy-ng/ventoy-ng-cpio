@@ -2,8 +2,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-from ..utils.process import ProcessBuilder
-from .base_run import BaseCommandBuilder
+from ...utils.process import ProcessBuilder
+from .base import BaseCommandBuilder
 
 
 @dataclass

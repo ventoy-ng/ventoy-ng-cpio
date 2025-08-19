@@ -4,8 +4,8 @@ from typing import Optional, Self
 
 from ventoy_ng_cpio.utils.path import PathLike
 
-from ..buildutils.base_run import BaseCommandBuilder
-from ..utils.process import ProcessBuilder
+from ...utils.process import ProcessBuilder
+from .base import BaseCommandBuilder
 
 
 @dataclass

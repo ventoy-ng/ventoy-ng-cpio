@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2
 
-from ...builders_abc.copier import BaseCopierBuilder
-from ...buildutils.xz import compress_file_with_xz
-from ...projectv2.jobs import ComponentJob
+from ...project.jobs import ComponentJob
+from ..bases.copier import BaseCopierBuilder
+from ..utils.xz import compress_file_with_xz
 
 
 def rd_stage_2_cvt(job: ComponentJob) -> list[tuple[str, str]]:

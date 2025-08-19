@@ -4,8 +4,8 @@ from enum import Enum, auto
 from os import cpu_count
 from typing import Optional
 
-from ..utils.process import ProcessBuilder
-from .base_run import BaseCommandBuilder
+from ...utils.process import ProcessBuilder
+from .base import BaseCommandBuilder
 
 
 @dataclass

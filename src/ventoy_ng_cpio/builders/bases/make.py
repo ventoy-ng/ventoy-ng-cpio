@@ -2,8 +2,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-from ..buildutils.make import MakeCommandBuilder
-from .build import BaseBuilder
+from ..utils.make import MakeCommandBuilder
+from .base import BaseBuilder
 
 
 def default_makefile() -> Path:

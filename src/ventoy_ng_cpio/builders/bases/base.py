@@ -4,11 +4,11 @@ from inspect import isabstract
 from pathlib import Path
 from typing import ClassVar
 
-from ..paths.build import BuildPaths
-from ..paths.project import ProjectPaths
-from ..projectv2.jobs import ComponentJob
-from ..projectv2.project import Project
-from ..schemas.sources import SourceInfo
+from ...paths.build import BuildPaths
+from ...paths.project import ProjectPaths
+from ...project.jobs import ComponentJob
+from ...project.project import Project
+from ...schemas.sources import SourceInfo
 
 _build_impls: dict[str, type["BaseBuilder"]] = {}
 

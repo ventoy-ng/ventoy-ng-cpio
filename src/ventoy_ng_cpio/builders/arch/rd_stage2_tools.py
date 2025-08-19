@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2
 
-from ...builders_abc.copier import BaseCopierBuilder
-from ...projectv2.jobs import ComponentJob
+from ...project.jobs import ComponentJob
+from ..bases.copier import BaseCopierBuilder
 
 DEP_TO_BIN_NAME = {
     "device-mapper": {"dmsetup": "dmsetup"},

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from shutil import copy2
 
-from ..builders_abc.copier import BaseCopierBuilder
-from ..projectv2.jobs import ComponentJob
+from ..project.jobs import ComponentJob
+from .bases.copier import BaseCopierBuilder
 
 
 @dataclass

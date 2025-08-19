@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..projectv2.components import Component
-from ..projectv2.jobs import ComponentJob
+from ..project.components import Component
+from ..project.jobs import ComponentJob
 
 
 @dataclass(frozen=True)
