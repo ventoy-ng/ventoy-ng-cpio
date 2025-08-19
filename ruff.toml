@@ -24,6 +24,7 @@ select = [
     "F",    # pyflakes
     "PL",   # pylint
     "UP",   # pyupgrade
+    "FURB", # refurb
 ]
 ignore = [
     # https://github.com/astral-sh/ruff/issues/9216
