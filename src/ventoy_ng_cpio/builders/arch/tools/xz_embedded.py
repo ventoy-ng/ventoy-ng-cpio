@@ -9,13 +9,10 @@ class XzEmbeddedBuilder(BaseMakeBuilder):
     NAME = "xz-embedded"
 
     def __post_init__(self):
-        makefile = self.project_paths.project_dir
-        makefile /= "extras"
-        makefile /= self.job.component.info.name
-        makefile /= "Makefile"
+        self.makefile = self.get_extras_dir() / "Makefile"
 
         make = MakeCommandBuilder()
-        make.file = str(makefile)
+        make.file = str(self.makefile)
         make.env["CROSS"] = self.job.target.info.get_cross()
         make.envs_strict["srcdir"] = str(self.get_main_source_dir())
         self.make = make

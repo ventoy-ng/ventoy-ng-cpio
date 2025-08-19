@@ -43,6 +43,9 @@ class BaseBuilder(ABC):
     def get_input_dir(self, job: ComponentJob):
         return self.build_paths.component_job_output_dir(job)
 
+    def get_extras_dir(self) -> Path:
+        return self.project_paths.component_job_extras_dir(self.job)
+
     def get_output_dir(self, absolute: bool = True) -> Path:
         out_dir = self.build_paths.component_job_output_dir(self.job)
         if absolute:

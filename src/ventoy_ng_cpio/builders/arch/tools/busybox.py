@@ -32,10 +32,7 @@ class BaseBusyboxBuilder(BaseMakeBuilder, ABC):
         pass
 
     def get_config_path(self) -> Path:
-        configs_dir = self.project_paths.project_dir
-        configs_dir /= "extras"
-        configs_dir /= "busybox"
-        return configs_dir / self.get_config_name()
+        return self.get_extras_dir() / self.get_config_name()
 
     def prepare(self):
         if self.config_file.exists():

@@ -50,9 +50,7 @@ class SquashfsBuilder(BaseMakeBuilder):
             return
         source_dir = self.get_main_source_dir()
         do_copy_src(source_dir)
-        patches_dir = self.project_paths.project_dir
-        patches_dir /= "extras"
-        patches_dir /= "squashfs"
+        patches_dir = self.get_extras_dir()
         for patch in patches_dir.iterdir():
             print("Applying patch", patch.name)
             cmd = ProcessBuilder(["patch"])
