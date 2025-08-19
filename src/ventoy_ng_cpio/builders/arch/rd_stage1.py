@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2
 
-from ...project.jobs import ComponentJob
-from ..bases.cpio import BaseCpioBuilder
+from ventoy_ng_cpio.builders.bases.cpio import BaseCpioBuilder
+from ventoy_ng_cpio.project.jobs import ComponentJob
 
 
 @dataclass

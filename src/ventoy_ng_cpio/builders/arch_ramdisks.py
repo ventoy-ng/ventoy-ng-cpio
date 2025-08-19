@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 from shutil import copy2
 
-from ..project.jobs import ComponentJob
+from ventoy_ng_cpio.project.jobs import ComponentJob
+
 from .bases.copier import BaseCopierBuilder
 
 

@@ -2,9 +2,10 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-from ...paths.build import BuildPaths
-from ...project.targets import Target
-from ...utils.process import ProcessBuilder
+from ventoy_ng_cpio.paths.build import BuildPaths
+from ventoy_ng_cpio.project.targets import Target
+from ventoy_ng_cpio.utils.process import ProcessBuilder
+
 from .base import BaseCommandBuilder
 
 

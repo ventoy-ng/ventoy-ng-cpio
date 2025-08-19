@@ -1,8 +1,8 @@
 from shutil import copy2
 from typing import Optional
 
-from ...project.targets import Target
-from ...utils.process import ProcessBuilder
+from ventoy_ng_cpio.project.targets import Target
+from ventoy_ng_cpio.utils.process import ProcessBuilder
 
 
 def strip_bin(

@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ..project.components import Component
-from ..project.jobs import ComponentJob
+from ventoy_ng_cpio.project.components import Component
+from ventoy_ng_cpio.project.jobs import ComponentJob
 
 
 @dataclass(frozen=True)

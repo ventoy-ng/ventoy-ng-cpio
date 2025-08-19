@@ -4,8 +4,8 @@ from typing import Optional
 
 from typing_extensions import Self
 
-from ..config import CONFIG
-from ..schemas.targets import TargetInfo
+from ventoy_ng_cpio.config import CONFIG
+from ventoy_ng_cpio.schemas.targets import TargetInfo
 
 ARCHES_32 = ["i386"]
 

@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ...bases.base import BaseBuilder
-from ...utils.cc import CcBuilder
-from ...utils.strip import strip_bin_copy
+from ventoy_ng_cpio.builders.bases.base import BaseBuilder
+from ventoy_ng_cpio.builders.utils.cc import CcBuilder
+from ventoy_ng_cpio.builders.utils.strip import strip_bin_copy
 
 
 @dataclass

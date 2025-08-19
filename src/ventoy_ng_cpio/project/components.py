@@ -5,8 +5,9 @@ from typing import Optional
 
 from typing_extensions import Self
 
-from ..schemas.components import ComponentInfo
-from ..schemas.sources import SourceInfo
+from ventoy_ng_cpio.schemas.components import ComponentInfo
+from ventoy_ng_cpio.schemas.sources import SourceInfo
+
 from .targets import Target, TargetSet
 
 

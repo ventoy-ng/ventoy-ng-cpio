@@ -2,8 +2,9 @@ from dataclasses import dataclass, field
 
 from typing_extensions import Self
 
-from ...utils.path import PathLike
-from ...utils.process import ProcessBuilder
+from ventoy_ng_cpio.utils.path import PathLike
+from ventoy_ng_cpio.utils.process import ProcessBuilder
+
 from .base import BaseCommandBuilder
 
 

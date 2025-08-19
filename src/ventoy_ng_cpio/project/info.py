@@ -4,9 +4,9 @@ from pathlib import Path
 
 from typing_extensions import Self
 
-from ..schemas.components import ComponentInfo
-from ..schemas.sources import SourceInfo
-from ..schemas.targets import TargetInfo
+from ventoy_ng_cpio.schemas.components import ComponentInfo
+from ventoy_ng_cpio.schemas.sources import SourceInfo
+from ventoy_ng_cpio.schemas.targets import TargetInfo
 
 
 def load_target_info(project_dir: Path) -> dict[Path, TargetInfo]:

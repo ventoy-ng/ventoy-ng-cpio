@@ -2,11 +2,11 @@ from argparse import ArgumentParser
 from pathlib import Path
 from typing import Optional
 
-from .config import CONFIG
-from .consts import BUILD_DIR, PROJECT_DIR
-from .project.project import Project
-from .stages.build import do_build
-from .stages.prepare import do_prepare
+from ventoy_ng_cpio.config import CONFIG
+from ventoy_ng_cpio.consts import BUILD_DIR, PROJECT_DIR
+from ventoy_ng_cpio.project.project import Project
+from ventoy_ng_cpio.stages.build import do_build
+from ventoy_ng_cpio.stages.prepare import do_prepare
 
 
 def main():

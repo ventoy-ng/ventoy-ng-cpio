@@ -3,10 +3,11 @@ from collections.abc import Callable
 from dataclasses import dataclass, field
 from pathlib import Path
 
-from ...paths.build import BuildPaths
-from ...project.targets import Target
-from ..utils.cmake import CMakeCommandBuilder
-from ..utils.make import MakeCommandBuilder
+from ventoy_ng_cpio.builders.utils.cmake import CMakeCommandBuilder
+from ventoy_ng_cpio.builders.utils.make import MakeCommandBuilder
+from ventoy_ng_cpio.paths.build import BuildPaths
+from ventoy_ng_cpio.project.targets import Target
+
 from .base import BaseBuilder
 from .make import BaseMakeBuilder
 

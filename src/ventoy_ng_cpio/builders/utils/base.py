@@ -4,7 +4,7 @@ from os import environ
 from pathlib import Path
 from typing import Optional
 
-from ...utils.process import ProcessBuilder
+from ventoy_ng_cpio.utils.process import ProcessBuilder
 
 
 @dataclass

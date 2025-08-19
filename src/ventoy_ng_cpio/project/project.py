@@ -6,11 +6,12 @@ from typing import Optional
 
 from typing_extensions import Self
 
-from ..paths.build import BuildPaths
-from ..paths.project import ProjectPaths
-from ..schemas.sources import SourceInfo
-from ..utils.flatten import flatten
-from ..utils.path import PathLike
+from ventoy_ng_cpio.paths.build import BuildPaths
+from ventoy_ng_cpio.paths.project import ProjectPaths
+from ventoy_ng_cpio.schemas.sources import SourceInfo
+from ventoy_ng_cpio.utils.flatten import flatten
+from ventoy_ng_cpio.utils.path import PathLike
+
 from .components import Component
 from .info import ProjectInfoX
 from .jobs import ComponentJob

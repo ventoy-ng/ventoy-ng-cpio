@@ -5,7 +5,8 @@ from typing import Optional
 
 from typing_extensions import Self
 
-from ...utils.process import ProcessBuilder
+from ventoy_ng_cpio.utils.process import ProcessBuilder
+
 from .base import BaseCommandBuilder
 
 

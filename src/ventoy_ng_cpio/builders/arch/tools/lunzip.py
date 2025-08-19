@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ....project.jobs import ComponentJob
-from ...bases.configure import BaseConfigureBuilder
-from ...utils.configure import ConfigureScriptBuilder
-from ...utils.strip import strip_bin_copy
+from ventoy_ng_cpio.builders.bases.configure import BaseConfigureBuilder
+from ventoy_ng_cpio.builders.utils.configure import ConfigureScriptBuilder
+from ventoy_ng_cpio.builders.utils.strip import strip_bin_copy
+from ventoy_ng_cpio.project.jobs import ComponentJob
 
 
 def do_configure(

@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from pathlib import Path
 from shutil import copy2
 
-from ...project.jobs import ComponentJob
-from ..bases.copier import BaseCopierBuilder
-from ..utils.xz import compress_file_with_xz
+from ventoy_ng_cpio.builders.bases.copier import BaseCopierBuilder
+from ventoy_ng_cpio.builders.utils.xz import compress_file_with_xz
+from ventoy_ng_cpio.project.jobs import ComponentJob
 
 
 def rd_stage_1_bin_rename(job: ComponentJob) -> tuple[str, str]:

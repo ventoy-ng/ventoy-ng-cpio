@@ -3,12 +3,12 @@ from pathlib import Path
 from shutil import rmtree
 from typing import Optional
 
-from ..builders import get_builder
-from ..config import CONFIG
-from ..paths.build import BuildPaths
-from ..paths.project import ProjectPaths
-from ..project.jobs import ComponentJob
-from ..project.project import Project
+from ventoy_ng_cpio.builders import get_builder
+from ventoy_ng_cpio.config import CONFIG
+from ventoy_ng_cpio.paths.build import BuildPaths
+from ventoy_ng_cpio.paths.project import ProjectPaths
+from ventoy_ng_cpio.project.jobs import ComponentJob
+from ventoy_ng_cpio.project.project import Project
 
 CMAKE_TOOLCHAIN_FILE = """# the name of the target operating system
 set(CMAKE_SYSTEM_PROCESSOR  {arch})

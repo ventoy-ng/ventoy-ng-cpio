@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from ...bases.make import BaseMakeBuilder
-from ...utils.make import MakeCommandBuilder
+from ventoy_ng_cpio.builders.bases.make import BaseMakeBuilder
+from ventoy_ng_cpio.builders.utils.make import MakeCommandBuilder
 
 
 @dataclass

@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 
-from ..utils.cpio import CpioCommandBuilder
+from ventoy_ng_cpio.builders.utils.cpio import CpioCommandBuilder
+
 from .base import BaseBuilder
 
 

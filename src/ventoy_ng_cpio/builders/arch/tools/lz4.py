@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ...bases.cmake import CMakeDefBuilder
-from ...utils.cmake import CMakeCommandBuilder
+from ventoy_ng_cpio.builders.bases.cmake import CMakeDefBuilder
+from ventoy_ng_cpio.builders.utils.cmake import CMakeCommandBuilder
 
 
 @dataclass

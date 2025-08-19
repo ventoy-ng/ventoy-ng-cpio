@@ -2,7 +2,8 @@ from dataclasses import dataclass
 
 from typing_extensions import Self
 
-from ..utils.flatten import flatten
+from ventoy_ng_cpio.utils.flatten import flatten
+
 from .components import Component
 from .targets import Target
 

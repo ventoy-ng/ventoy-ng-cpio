@@ -2,7 +2,8 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Optional
 
-from ..utils.make import MakeCommandBuilder
+from ventoy_ng_cpio.builders.utils.make import MakeCommandBuilder
+
 from .base import BaseBuilder
 
 

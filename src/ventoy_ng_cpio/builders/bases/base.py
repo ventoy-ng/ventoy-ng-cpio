@@ -4,11 +4,11 @@ from inspect import isabstract
 from pathlib import Path
 from typing import ClassVar
 
-from ...paths.build import BuildPaths
-from ...paths.project import ProjectPaths
-from ...project.jobs import ComponentJob
-from ...project.project import Project
-from ...schemas.sources import SourceInfo
+from ventoy_ng_cpio.paths.build import BuildPaths
+from ventoy_ng_cpio.paths.project import ProjectPaths
+from ventoy_ng_cpio.project.jobs import ComponentJob
+from ventoy_ng_cpio.project.project import Project
+from ventoy_ng_cpio.schemas.sources import SourceInfo
 
 _build_impls: dict[str, type["BaseBuilder"]] = {}
 

@@ -9,9 +9,9 @@ from urllib.request import urlopen
 
 from zstd import ZSTD_uncompress
 
-from ..paths.build import BuildPaths
-from ..project.project import Project
-from ..schemas.sources import SourceInfo
+from ventoy_ng_cpio.paths.build import BuildPaths
+from ventoy_ng_cpio.project.project import Project
+from ventoy_ng_cpio.schemas.sources import SourceInfo
 
 TAR_REGEX = r"^(.*)\.(tar(\.[^\.]+)?|tgz)$"
 TAR_REGEX_C = re.compile(TAR_REGEX)
