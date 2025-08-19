@@ -42,7 +42,6 @@ class CMakeCommandBuilder(BaseCommandBuilder):
         args = {
             "CMAKE_BUILD_TYPE": self.build_type,
             # NOTE: --prefix=/ is broken
-            # flake8: noqa: E800
             # "CMAKE_INSTALL_PREFIX": self.install_prefix,
             "BUILD_SHARED_LIBS": "OFF",
         }
