@@ -24,7 +24,7 @@ class MakeLikeCommandBuilder(BaseCommandBuilder, ABC):
 class MakeStatus(Enum):
     DONE = 0
     UP_TO_DATE = auto()
-    #FAILED = auto()
+    # FAILED = auto()
 
     def is_up_to_date(self) -> bool:
         return self == self.__class__.UP_TO_DATE
@@ -44,10 +44,7 @@ class MakeCommandBuilder(MakeLikeCommandBuilder):
         if self.jobs is not None:
             res.args.extend(["-O", "-j", str(self.jobs)])
         if self.envs_strict:
-            res.args.extend([
-                f"{k}={v}"
-                for k, v in self.envs_strict.items()
-            ])
+            res.args.extend([f"{k}={v}" for k, v in self.envs_strict.items()])
         if targets:
             res.args.append("--")
             res.args.extend(targets)

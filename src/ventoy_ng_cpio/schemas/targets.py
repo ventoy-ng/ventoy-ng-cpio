@@ -46,6 +46,7 @@ class TargetInfo(DataClassTOMLMixin):
     - system/x86_64
     - output/x86
     """
+
     name: str
     suffix: Optional[str] = field(default=None)
     triplet: Optional[TargetTriplet] = field(default=None)

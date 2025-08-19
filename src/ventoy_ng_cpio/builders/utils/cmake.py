@@ -47,10 +47,7 @@ class CMakeCommandBuilder(BaseCommandBuilder):
             "BUILD_SHARED_LIBS": "OFF",
         }
         args.update(self.args)
-        res.args.extend([
-            f"-D{k}={v}"
-            for k, v in args.items()
-        ])
+        res.args.extend([f"-D{k}={v}" for k, v in args.items()])
         return res
 
     def run(self):

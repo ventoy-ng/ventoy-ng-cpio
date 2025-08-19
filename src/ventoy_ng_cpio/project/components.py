@@ -30,12 +30,10 @@ class Component:
         else:
             target_set = None
         sources = {
-            src_name: all_sources[src_name]
-            for src_name in info.sources
+            src_name: all_sources[src_name] for src_name in info.sources
         }
         dependencies = {
-            comp_name: all_components[comp_name]
-            for comp_name in info.deps
+            comp_name: all_components[comp_name] for comp_name in info.deps
         }
         this = cls(info, target_set, sources, dependencies)  # type: ignore
         return this

@@ -25,8 +25,7 @@ class Target:
             if targets is None:
                 raise ValueError
             subtargets = [
-                targets[subtarget_name]
-                for subtarget_name in info.subtargets
+                targets[subtarget_name] for subtarget_name in info.subtargets
             ]
         else:
             subtargets = None
@@ -61,10 +60,7 @@ class Target:
             return True
         if not self.subtargets:
             return False
-        return any(
-            target.is_subtarget(other)
-            for target in self.subtargets
-        )
+        return any(target.is_subtarget(other) for target in self.subtargets)
 
     def get_bitness(self) -> int:
         if self.info.arch in ARCHES_32:
@@ -112,7 +108,4 @@ class TargetSet:
                 target_sets[tset] = []
             tseta = target_sets[tset]
             tseta.append(target)
-        return {
-            name: cls(name, info)
-            for name, info in target_sets.items()
-        }
+        return {name: cls(name, info) for name, info in target_sets.items()}

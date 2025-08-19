@@ -19,26 +19,18 @@ class ConfigureScriptBuilder(BaseCommandBuilder):
         return cls(str(path))
 
     def add_arguments(self, *args: object):
-        self.args.extend([
-            str(arg)
-            for arg in args
-            if assert_stringifyable_value(arg)
-        ])
+        self.args.extend(
+            [str(arg) for arg in args if assert_stringifyable_value(arg)],
+        )
 
     def disable_features(self, *args: str):
-        self.add_arguments(*[
-            f"--disable-{feature}"
-            for feature in args
-        ])
+        self.add_arguments(*[f"--disable-{feature}" for feature in args])
 
     def build_process(self) -> ProcessBuilder:
         res = ProcessBuilder([self.path])
         res.env = self.env
         res.args.extend(self.args)
-        res.args.extend([
-            f"{k}={v}"
-            for k, v in self.confenv.items()
-        ])
+        res.args.extend([f"{k}={v}" for k, v in self.confenv.items()])
         return res
 
     def run(self):

@@ -31,24 +31,14 @@ class ComponentJob:
         all_jobs: dict[str, Self],
     ) -> Self:
         dep_names = component.get_deps(target)
-        dep_comps = [
-            all_components[cname]
-            for cname in dep_names
-        ]
+        dep_comps = [all_components[cname] for cname in dep_names]
         pot_dep_jobs = [
-            job
-            for job in all_jobs.values()
-            if job.component in dep_comps
+            job for job in all_jobs.values() if job.component in dep_comps
         ]
         dep_jobs = [
-            job
-            for job in pot_dep_jobs
-            if target.is_subtarget(job.target)
+            job for job in pot_dep_jobs if target.is_subtarget(job.target)
         ]
-        deps = {
-            job.name: job
-            for job in dep_jobs
-        }
+        deps = {job.name: job for job in dep_jobs}
         return cls(component, target, deps)  # type: ignore
 
     @classmethod
@@ -63,10 +53,7 @@ class ComponentJob:
             cls._new(component, target, all_components, all_jobs)
             for target in targets
         ]
-        return {
-            job.name: job
-            for job in jobs
-        }
+        return {job.name: job for job in jobs}
 
     @classmethod
     def new_for(
@@ -80,9 +67,6 @@ class ComponentJob:
         return jobs
 
     def walk(self) -> list[Self]:
-        deptt = [
-            dep.walk()
-            for dep in self.dependencies.values()
-        ]
+        deptt = [dep.walk() for dep in self.dependencies.values()]
         dept = flatten(deptt)
         return dept + [self]

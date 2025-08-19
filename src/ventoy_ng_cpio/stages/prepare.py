@@ -21,10 +21,7 @@ def is_archive_file(filename: str) -> bool:
     regs = [
         TAR_REGEX_C,
     ]
-    return any(
-        reg.match(filename) is not None
-        for reg in regs
-    )
+    return any(reg.match(filename) is not None for reg in regs)
 
 
 def download_source(url: str) -> bytes:

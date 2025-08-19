@@ -15,9 +15,13 @@ def do_configure(
     conf.add_arguments("--prefix=/")
     conf.add_arguments("--enable-shared=no", "--enable-static=yes")
     conf.disable_features(
-        "xz", "xzdec",
-        "lzmadec", "lzmainfo", "lzma-links",
-        "scripts", "assembler",
+        "xz",
+        "xzdec",
+        "lzmadec",
+        "lzmainfo",
+        "lzma-links",
+        "scripts",
+        "assembler",
     )
     conf.confenv["CC"] = job.target.get_cmd("cc")
     conf.confenv["CFLAGS"] = "-Oz"

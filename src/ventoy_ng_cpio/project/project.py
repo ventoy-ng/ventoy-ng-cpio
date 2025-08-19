@@ -31,21 +31,24 @@ class Project:
     def new(cls, info: ProjectInfoX, build_dir: Path) -> Self:
         targets = Target.new_for(info.targets)
         target_sets = TargetSet.new_for(targets)
-        sources = {
-            src.name: src
-            for src in info.sources.values()
-        }
+        sources = {src.name: src for src in info.sources.values()}
 
         components = Component.new_for(
-            info.components, target_sets, sources,
+            info.components,
+            target_sets,
+            sources,
         )
 
         component_jobs = ComponentJob.new_for(components)
 
         this = cls(
-            build_dir, info,
-            targets, target_sets, sources,
-            components, component_jobs,
+            build_dir,
+            info,
+            targets,
+            target_sets,
+            sources,
+            components,
+            component_jobs,
         )
         return this
 
@@ -85,8 +88,7 @@ class Project:
             component_names = ["main"]
         # 1 - find the requested components
         main_comp = [
-            self.components[comp_name]
-            for comp_name in component_names
+            self.components[comp_name] for comp_name in component_names
         ]
         # 2 - find the jobs of those components
         main_jobs = [
@@ -100,12 +102,10 @@ class Project:
 
             def matches_user_pattern(job: ComponentJob) -> bool:
                 return pat.match(job.target.info.name) is not None
+
             main_jobs = list(filter(matches_user_pattern, main_jobs))
         # 3 - walk the dependency tree for each of those jobs
-        dup_deps_2d = [
-            job.walk()
-            for job in main_jobs
-        ]
+        dup_deps_2d = [job.walk() for job in main_jobs]
         # 4 - flatten to get one list
         dup_deps = flatten(dup_deps_2d)
         # 5 - de-duplicate

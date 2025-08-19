@@ -34,10 +34,7 @@ class XzCommandBuilder(BaseCommandBuilder):
 
     def run(self, *args: PathLike):
         cmd = self.build_process()
-        cmd.args.extend([
-            str(arg)
-            for arg in args
-        ])
+        cmd.args.extend([str(arg) for arg in args])
         cmd.run()
 
 

@@ -100,8 +100,8 @@ def do_build_job(
     build_paths = project.get_build_paths(relative_to=work_dir)
     project_paths = project.get_project_paths(relative_to=work_dir)
     chdir(work_dir)
-    #with open("vtbuild.log", "wt") as file:
-    #    file.write("test\n")
+    # with open("vtbuild.log", "wt") as file:
+    #     file.write("test\n")
     do_build_job_log(job, project, build_paths, project_paths)
     chdir(project.info.cwd)
 

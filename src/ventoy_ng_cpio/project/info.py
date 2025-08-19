@@ -67,8 +67,11 @@ class ProjectInfoX:
         sources = load_source_info(project_dir)
         components = load_component_info(project_dir)
         return cls(
-            cwd, project_dir,
-            targets, sources, components,
+            cwd,
+            project_dir,
+            targets,
+            sources,
+            components,
         )
 
     def get_root_abspath(self) -> Path:

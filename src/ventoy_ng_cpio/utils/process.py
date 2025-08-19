@@ -48,8 +48,11 @@ class ProcessBuilder:
     def spawn(self):
         return PopenX(
             self.args,
-            stdin=self.stdin, stdout=self.stdout, stderr=self.stderr,
-            cwd=self.cwd, env=self.env,
+            stdin=self.stdin,
+            stdout=self.stdout,
+            stderr=self.stderr,
+            cwd=self.cwd,
+            env=self.env,
         )
 
     def run(self):

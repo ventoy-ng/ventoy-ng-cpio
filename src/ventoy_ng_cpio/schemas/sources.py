@@ -11,9 +11,11 @@ from mashumaro.mixins.toml import DataClassTOMLMixin
 class SourceInfo(DataClassTOMLMixin):
     name: str
     version: str
-    raw_id: str = field(metadata=field_options(
-        alias="id",
-    ))
+    raw_id: str = field(
+        metadata=field_options(
+            alias="id",
+        ),
+    )
     url: Optional[str] = field(default=None)
     filename: Optional[str] = field(default=None)
     xhash: Optional[str] = field(
