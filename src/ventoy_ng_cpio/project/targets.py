@@ -59,10 +59,10 @@ class Target:
             return True
         if not self.subtargets:
             return False
-        return any([
+        return any(
             target.is_subtarget(other)
             for target in self.subtargets
-        ])
+        )
 
     def get_bitness(self) -> int:
         if self.info.arch in ARCHES_32:

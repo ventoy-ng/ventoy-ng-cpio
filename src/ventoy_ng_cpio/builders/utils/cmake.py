@@ -8,6 +8,7 @@ from ...utils.process import ProcessBuilder
 from .base import BaseCommandBuilder
 
 
+# pylint: disable=too-many-instance-attributes
 @dataclass
 class CMakeCommandBuilder(BaseCommandBuilder):
     path: str = field(default="cmake")
@@ -41,6 +42,7 @@ class CMakeCommandBuilder(BaseCommandBuilder):
         args = {
             "CMAKE_BUILD_TYPE": self.build_type,
             # NOTE: --prefix=/ is broken
+            # flake8: noqa: E800
             # "CMAKE_INSTALL_PREFIX": self.install_prefix,
             "BUILD_SHARED_LIBS": "OFF",
         }

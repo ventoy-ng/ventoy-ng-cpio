@@ -29,13 +29,9 @@ class TargetTriplet(DataClassTOMLMixin):
         assert isinstance(libc, str)
         return libc
 
-    def to_string(
-        self,
-        default_vendor: Optional[str] = None,
-        default_os: Optional[str] = None,
-    ) -> str:
-        res = self.machine
+    def to_string(self, default_vendor: Optional[str] = None) -> str:
         assert self.operatingsystem == "linux"
+        res = self.machine
         res += "-" + self.get_vendor(default=default_vendor)
         res += "-" + self.operatingsystem
         res += "-" + self.get_libc()
@@ -69,13 +65,6 @@ class TargetInfo(DataClassTOMLMixin):
     def arch(self) -> str:
         return self.get_triplet().arch
 
-    def get_cross(
-        self,
-        default_vendor: Optional[str] = None,
-        default_os: Optional[str] = None,
-    ) -> str:
-        triplet = self.get_triplet().to_string(
-            default_vendor=default_vendor,
-            default_os=default_os,
-        )
+    def get_cross(self, default_vendor: Optional[str] = None) -> str:
+        triplet = self.get_triplet().to_string(default_vendor=default_vendor)
         return triplet + "-"

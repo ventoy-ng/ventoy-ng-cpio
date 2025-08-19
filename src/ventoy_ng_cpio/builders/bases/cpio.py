@@ -7,6 +7,10 @@ from .base import BaseBuilder
 
 @dataclass
 class BaseCpioBuilder(BaseBuilder, ABC):
+    def __post_init__(self):
+        self.output_dir = self.get_output_dir(absolute=False)
+        self.output_cpio_file = self.output_dir / self.get_cpio_name()
+
     @abstractmethod
     def get_cpio_name(self) -> str:
         pass
@@ -19,16 +23,13 @@ class BaseCpioBuilder(BaseBuilder, ABC):
         pass
 
     def build(self):
-        if self.get_output_dir(absolute=False).exists():
+        if self.output_dir.exists():
             return
         self._flagged_for_install = True
         self.build_cpio()
 
     def do_install(self):
-        output_dir = self.get_output_dir(absolute=False)
-        output_file = output_dir / self.get_cpio_name()
         cmd = CpioCommandBuilder.get_def()
         cpio_data = cmd.run_glob(reset_mtime=True)
-        output_dir.mkdir(parents=True, exist_ok=True)
-        output_file.write_bytes(cpio_data)
-        self.output_cpio_file = output_file
+        self.output_dir.mkdir(parents=True, exist_ok=True)
+        self.output_cpio_file.write_bytes(cpio_data)

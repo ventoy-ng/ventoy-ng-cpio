@@ -3,6 +3,7 @@ from pathlib import Path
 from shutil import rmtree
 from typing import Optional
 
+from ..builders import get_builder
 from ..config import CONFIG
 from ..paths.build import BuildPaths
 from ..paths.project import ProjectPaths
@@ -71,8 +72,6 @@ def do_build_job_log(
     build_paths: BuildPaths,
     project_paths: ProjectPaths,
 ):
-    from ..builders import get_builder
-
     comp_name = job.component.info.name
     try:
         bldr_class = get_builder(comp_name)

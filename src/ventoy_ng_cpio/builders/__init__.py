@@ -12,8 +12,8 @@ from .arch.tools.squashfs import SquashfsBuilder
 from .arch.tools.vblade import VBladeBuilder
 from .arch.tools.xz import XzBuilder
 from .arch.tools.xz_embedded import XzEmbeddedBuilder
-from .arch.tools.zlib import ZlibBuilder
 from .arch.tools.zstd import ZstdBuilder
+from .arch.tools.zzlib import ZlibBuilder
 from .arch_ramdisks import ArchRamdisksBuilder
 from .bases.base import get_builder
 

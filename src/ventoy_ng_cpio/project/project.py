@@ -95,6 +95,7 @@ class Project:
         # 2.1 - only select jobs that match user-given regex
         if target_filter is not None:
             pat = re.compile(target_filter)
+
             def matches_user_pattern(job: ComponentJob) -> bool:
                 return pat.match(job.target.info.name) is not None
             main_jobs = list(filter(matches_user_pattern, main_jobs))
