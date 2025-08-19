@@ -1,1 +1,27 @@
 line-length = 79
+
+[lint]
+select = [
+    "YTT",  # flake8-2020
+    "BLE",  # flake8-blind-except
+    "B",    # flake8-bugbear
+    "A",    # flake8-builtins
+    "COM",  # flake8-commas
+    "C4",   # flake8-comprehensions
+    "EXE",  # flake8-executable
+    "FIX",  # flake8-fixme
+    "PIE",  # flake8-pie
+    "RSE",  # flake8-raise
+    "SLF",  # flake8-self
+    "SIM",  # flake8-simplify
+    "ARG",  # flake8-unused-arguments
+    "I",    # isort
+    "N",    # pep8-naming
+    "PERF", # perflint
+    "E", "W",   # pycodestyle
+    "F",    # pyflakes
+    "PLC", "PLE",   # pylint
+]
+# https://github.com/astral-sh/ruff/issues/9216
+# sadge :(
+ignore = ["COM812"]
