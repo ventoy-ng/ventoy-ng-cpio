@@ -11,6 +11,7 @@ select = [
     "EXE",  # flake8-executable
     "FIX",  # flake8-fixme
     "PIE",  # flake8-pie
+    "Q",    # flake8-quotes
     "RSE",  # flake8-raise
     "SLF",  # flake8-self
     "SIM",  # flake8-simplify
