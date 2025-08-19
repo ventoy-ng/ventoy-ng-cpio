@@ -25,6 +25,7 @@ select = [
     "PL",   # pylint
     "UP",   # pyupgrade
     "FURB", # refurb
+    "RUF",  # ruff-specific rules
 ]
 ignore = [
     # https://github.com/astral-sh/ruff/issues/9216

@@ -69,4 +69,4 @@ class ComponentJob:
     def walk(self) -> list[Self]:
         deptt = [dep.walk() for dep in self.dependencies.values()]
         dept = flatten(deptt)
-        return dept + [self]
+        return [*dept, self]
