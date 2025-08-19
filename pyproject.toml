@@ -6,7 +6,7 @@ readme = "README.md"
 authors = [
     { name = "fnrir", email = "fnr1r0@protonmail.com" }
 ]
-requires-python = ">=3.13"
+requires-python = ">=3.10"
 dependencies = [
     "mashumaro>=3.16",
     "toml>=0.10.2",
