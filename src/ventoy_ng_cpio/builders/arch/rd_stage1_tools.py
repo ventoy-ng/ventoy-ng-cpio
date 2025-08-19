@@ -13,9 +13,6 @@ def rd_stage_1_bin_rename(job: ComponentJob) -> tuple[str, str]:
     suffix = target.info.suffix
     assert suffix is not None
 
-    def with_suffix(name: str, extra_suffix: str = "") -> tuple[str, str]:
-        return (name, name + extra_suffix + suffix)
-
     if info.name == "busybox-ash":
         if target.info.arch == "x86_64":
             return ("busybox", "64h")
