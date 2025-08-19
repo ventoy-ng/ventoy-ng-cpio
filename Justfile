@@ -53,3 +53,5 @@ pylint:
         --disable C0114,C0115,C0116 \
         --extension-pkg-allow-list zstd \
         {{SRC_DIR}}
+
+ruff: isort format check
