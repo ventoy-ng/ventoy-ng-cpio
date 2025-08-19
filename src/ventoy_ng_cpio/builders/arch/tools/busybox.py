@@ -60,7 +60,7 @@ class BusyboxAshBuilder(BaseBusyboxBuilder):
 
     def get_config_name(self) -> str:
         target = self.job.target
-        use_lfs = target.get_bitness() != 64
+        use_lfs = target.get_bitness() != 64  # noqa: PLR2004
         filename = "03-ash-extras.config"
         if use_lfs:
             filename = "04-ash-lfs.config"

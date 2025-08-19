@@ -83,7 +83,7 @@ def extract_source_archive(
     exts = filename.split(".")
     ext0 = exts.pop()
     ext1 = exts.pop()
-    if ext1 == "tar" or ext0 == "tar" or ext0 == "tgz":
+    if ext1 == "tar" or ext0 in {"tar", "tgz"}:
         extract_source_tar_any(paths, data, ext0)
         return
     raise NotImplementedError
