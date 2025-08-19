@@ -8,15 +8,6 @@ resolution-markers = [
 ]
 
 [[package]]
-name = "astor"
-version = "0.8.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/5a/21/75b771132fee241dfe601d39ade629548a9626d1d39f333fde31bc46febe/astor-0.8.1.tar.gz", hash = "sha256:6a6effda93f4e1ce9f618779b2dd1d9d84f1e32812c23a29b3fff6fd7f63fa5e", size = 35090, upload-time = "2019-12-10T01:50:35.51Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c3/88/97eef84f48fa04fbd6750e62dcceafba6c63c81b7ac1420856c8dcc0a3f9/astor-0.8.1-py2.py3-none-any.whl", hash = "sha256:070a54e890cefb5b3739d19f30f5a5ec840ffc9c50ffa7d23cc9fc1a38ebbfc5", size = 27488, upload-time = "2019-12-10T01:50:33.628Z" },
-]
-
-[[package]]
 name = "astroid"
 version = "3.3.11"
 source = { registry = "https://pypi.org/simple" }
@@ -26,15 +17,6 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/18/74/dfb75f9ccd592bbedb175d4a32fc643cf569d7c218508bfbd6ea7ef9c091/astroid-3.3.11.tar.gz", hash = "sha256:1e5a5011af2920c7c67a53f65d536d65bfa7116feeaf2354d8b94f29573bb0ce", size = 400439, upload-time = "2025-07-13T18:04:23.177Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/af/0f/3b8fdc946b4d9cc8cc1e8af42c4e409468c84441b933d037e101b3d72d86/astroid-3.3.11-py3-none-any.whl", hash = "sha256:54c760ae8322ece1abd213057c4b5bba7c49818853fc901ef09719a60dbf9dec", size = 275612, upload-time = "2025-07-13T18:04:21.07Z" },
-]
-
-[[package]]
-name = "attrs"
-version = "25.3.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/5a/b0/1367933a8532ee6ff8d63537de4f1177af4bff9f3e829baf7331f595bb24/attrs-25.3.0.tar.gz", hash = "sha256:75d7cefc7fb576747b2c81b4442d4d4a1ce0900973527c011d1030fd3bf4af1b", size = 812032, upload-time = "2025-03-13T11:10:22.779Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/77/06/bb80f5f86020c4551da315d78b3ab75e8228f89f0162f2c3a819e407941a/attrs-25.3.0-py3-none-any.whl", hash = "sha256:427318ce031701fea540783410126f03899a97ffc6f61596ad581ac2e40e3bc3", size = 63815, upload-time = "2025-03-13T11:10:21.14Z" },
 ]
 
 [[package]]
@@ -53,196 +35,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/12/80/630b4b88364e9a8c8c5797f4602d0f76ef820909ee32f0bacb9f90654042/dill-0.4.0.tar.gz", hash = "sha256:0633f1d2df477324f53a895b02c901fb961bdbf65a17122586ea7019292cbcf0", size = 186976, upload-time = "2025-04-16T00:41:48.867Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/50/3d/9373ad9c56321fdab5b41197068e1d8c25883b3fea29dd361f9b55116869/dill-0.4.0-py3-none-any.whl", hash = "sha256:44f54bf6412c2c8464c14e8243eb163690a9800dbe2c367330883b19c7561049", size = 119668, upload-time = "2025-04-16T00:41:47.671Z" },
-]
-
-[[package]]
-name = "eradicate"
-version = "2.3.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/7a/e1/665186aedea2d6ebf0415cf97c0629c8123a721e7afc417deeade5598215/eradicate-2.3.0.tar.gz", hash = "sha256:06df115be3b87d0fc1c483db22a2ebb12bcf40585722810d809cc770f5031c37", size = 8536, upload-time = "2023-06-09T06:31:41.814Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/90/c2/533e1338429aeba1f089566a2314d69d3e78ab57a73006f16a923bf2b24c/eradicate-2.3.0-py3-none-any.whl", hash = "sha256:2b29b3dd27171f209e4ddd8204b70c02f0682ae95eecb353f10e8d72b149c63e", size = 6113, upload-time = "2023-06-09T06:31:40.209Z" },
-]
-
-[[package]]
-name = "flake8"
-version = "7.3.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "mccabe" },
-    { name = "pycodestyle" },
-    { name = "pyflakes" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/9b/af/fbfe3c4b5a657d79e5c47a2827a362f9e1b763336a52f926126aa6dc7123/flake8-7.3.0.tar.gz", hash = "sha256:fe044858146b9fc69b551a4b490d69cf960fcb78ad1edcb84e7fbb1b4a8e3872", size = 48326, upload-time = "2025-06-20T19:31:35.838Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/9f/56/13ab06b4f93ca7cac71078fbe37fcea175d3216f31f85c3168a6bbd0bb9a/flake8-7.3.0-py2.py3-none-any.whl", hash = "sha256:b9696257b9ce8beb888cdbe31cf885c90d31928fe202be0889a7cdafad32f01e", size = 57922, upload-time = "2025-06-20T19:31:34.425Z" },
-]
-
-[[package]]
-name = "flake8-2020"
-version = "1.8.1"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/cf/0b/e71a0d9efd854a631e2d51707676886997c73bec70c3c221b84601b976d2/flake8_2020-1.8.1.tar.gz", hash = "sha256:094ea95e8b614c3bd123fd4f007be28ec117ca57a6169903d4baaabe78e3e590", size = 4527, upload-time = "2023-06-10T19:05:11.43Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/36/f0/14c6c25768ddc81999733e7bed89e9285b273920505180155e351ed92dc5/flake8_2020-1.8.1-py2.py3-none-any.whl", hash = "sha256:59b6b8ac01cde10ef11b31a2c9aa15b4509d828ae115ee5be34464b9e4de4ea6", size = 4885, upload-time = "2023-06-10T19:05:09.965Z" },
-]
-
-[[package]]
-name = "flake8-breakpoint"
-version = "1.1.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8-plugin-utils" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/86/51/45dfed762abbe6524d320ac637c1784964e4d8d9783c8eff1fc868ce1ddb/flake8-breakpoint-1.1.0.tar.gz", hash = "sha256:5bc70d478f0437a3655d094e1d2fca81ddacabaa84d99db45ad3630bf2004064", size = 3097, upload-time = "2019-05-23T11:41:35.667Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/69/22/990024226c6d32fca7cba5c9d76ed1c18833d4cdbe02faf3012d1c17f6ad/flake8_breakpoint-1.1.0-py3-none-any.whl", hash = "sha256:27e0cb132647f9ef348b4a3c3126e7350bedbb22e8e221cd11712a223855ea0b", size = 5118, upload-time = "2019-05-23T11:41:37.151Z" },
-]
-
-[[package]]
-name = "flake8-bugbear"
-version = "24.12.12"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "attrs" },
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/c7/25/48ba712ff589b0149f21135234f9bb45c14d6689acc6151b5e2ff8ac2ae9/flake8_bugbear-24.12.12.tar.gz", hash = "sha256:46273cef0a6b6ff48ca2d69e472f41420a42a46e24b2a8972e4f0d6733d12a64", size = 82907, upload-time = "2024-12-12T16:49:26.307Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b9/21/0a875f75fbe4008bd171e2fefa413536258fe6b4cfaaa087986de74588f4/flake8_bugbear-24.12.12-py3-none-any.whl", hash = "sha256:1b6967436f65ca22a42e5373aaa6f2d87966ade9aa38d4baf2a1be550767545e", size = 36664, upload-time = "2024-12-12T16:49:23.584Z" },
-]
-
-[[package]]
-name = "flake8-builtins"
-version = "2.5.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/7a/33/fdfe44695094124e0e518fdd4fed0c7a34a5920de7063babd4b2bbdc8a7f/flake8_builtins-2.5.0.tar.gz", hash = "sha256:bdaa3dd823e4f5308c5e712d19fa5f69daa52781ea874f5ea9c3637bcf56faa6", size = 16499, upload-time = "2024-04-09T10:57:33.399Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/14/33/e423d57dbe2a2ad664d166aeceac58b469510d6c763fada32afd47ffc9ef/flake8_builtins-2.5.0-py3-none-any.whl", hash = "sha256:8cac7c52c6f0708c0902b46b385bc7e368a9068965083796f1431c0d2e6550cf", size = 11964, upload-time = "2024-04-09T10:57:31.271Z" },
-]
-
-[[package]]
-name = "flake8-commas"
-version = "4.0.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/e4/e7/4add4247c9ea7871f6bc9f794f2771647b809bb492b36c8ce18825d64994/flake8_commas-4.0.0.tar.gz", hash = "sha256:a68834b42a9a31c94ca790efe557a932c0eae21a3479c6b9a23c4dc077e3ea96", size = 9338, upload-time = "2024-05-16T20:07:46.271Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/74/d4/75d1cdd7c89cb6af4f956393c339bb9a7d203999432a823f60b64c0ea072/flake8_commas-4.0.0-py3-none-any.whl", hash = "sha256:cad476d71ba72e8b941a8508d5b9ffb6b03e50f7102982474f085ad0d674b685", size = 7877, upload-time = "2024-05-16T20:07:44.536Z" },
-]
-
-[[package]]
-name = "flake8-comments"
-version = "0.1.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/83/38/3d8706aea09d9bfb22ea3a7f9d04e11090aaa21711051d2f688695ef5892/flake8-comments-0.1.2.tar.gz", hash = "sha256:780b4fc2820ed4ff8a0a98f3fc993f776ede1aecbe0c6cec64d93814b21c9234", size = 5332, upload-time = "2021-06-08T12:47:34.265Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/9b/32/4e4ad1131cf7d2aff04f6dbce80c74a2a39ac290acf4870d343879e5b2bf/flake8_comments-0.1.2-py3-none-any.whl", hash = "sha256:42250cb4a51dc59e6db25f1291cfb16b78ea233f72dac32a5bc7b09c691235ea", size = 5198, upload-time = "2021-06-08T12:47:32.072Z" },
-]
-
-[[package]]
-name = "flake8-eradicate"
-version = "1.5.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "attrs" },
-    { name = "eradicate" },
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/9e/72/a3975dfa4287396e9fb8fc2b4ee94a80d0809babbf92abed5af9c8e29c95/flake8_eradicate-1.5.0.tar.gz", hash = "sha256:aee636cb9ecb5594a7cd92d67ad73eb69909e5cc7bd81710cf9d00970f3983a6", size = 4508, upload-time = "2023-05-31T09:57:15.484Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/e2/a9/1319b9e5eeb7d948f6db0b0ed4209bae0ec12d30ab3ee43a0ac1d8ce455f/flake8_eradicate-1.5.0-py3-none-any.whl", hash = "sha256:18acc922ad7de623f5247c7d5595da068525ec5437dd53b22ec2259b96ce9d22", size = 5144, upload-time = "2023-05-31T09:57:13.589Z" },
-]
-
-[[package]]
-name = "flake8-executable"
-version = "2.1.3"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/3b/41/f0687401d76d6031aa5fc447615e1a337308a9c5c586913f70c5a2abe832/flake8-executable-2.1.3.tar.gz", hash = "sha256:619fe023e00c3d8e5113521d7200e1ebb04587c12d157f9a2fb167feb8cae66b", size = 23035, upload-time = "2023-01-23T00:39:57.537Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/bc/d7/311104f82226a6b108f7f05c56cfb7fe773847a879f622d6450ab0a227b3/flake8_executable-2.1.3-py3-none-any.whl", hash = "sha256:f0a66c97c3b99ce63bc1f01ce602d6bd048e4fc5dc0d7a13be2bfa3deb023a34", size = 35302, upload-time = "2023-01-23T00:39:55.485Z" },
-]
-
-[[package]]
-name = "flake8-fixme"
-version = "1.1.1"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/58/96/51adbf26b1cc4c2f3a434fa06972a6bc9b3d96f6a4c04dfe9a604b5ce10e/flake8-fixme-1.1.1.tar.gz", hash = "sha256:50cade07d27a4c30d4f12351478df87339e67640c83041b664724bda6d16f33a", size = 3423, upload-time = "2019-05-06T19:06:45.852Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c6/a2/f3c813f06cbc1b38b1a1e3647ae204254844c7f28ce9c8eaee053d14e43d/flake8_fixme-1.1.1-py2.py3-none-any.whl", hash = "sha256:226a6f2ef916730899f29ac140bed5d4a17e5aba79f00a0e3ae1eff1997cb1ac", size = 7975, upload-time = "2019-05-06T19:06:44.658Z" },
-]
-
-[[package]]
-name = "flake8-isort"
-version = "6.1.2"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-    { name = "isort" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/7c/ea/2f2662d4fefa6ab335c7119cb28e5bc57c935a86a69a7f72df3ea5fe7b2c/flake8_isort-6.1.2.tar.gz", hash = "sha256:9d0452acdf0e1cd6f2d6848e3605e66b54d920e73471fb4744eef0f93df62d5d", size = 17756, upload-time = "2025-01-29T12:29:25.753Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/b3/10/295e982874f2a94f309baf7c45f852a191c87d59bd846b1701332303783f/flake8_isort-6.1.2-py3-none-any.whl", hash = "sha256:549197dedf0273502fb74f04c080beed9e62a7eb70244610413d27052e78bd3b", size = 18385, upload-time = "2025-01-29T12:29:23.46Z" },
-]
-
-[[package]]
-name = "flake8-plugin-utils"
-version = "1.3.3"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/51/14/53727a2bc5bbda1e1f7e266e0e2d2718e5eb6c943a1e8cc2b33e5af002e0/flake8-plugin-utils-1.3.3.tar.gz", hash = "sha256:39f6f338d038b301c6fd344b06f2e81e382b68fa03c0560dff0d9b1791a11a2c", size = 10459, upload-time = "2023-06-26T16:42:20.946Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/da/a7/23c012c9becaacb24e9ba8e359e48db5f96982d505e38a3e7003902c5b9f/flake8_plugin_utils-1.3.3-py3-none-any.whl", hash = "sha256:e4848c57d9d50f19100c2d75fa794b72df068666a9041b4b0409be923356a3ed", size = 9664, upload-time = "2023-06-26T16:42:23.939Z" },
-]
-
-[[package]]
-name = "flake8-raise"
-version = "0.0.5"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/45/3d/0211d7fb77b3bc6c49495575de4dd07b2ca6fc90a6784bca6097ec980cb9/flake8-raise-0.0.5.tar.gz", hash = "sha256:0a9890e16b851402d9b0d4fafe6c34890eab73835a2c2079c3850a25be575623", size = 5524, upload-time = "2020-01-26T13:53:15.354Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/da/b7/b8edb1ae5c517b8d3cd693129daab16282c5a4b4fc6ad4522cedc29eba61/flake8_raise-0.0.5-py3-none-any.whl", hash = "sha256:df26e5c542a58c8f8786d978e18ad7e54126a0ef5c6241c35dafaca7e2bbb808", size = 3694, upload-time = "2020-01-26T13:53:13.431Z" },
-]
-
-[[package]]
-name = "flake8-simplify"
-version = "0.22.0"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "astor" },
-    { name = "flake8" },
-]
-sdist = { url = "https://files.pythonhosted.org/packages/39/6d/fa628c641349a3737932f9e5e2cf62b9fca3e124426b0f2688bdbc336cc4/flake8_simplify-0.22.0.tar.gz", hash = "sha256:526421594d5815cf786a637c2a705223956f7e34872b6bb9f66c5ce3e28caaf9", size = 34100, upload-time = "2025-06-01T11:59:34.725Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/45/99/23ab2049d5b6346a58315a87fb7916122e7d3aaa2b8d7ae4577f1fa43c94/flake8_simplify-0.22.0-py3-none-any.whl", hash = "sha256:812c65bf49d7857093750df71fc9c4a925fc192bfca14ecf04570e224f17581f", size = 26989, upload-time = "2025-06-01T11:59:32.736Z" },
-]
-
-[[package]]
-name = "flake8-super"
-version = "0.1.3"
-source = { registry = "https://pypi.org/simple" }
-dependencies = [
-    { name = "flake8" },
-    { name = "flake8-plugin-utils" },
-]
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/4f/44/96e6933425f4ae28f8eab69aa7b7bb7d04ca668ffe01b1a9005e95f6366b/flake8_super-0.1.3-py3-none-any.whl", hash = "sha256:595cd65af908574867accfaa3ea2b3e4790637711859306550dc433d9105cbba", size = 3439, upload-time = "2021-05-31T07:19:38.166Z" },
 ]
 
 [[package]]
@@ -345,24 +137,6 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/fe/8b/3c73abc9c759ecd3f1f7ceff6685840859e8070c4d947c93fae71f6a0bf2/platformdirs-4.3.8.tar.gz", hash = "sha256:3d512d96e16bcb959a814c9f348431070822a6496326a4be0911c40b5a74c2bc", size = 21362, upload-time = "2025-05-07T22:47:42.121Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fe/39/979e8e21520d4e47a0bbe349e2713c0aac6f3d853d0e5b34d76206c439aa/platformdirs-4.3.8-py3-none-any.whl", hash = "sha256:ff7059bb7eb1179e2685604f4aaf157cfd9535242bd23742eadc3c13542139b4", size = 18567, upload-time = "2025-05-07T22:47:40.376Z" },
-]
-
-[[package]]
-name = "pycodestyle"
-version = "2.14.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/11/e0/abfd2a0d2efe47670df87f3e3a0e2edda42f055053c85361f19c0e2c1ca8/pycodestyle-2.14.0.tar.gz", hash = "sha256:c4b5b517d278089ff9d0abdec919cd97262a3367449ea1c8b49b91529167b783", size = 39472, upload-time = "2025-06-20T18:49:48.75Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/d7/27/a58ddaf8c588a3ef080db9d0b7e0b97215cee3a45df74f3a94dbbf5c893a/pycodestyle-2.14.0-py2.py3-none-any.whl", hash = "sha256:dd6bf7cb4ee77f8e016f9c8e74a35ddd9f67e1d5fd4184d86c3b98e07099f42d", size = 31594, upload-time = "2025-06-20T18:49:47.491Z" },
-]
-
-[[package]]
-name = "pyflakes"
-version = "3.4.0"
-source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/45/dc/fd034dc20b4b264b3d015808458391acbf9df40b1e54750ef175d39180b1/pyflakes-3.4.0.tar.gz", hash = "sha256:b24f96fafb7d2ab0ec5075b7350b3d2d2218eab42003821c06344973d3ea2f58", size = 64669, upload-time = "2025-06-20T18:45:27.834Z" }
-wheels = [
-    { url = "https://files.pythonhosted.org/packages/c2/2f/81d580a0fb83baeb066698975cb14a618bdbed7720678566f1b046a95fe8/pyflakes-3.4.0-py2.py3-none-any.whl", hash = "sha256:f742a7dbd0d9cb9ea41e9a24a918996e8170c799fa528688d40dd582c8265f4f", size = 63551, upload-time = "2025-06-20T18:45:26.937Z" },
 ]
 
 [[package]]
@@ -518,20 +292,6 @@ dependencies = [
 
 [package.dev-dependencies]
 dev = [
-    { name = "flake8" },
-    { name = "flake8-2020" },
-    { name = "flake8-breakpoint" },
-    { name = "flake8-bugbear" },
-    { name = "flake8-builtins" },
-    { name = "flake8-commas" },
-    { name = "flake8-comments" },
-    { name = "flake8-eradicate" },
-    { name = "flake8-executable" },
-    { name = "flake8-fixme" },
-    { name = "flake8-isort" },
-    { name = "flake8-raise" },
-    { name = "flake8-simplify" },
-    { name = "flake8-super" },
     { name = "mypy" },
     { name = "pylint" },
     { name = "ruff" },
@@ -551,20 +311,6 @@ requires-dist = [
 
 [package.metadata.requires-dev]
 dev = [
-    { name = "flake8", specifier = ">=7.3.0" },
-    { name = "flake8-2020", specifier = ">=1.8.1" },
-    { name = "flake8-breakpoint", specifier = ">=1.1.0" },
-    { name = "flake8-bugbear", specifier = ">=24.12.12" },
-    { name = "flake8-builtins", specifier = ">=2.5.0" },
-    { name = "flake8-commas", specifier = ">=4.0.0" },
-    { name = "flake8-comments", specifier = ">=0.1.2" },
-    { name = "flake8-eradicate", specifier = ">=1.5.0" },
-    { name = "flake8-executable", specifier = ">=2.1.3" },
-    { name = "flake8-fixme", specifier = ">=1.1.1" },
-    { name = "flake8-isort", specifier = ">=6.1.2" },
-    { name = "flake8-raise", specifier = ">=0.0.5" },
-    { name = "flake8-simplify", specifier = ">=0.22.0" },
-    { name = "flake8-super", specifier = ">=0.1.3" },
     { name = "mypy", specifier = ">=1.17.0" },
     { name = "pylint", specifier = ">=3.3.7" },
     { name = "ruff", specifier = ">=0.12.9" },

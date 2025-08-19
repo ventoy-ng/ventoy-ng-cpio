@@ -28,15 +28,16 @@ clean-dist: clean
 clean-pycache:
     -find {{SRC_DIR}} -iname __pycache__ -exec rm -r {} +
 
-#check: mypy pylint flake8
+check-all: mypy pylint check
+fixup-all: isort format
 
 alias fmt := format
-alias flake := flake8
+alias flake := check
 alias lint := pylint
 alias typecheck := mypy
 
-flake8:
-    -uv run flake8 {{SRC_DIR}}
+check:
+    -uv run ruff check {{SRC_DIR}}
 
 format:
     -uv run ruff format {{SRC_DIR}}
