@@ -3,13 +3,13 @@ from dataclasses import dataclass, field
 from os import environ
 from pathlib import Path
 from subprocess import PIPE, Popen
-from typing import IO, TYPE_CHECKING, Any, Optional, TypeAlias
+from typing import IO, TYPE_CHECKING, Any, Optional, TypeAlias, Union
 
 if TYPE_CHECKING:
     from _typeshed import FileDescriptor
 
 
-FileLike: TypeAlias = IO[Any] | "FileDescriptor" | None
+FileLike: TypeAlias = Union[IO[Any], "FileDescriptor", None]
 
 
 class PopenX(Popen):
