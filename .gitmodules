@@ -1,0 +1,6 @@
+[submodule "src/vtchmod"]
+	path = src/vtchmod
+	url = https://github.com/fnr1r/vtchmod.git
+[submodule "src/vtoytool"]
+	path = src/vtoytool
+	url = https://github.com/fnr1r/vtoytool.git
