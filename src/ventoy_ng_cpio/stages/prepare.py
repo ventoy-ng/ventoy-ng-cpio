@@ -2,7 +2,7 @@ import re
 import tarfile
 from hashlib import sha256
 from io import BytesIO
-from os import chdir, makedirs
+from os import chdir
 from pathlib import Path
 from typing import Optional
 from urllib.request import urlopen
@@ -49,7 +49,7 @@ def extract_source_tar_builtin(
 ):
     stream = BytesIO(data)
     tmp_dir = paths.sources_dir
-    makedirs(tmp_dir, exist_ok=True)
+    tmp_dir.mkdir(parents=True, exist_ok=True)
     old_dir = Path.cwd()
     with tarfile.open(mode="r:*", fileobj=stream) as file:
         chdir(tmp_dir)
@@ -98,7 +98,7 @@ def handle_source_url(
     if target_file.exists():
         print("  Skipping download")
         return None
-    makedirs(download_dir, exist_ok=True)
+    download_dir.mkdir(parents=True, exist_ok=True)
     print("  Downloading...")
     data = download_source(url)
     if this.xhash is not None:

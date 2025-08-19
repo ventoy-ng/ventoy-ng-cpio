@@ -60,7 +60,7 @@ class CpioCommandBuilder(BaseCommandBuilder):
         do_sort: bool = True,
         reset_mtime: bool = False,
     ) -> bytes:
-        files = glob(pathname, root_dir=self.cwd, recursive=recursive)
+        files = glob(pathname, root_dir=self.cwd, recursive=recursive)  # noqa: PTH207
         if do_sort:
             files.sort()
         if reset_mtime:

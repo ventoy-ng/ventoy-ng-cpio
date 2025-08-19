@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from itertools import chain
-from os import getcwd
 from pathlib import Path
 
 from typing_extensions import Self
@@ -62,7 +61,7 @@ class ProjectInfoX:
 
     @classmethod
     def load(cls, project_dir: Path) -> Self:
-        cwd = Path(getcwd())
+        cwd = Path.cwd()
         targets = load_target_info(project_dir)
         sources = load_source_info(project_dir)
         components = load_component_info(project_dir)
