@@ -22,7 +22,12 @@ select = [
     "E", "W",   # pycodestyle
     "F",    # pyflakes
     "PL",   # pylint
+    "UP",   # pyupgrade
 ]
-# https://github.com/astral-sh/ruff/issues/9216
-# sadge :(
-ignore = ["COM812"]
+ignore = [
+    # https://github.com/astral-sh/ruff/issues/9216
+    # sadge :(
+    "COM812",
+    # I prefer Rust-style Option<T>
+    "UP045",
+]
