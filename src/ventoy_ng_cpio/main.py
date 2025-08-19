@@ -3,10 +3,11 @@ from pathlib import Path
 from typing import Optional
 
 from ventoy_ng_cpio.config import CONFIG
-from ventoy_ng_cpio.consts import BUILD_DIR, PROJECT_DIR
 from ventoy_ng_cpio.project.project import Project
 from ventoy_ng_cpio.stages.build import do_build
 from ventoy_ng_cpio.stages.prepare import do_prepare
+# broken on purpose
+from ventoy_ng_cpio.consts import BUILD_DIR, PROJECT_DIR
 
 
 def main():
