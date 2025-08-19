@@ -12,6 +12,7 @@ arch/tools/lunzip.toml
 arch/tools/smallz4.toml
 arch/tools/squashfs.toml
 arch/tools/vblade.toml
+arch/custom-tools/vtoytool.toml
 
 # stage 2: inner compressed ramdisk
 arch/rd-stage2-tools.toml
@@ -19,6 +20,7 @@ arch/rd-stage2.toml
 
 # stage 1 tools
 arch/tools/busybox/ash.toml
+arch/custom-tools/vtchmod.toml
 arch/tools/xz-embedded.toml
 
 # stage 1: uncompressed ramdisk

@@ -10,12 +10,12 @@ from mashumaro.mixins.toml import DataClassTOMLMixin
 @dataclass(frozen=True)
 class SourceInfo(DataClassTOMLMixin):
     name: str
-    version: str
     raw_id: str = field(
         metadata=field_options(
             alias="id",
         ),
     )
+    version: Optional[str] = field(default=None)
     url: Optional[str] = field(default=None)
     filename: Optional[str] = field(default=None)
     xhash: Optional[str] = field(
@@ -25,6 +25,7 @@ class SourceInfo(DataClassTOMLMixin):
         ),
     )
     extracted_name: Optional[str] = field(default=None)
+    submod: bool = field(default=False)
 
     def get_id(self) -> str:
         return self.raw_id.format(

@@ -1,0 +1,3 @@
+name = "vtoytool"
+target_set = "system"
+sources = ["vtoytool"]

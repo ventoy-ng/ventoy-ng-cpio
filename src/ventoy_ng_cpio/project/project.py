@@ -8,6 +8,7 @@ from typing_extensions import Self
 
 from ventoy_ng_cpio.paths.build import BuildPaths
 from ventoy_ng_cpio.paths.project import ProjectPaths
+from ventoy_ng_cpio.paths.sources import SourcesPaths
 from ventoy_ng_cpio.schemas.sources import SourceInfo
 from ventoy_ng_cpio.utils.flatten import flatten
 from ventoy_ng_cpio.utils.path import PathLike
@@ -21,6 +22,7 @@ from .targets import Target, TargetSet
 @dataclass(repr=False)
 class Project:
     build_dir: Path
+    sources_dir: Path
     info: ProjectInfoX
     targets: dict[str, Target]
     target_sets: dict[str, TargetSet]
@@ -29,7 +31,12 @@ class Project:
     component_jobs: dict[str, ComponentJob]
 
     @classmethod
-    def new(cls, info: ProjectInfoX, build_dir: Path) -> Self:
+    def new(
+        cls,
+        info: ProjectInfoX,
+        build_dir: Path,
+        sources_dir: Path,
+    ) -> Self:
         targets = Target.new_for(info.targets)
         target_sets = TargetSet.new_for(targets)
         sources = {src.name: src for src in info.sources.values()}
@@ -44,6 +51,7 @@ class Project:
 
         this = cls(
             build_dir,
+            sources_dir,
             info,
             targets,
             target_sets,
@@ -54,11 +62,17 @@ class Project:
         return this
 
     @classmethod
-    def load(cls, root: PathLike, build_dir: PathLike) -> Self:
+    def load(
+        cls,
+        root: PathLike,
+        build_dir: PathLike,
+        sources_dir: PathLike,
+    ) -> Self:
         project_dir = Path(root)
         build_dir = Path(build_dir)
+        sources_dir = Path(sources_dir)
         info = ProjectInfoX.load(project_dir)
-        return cls.new(info, build_dir)
+        return cls.new(info, build_dir, sources_dir)
 
     def get_build_paths(
         self,
@@ -79,6 +93,16 @@ class Project:
         else:
             p = self.info.root
         return ProjectPaths(p)
+
+    def get_sources_paths(
+        self,
+        relative_to: Optional[PathLike] = None,
+    ) -> SourcesPaths:
+        if relative_to is not None:
+            p = Path(relpath(self.sources_dir, relative_to))
+        else:
+            p = self.build_dir
+        return SourcesPaths(p)
 
     def walk_dedup(
         self,

@@ -3,7 +3,7 @@ target_set = "system"
 deps = [
     "device-mapper",
     "smallz4",
-    # "vtoytool",
+    "vtoytool",
 ]
 
 [[per_target]]

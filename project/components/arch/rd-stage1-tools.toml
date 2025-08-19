@@ -3,5 +3,6 @@ target_set = "system"
 deps = [
     "busybox-ash",
     "busybox-full",
+    "vtchmod",
     "xz-embedded",
 ]

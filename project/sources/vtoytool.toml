@@ -1,0 +1,4 @@
+name = "vtoytool"
+id = "{name}"
+extracted_name = "{name}"
+submod = true

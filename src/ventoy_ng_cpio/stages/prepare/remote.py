@@ -1,17 +1,18 @@
 import re
 import tarfile
-from hashlib import sha256
 from io import BytesIO
 from os import chdir
 from pathlib import Path
 from typing import Optional
-from urllib.request import urlopen
 
 from zstd import ZSTD_uncompress
 
 from ventoy_ng_cpio.paths.build import BuildPaths
 from ventoy_ng_cpio.project.project import Project
 from ventoy_ng_cpio.schemas.sources import SourceInfo
+
+from .download_file import download_source
+from .verify import verify_source
 
 TAR_REGEX = r"^(.*)\.(tar(\.[^\.]+)?|tgz)$"
 TAR_REGEX_C = re.compile(TAR_REGEX)
@@ -22,25 +23,6 @@ def is_archive_file(filename: str) -> bool:
         TAR_REGEX_C,
     ]
     return any(reg.match(filename) is not None for reg in regs)
-
-
-def download_source(url: str) -> bytes:
-    with urlopen(url) as req:
-        data = req.read()
-    assert isinstance(data, bytes)
-    return data
-
-
-def verify_source(this: SourceInfo, data: bytes):
-    xhash = this.xhash
-    assert xhash is not None
-    sxhash = xhash.split(":")
-    hash_kind = sxhash[0]
-    assert hash_kind == "sha256"
-    valid_hash_value = sxhash[1]
-    hash_value = sha256(data)
-    if hash_value.hexdigest() != valid_hash_value:
-        raise ValueError
 
 
 def extract_source_tar_builtin(
@@ -127,7 +109,8 @@ def handle_source_archive(
     print("  Done!")
 
 
-def prepare_source(this: SourceInfo, paths: BuildPaths):
+def prepare_remote_source(this: SourceInfo, project: Project):
+    paths = project.get_build_paths()
     url = this.get_url()
     assert url is not None
     filename = this.get_filename()
@@ -143,10 +126,3 @@ def prepare_source(this: SourceInfo, paths: BuildPaths):
     data = handle_source_url(this, target_file, url, download_dir)
     if is_archive:
         handle_source_archive(this, paths, filename, target_file, data)
-
-
-def do_prepare(project: Project):
-    for source in project.sources.values():
-        if source.url is None:
-            raise NotImplementedError
-        prepare_source(source, project.get_build_paths())

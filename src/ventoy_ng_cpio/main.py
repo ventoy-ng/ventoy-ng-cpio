@@ -3,7 +3,7 @@ from pathlib import Path
 from typing import Optional
 
 from ventoy_ng_cpio.config import CONFIG
-from ventoy_ng_cpio.consts import BUILD_DIR, PROJECT_DIR
+from ventoy_ng_cpio.consts import BUILD_DIR, PROJECT_DIR, SOURCES_DIR
 from ventoy_ng_cpio.project.project import Project
 from ventoy_ng_cpio.stages.build import do_build
 from ventoy_ng_cpio.stages.prepare import do_prepare
@@ -19,6 +19,11 @@ def main():
     parser.add_argument(
         "--build-dir",
         default=BUILD_DIR,
+        type=Path,
+    )
+    parser.add_argument(
+        "--sources-dir",
+        default=SOURCES_DIR,
         type=Path,
     )
     parser.add_argument(
@@ -41,7 +46,7 @@ def main():
         components = args.components
 
     CONFIG.cleanbuild = args.cleanbuild
-    project = Project.load(args.project_dir, args.build_dir)
+    project = Project.load(args.project_dir, args.build_dir, args.sources_dir)
 
     match args.command:
         case "build":
