@@ -5,39 +5,49 @@ from shutil import copy2
 from ...project.jobs import ComponentJob
 from ..bases.copier import BaseCopierBuilder
 
-DEP_TO_BIN_NAME = {
-    "device-mapper": {"dmsetup": "dmsetup"},
-    "smallz4": {"smallz4cat": "lz4cat"},
-    "lunzip": {"lunzip": "lunzip"},
-    "squashfs": {"unsquashfs": "unsquashfs_"},
-    "vblade": {"vblade": "vblade_"},
-    "zstd": {"bin/zstd": "zstdcat"},
-}
+
+def rd_stage_2_bin_rename(job: ComponentJob) -> tuple[str, str]:
+    info = job.component.info
+    target = job.target
+    suffix = target.info.suffix
+    assert suffix is not None
+
+    isuffix = "" if target.info.arch == "i386" else suffix
+
+    if info.name == "smallz4":
+        return ("smallz4cat", "lz4cat" + isuffix)
+    if info.name == "zstd":
+        return ("bin/zstd", "zstdcat" + isuffix)
+
+    extra_suffix = ""
+
+    if info.name == "device-mapper":
+        binname = "dmsetup"
+    elif info.name == "lunzip":
+        binname = "lunzip"
+    elif info.name == "squashfs":
+        binname = "unsquashfs"
+        extra_suffix = "_"
+    elif info.name == "vblade":
+        binname = "vblade"
+        extra_suffix = "_"
+    else:
+        raise NotImplementedError(job.name)
+
+    return (binname, binname + extra_suffix + suffix)
 
 
 @dataclass
 class RamdiskStage2ToolsBuilder(BaseCopierBuilder):
     NAME = "rd-stage2-tools"
 
-    def dependency_bin_copy(
-        self,
-        job: ComponentJob,
-        output_dir: Path,
-        bin_suffix: str,
-    ):
+    def copy_output_bins(self, job: ComponentJob, output_dir: Path):
         input_dir = self.get_input_dir(job)
-        bin_map = DEP_TO_BIN_NAME[job.component.info.name]
-        for bin_src, bin_dest in bin_map.items():
-            a = bin_suffix == "32" and bin_dest in ["lz4cat", "zstdcat"]
-            if not a:
-                bin_dest += bin_suffix
-            copy2(input_dir / bin_src, output_dir / bin_dest)
+        (bin_src, bin_dest) = rd_stage_2_bin_rename(job)
+        copy2(input_dir / bin_src, output_dir / bin_dest)
 
     def do_install(self):
-        target = self.job.target
-        bin_suffix = target.info.suffix
-        assert bin_suffix is not None
         output_dir = self.get_output_dir(absolute=False)
         output_dir.mkdir(parents=True, exist_ok=True)
         for dep in self.job.dependencies.values():
-            self.dependency_bin_copy(dep, output_dir, bin_suffix)
+            self.copy_output_bins(dep, output_dir)

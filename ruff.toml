@@ -21,7 +21,7 @@ select = [
     "PERF", # perflint
     "E", "W",   # pycodestyle
     "F",    # pyflakes
-    "PLC", "PLE", "PLR",    # pylint
+    "PL",   # pylint
 ]
 # https://github.com/astral-sh/ruff/issues/9216
 # sadge :(
