@@ -39,7 +39,7 @@ flake8:
     -uv run flake8 {{SRC_DIR}}
 
 isort:
-    -uv run isort {{SRC_DIR}}
+    -uv run ruff check --select I --fix {{SRC_DIR}}
 
 mypy:
     -uv run mypy {{SRC_DIR}}
