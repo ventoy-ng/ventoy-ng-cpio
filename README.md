@@ -6,6 +6,8 @@ this time it actually allows for interdependency
 
 https://github.com/fnr1r/ventoy-cpio
 
+[TODO](./TODO.md)
+
 <!--
 NOTE:
 oh my god. the old code is so fucking bad.
