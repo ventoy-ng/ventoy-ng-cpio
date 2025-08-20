@@ -15,10 +15,7 @@ class Lz4Builder(CMakeDefBuilder):
     def cmake_configure_hook(self, cmake: CMakeCommandBuilder):
         pass
 
-    def build(self):
+    def make_should_build(self) -> bool:
         # make -q is broken here due to symlinks
         lib_lz4 = Path("liblz4.a")
-        if lib_lz4.exists():
-            return
-        self._flagged_for_install = True
-        self.make.run()
+        return not lib_lz4.exists()

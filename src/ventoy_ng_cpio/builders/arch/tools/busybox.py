@@ -34,19 +34,17 @@ class BaseBusyboxBuilder(BaseMakeBuilder, ABC):
     def get_config_path(self) -> Path:
         return self.get_extras_dir() / self.get_config_name()
 
-    def prepare(self):
-        if self.config_file.exists():
-            return
+    def should_prepare(self) -> bool:
+        return not self.config_file.exists()
+
+    def do_prepare(self):
         target_config_file = self.get_config_path()
         symlink(target_config_file, self.config_file)
 
-    def build(self):
+    def make_should_build(self) -> bool:
         # make -q is broken here for some reason
         bin_busybox = self.get_output_dir() / "busybox"
-        if bin_busybox.exists():
-            return
-        self._flagged_for_install = True
-        self.make.run()
+        return not bin_busybox.exists()
 
     def do_install(self):
         output_dir = self.get_output_dir()

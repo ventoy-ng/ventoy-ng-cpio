@@ -14,12 +14,18 @@ _build_impls: dict[str, type["BaseBuilder"]] = {}
 
 
 @dataclass
+class BuilderFlags:
+    build: bool = False
+    install: bool = False
+
+
+@dataclass
 class BaseBuilder(ABC):
     job: ComponentJob
     project: Project
     build_paths: BuildPaths
     project_paths: ProjectPaths
-    _flagged_for_install: bool = field(default=False)
+    flags: BuilderFlags = field(default_factory=BuilderFlags)
     NAME: ClassVar[str] = ""
 
     def __init_subclass__(cls) -> None:
@@ -53,19 +59,39 @@ class BaseBuilder(ABC):
         return out_dir
 
     @abstractmethod
-    def prepare(self):
+    def should_prepare(self) -> bool:
         pass
 
     @abstractmethod
-    def build(self):
+    def do_prepare(self):
         pass
+
+    def prepare(self):
+        if not self.should_prepare():
+            return
+        self.do_prepare()
+
+    def should_build(self) -> bool:
+        return self.flags.build
+
+    @abstractmethod
+    def do_build(self):
+        pass
+
+    def build(self):
+        if not self.should_build():
+            return
+        self.do_build()
+
+    def should_install(self):
+        return self.flags.install
 
     @abstractmethod
     def do_install(self):
         pass
 
     def install(self):
-        if not self._flagged_for_install:
+        if not self.should_install():
             return
         self.do_install()
 

@@ -45,9 +45,10 @@ class SquashfsBuilder(BaseMakeBuilder):
     def get_main_source_dir(self) -> Path:
         return super().get_main_source_dir() / "squashfs-tools"
 
-    def prepare(self):
-        if self.makefile.exists():
-            return
+    def should_prepare(self) -> bool:
+        return not self.makefile.exists()
+
+    def do_prepare(self):
         source_dir = self.get_main_source_dir()
         do_copy_src(source_dir)
         patches_dir = self.get_extras_dir()

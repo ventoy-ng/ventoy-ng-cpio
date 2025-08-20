@@ -31,9 +31,10 @@ class VBladeBuilder(BaseMakeBuilder):
         make.envs_strict["CFLAGS"] = "-Oz -Wall"
         self.make = make
 
-    def prepare(self):
-        if self.makefile.exists():
-            return
+    def should_prepare(self):
+        return not self.makefile.exists()
+
+    def do_prepare(self):
         do_copy_src(self.get_main_source_dir())
 
     def do_install(self):

@@ -57,23 +57,18 @@ class DeviceMapperBuilder(BaseConfigureBuilder):
     def get_configure_script(self) -> Path:
         return Path("configure")
 
-    def do_configure(self):
+    def should_prepare(self) -> bool:
+        return not self.get_configure_script().exists()
+
+    def do_prepare(self):
+        do_copy_src(self.get_main_source_dir())
         do_configure(self.job)
 
-    def prepare(self):
-        configure_script = Path("configure")
-        if not configure_script.exists():
-            do_copy_src(self.get_main_source_dir())
-        super().prepare()
-
-    def build(self):
+    def make_should_build(self) -> bool:
         # make -q is broken here for some reason
-        if self.bin_path.exists():
-            return
-        self._flagged_for_install = True
-        self.make.run()
+        return not self.bin_path.exists()
 
-    def install(self):
+    def do_install(self):
         output_dir = self.get_output_dir()
         output_dir.mkdir(parents=True, exist_ok=True)
         strip_bin_copy(

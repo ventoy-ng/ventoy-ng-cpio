@@ -6,10 +6,14 @@ from .base import BaseBuilder
 
 @dataclass
 class BaseCopierBuilder(BaseBuilder, ABC):
-    def prepare(self):
+    def should_prepare(self) -> bool:
+        return False
+
+    def do_prepare(self):
         pass
 
-    def build(self):
-        if self.get_output_dir(absolute=False).exists():
-            return
-        self._flagged_for_install = True
+    def do_build(self):
+        pass
+
+    def should_install(self) -> bool:
+        return not self.get_output_dir(absolute=False).exists()

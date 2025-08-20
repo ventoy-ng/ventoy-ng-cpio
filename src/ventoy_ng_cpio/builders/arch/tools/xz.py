@@ -32,16 +32,13 @@ def do_configure(
 class XzBuilder(BaseConfigureBuilder):
     NAME = "xz"
 
-    def do_configure(self):
+    def do_prepare(self):
         do_configure(
             self.job,
             self.get_configure_script(),
         )
 
-    def build(self):
+    def make_should_build(self) -> bool:
         # make -q is broken here for some reason
         lib_lzma = Path("src/liblzma/.libs/liblzma.a")
-        if lib_lzma.exists():
-            return
-        self._flagged_for_install = True
-        self.make.run()
+        return not lib_lzma.exists()

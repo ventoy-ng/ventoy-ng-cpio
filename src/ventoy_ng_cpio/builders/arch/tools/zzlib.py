@@ -22,7 +22,7 @@ def do_configure(
 class ZlibBuilder(BaseConfigureBuilder):
     NAME = "zlib"
 
-    def do_configure(self):
+    def do_prepare(self):
         do_configure(
             self.job,
             self.get_configure_script(),

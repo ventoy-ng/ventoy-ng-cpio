@@ -40,9 +40,10 @@ class BaseCMakeBuilder(BaseBuilder, ABC):
     def cmake_configure_hook(self, cmake: CMakeCommandBuilder):
         pass
 
-    def prepare(self):
-        if self.is_configured():
-            return
+    def should_prepare(self) -> bool:
+        return not self.is_configured()
+
+    def do_prepare(self):
         do_cmake_configure(
             self.build_paths,
             self.job.target,

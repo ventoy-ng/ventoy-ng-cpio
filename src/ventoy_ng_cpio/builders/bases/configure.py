@@ -1,4 +1,4 @@
-from abc import ABC, abstractmethod
+from abc import ABC
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -14,17 +14,5 @@ class BaseConfigureBuilder(BaseMakeBuilder, ABC):
         main_source_dir = self.get_main_source_dir()
         return main_source_dir / "configure"
 
-    @abstractmethod
-    def do_configure(self):
-        pass
-
-    def prepare(self):
-        if self.is_configured():
-            return
-        self.do_configure()
-
-    def do_install(self):
-        make = self.make
-
-        make.envs_strict["DESTDIR"] = str(self.get_output_dir())
-        make.run(["install"])
+    def should_prepare(self) -> bool:
+        return not self.is_configured()

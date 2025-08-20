@@ -20,13 +20,18 @@ class Smallz4Builder(BaseBuilder):
 
         return sources_dir / main_source.name
 
-    def prepare(self):
+    def should_prepare(self):
+        return False
+
+    def do_prepare(self):
         pass
 
-    def build(self):
-        if self.bin_build_path.exists():
-            return
-        self._flagged_for_install = True
+    def should_build(self) -> bool:
+        if super().should_build():
+            return True
+        return not self.bin_build_path.exists()
+
+    def do_build(self):
         target = self.job.target
         cmd = CcBuilder(target.get_cmd("cc"))
         cmd.output_file = self.bin_build_path
@@ -36,6 +41,7 @@ class Smallz4Builder(BaseBuilder):
         cmd.args.append("-Oz")
         cmd.args.append("-MMD")
         cmd.run()
+        self.flags.install = True
 
     def do_install(self):
         output_dir = self.get_output_dir()

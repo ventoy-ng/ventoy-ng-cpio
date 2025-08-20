@@ -16,18 +16,24 @@ class BaseCpioBuilder(BaseBuilder, ABC):
     def get_cpio_name(self) -> str:
         pass
 
-    def prepare(self):
+    def should_prepare(self):
+        return False
+
+    def do_prepare(self):
         pass
 
     @abstractmethod
     def build_cpio(self):
         pass
 
-    def build(self):
-        if self.output_dir.exists():
-            return
-        self._flagged_for_install = True
+    def should_build(self) -> bool:
+        if super().should_build():
+            return True
+        return not self.output_dir.exists()
+
+    def do_build(self):
         self.build_cpio()
+        self.flags.install = True
 
     def do_install(self):
         cmd = CpioCommandBuilder.get_def()

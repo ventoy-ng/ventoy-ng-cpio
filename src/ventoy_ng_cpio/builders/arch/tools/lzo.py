@@ -22,16 +22,13 @@ def do_configure(
 class LzoBuilder(BaseConfigureBuilder):
     NAME = "lzo"
 
-    def do_configure(self):
+    def do_prepare(self):
         do_configure(
             self.job,
             self.get_configure_script(),
         )
 
-    def build(self):
+    def make_should_build(self) -> bool:
         # make -q is broken here for some reason
         lzo_libtool = Path("src/liblzo2.la")
-        if lzo_libtool.exists():
-            return
-        self._flagged_for_install = True
-        self.make.run()
+        return not lzo_libtool.exists()

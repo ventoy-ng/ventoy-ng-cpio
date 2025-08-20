@@ -24,17 +24,17 @@ def do_configure(
 class LunzipBuilder(BaseConfigureBuilder):
     NAME = "lunzip"
 
-    def do_configure(self):
+    def do_prepare(self):
         do_configure(
             self.job,
             self.get_configure_script(),
         )
 
     def do_install(self):
-        out_dir = self.get_output_dir()
-        out_dir.mkdir(parents=True, exist_ok=True)
+        output_dir = self.get_output_dir()
+        output_dir.mkdir(parents=True, exist_ok=True)
         strip_bin_copy(
             self.job.target,
             self.job.component.info.name,
-            str(out_dir / self.job.component.info.name),
+            str(output_dir / self.job.component.info.name),
         )

@@ -16,10 +16,7 @@ class ZstdBuilder(CMakeDefBuilder):
         cmake.args["ZSTD_BUILD_SHARED"] = "OFF"
         cmake.args["ZSTD_PROGRAMS_LINK_SHARED"] = "OFF"
 
-    def build(self):
+    def make_should_build(self):
         # make -q is broken here due to symlinks
         zstd_bin = Path("programs/zstd")
-        if zstd_bin.exists():
-            return
-        self._flagged_for_install = True
-        self.make.run()
+        return not zstd_bin.exists()

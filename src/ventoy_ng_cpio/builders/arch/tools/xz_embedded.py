@@ -17,11 +17,8 @@ class XzEmbeddedBuilder(BaseMakeBuilder):
         make.envs_strict["srcdir"] = str(self.get_main_source_dir())
         self.make = make
 
-    def prepare(self):
+    def should_prepare(self) -> bool:
+        return False
+
+    def do_prepare(self):
         pass
-
-    def do_install(self):
-        make = self.make
-
-        make.envs_strict["DESTDIR"] = str(self.get_output_dir())
-        make.run(["install"])

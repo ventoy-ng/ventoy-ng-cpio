@@ -19,9 +19,20 @@ class BaseMakeBuilder(BaseBuilder):
     def get_make_targets(self) -> Optional[list[str]]:
         return None
 
-    def build(self):
-        # pylint: disable=assignment-from-none
-        targets = self.get_make_targets()
-        if self.make.run_if_needed(targets).is_up_to_date():
-            return
-        self._flagged_for_install = True
+    def make_should_build(self) -> bool:
+        return self.make.question(self.get_make_targets())
+
+    def should_build(self) -> bool:
+        if super().should_build():
+            return True
+        return self.make_should_build()
+
+    def do_build(self):
+        self.make.run(self.get_make_targets())
+        self.flags.install = True
+
+    def do_install(self):
+        make = self.make
+
+        make.envs_strict["DESTDIR"] = str(self.get_output_dir())
+        make.run(["install"])

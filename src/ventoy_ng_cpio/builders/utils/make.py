@@ -51,24 +51,23 @@ class MakeCommandBuilder(MakeLikeCommandBuilder):
             res.args.extend(targets)
         return res
 
+    def question(
+        self,
+        targets: Optional[list[str]] = None,
+    ) -> bool:
+        "runs make -q to check if rebuild is needed"
+        cmd = self.build_process(targets)
+        cmd = cmd.copy()
+        cmd.args.insert(1, "-q")
+        ret = cmd.spawn().wait()
+        return bool(ret)
+
     def run(
         self,
         targets: Optional[list[str]] = None,
     ):
         cmd = self.build_process(targets)
         cmd.run()
-
-    def run_if_needed(
-        self,
-        targets: Optional[list[str]] = None,
-    ):
-        cmd = self.build_process(targets)
-        cmd_check = cmd.copy()
-        cmd_check.args.insert(1, "-q")
-        if cmd_check.spawn().wait() == 0:
-            return MakeStatus.UP_TO_DATE
-        cmd.run()
-        return MakeStatus.DONE
 
 
 @dataclass
