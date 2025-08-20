@@ -46,8 +46,23 @@ class RamdiskStage2ToolsBuilder(BaseCopierBuilder):
         (bin_src, bin_dest) = rd_stage_2_bin_rename(job)
         copy2(input_dir / bin_src, output_dir / bin_dest)
 
+    def copy_vtoytool(self, job: ComponentJob, output_dir: Path):
+        output_dir.mkdir(parents=True, exist_ok=True)
+        suffix = job.target.info.suffix
+        assert suffix is not None
+        input_dir = self.get_input_dir(job)
+        bin_name = job.component.info.name
+        output_file = bin_name + "_" + suffix
+        copy2(input_dir / bin_name, output_dir / output_file)
+
     def do_install(self):
         output_dir = self.get_output_dir(absolute=False)
         output_dir.mkdir(parents=True, exist_ok=True)
-        for dep in self.job.dependencies.values():
+        deps = list(self.job.dependencies.values())
+        vtoytool_job = next(
+            dep for dep in deps if dep.component.info.name == "vtoytool"
+        )
+        deps.remove(vtoytool_job)
+        for dep in deps:
             self.copy_output_bins(dep, output_dir)
+        self.copy_vtoytool(vtoytool_job, output_dir / "vtoytool/00")

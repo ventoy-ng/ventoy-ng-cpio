@@ -1,3 +1,5 @@
+from .arch.custom_tools.vtchmod import VtChmodBuilder
+from .arch.custom_tools.vtoytool import VToyToolBuilder
 from .arch.rd_stage1 import RamdiskStage1Builder
 from .arch.rd_stage1_tools import RamdiskStage1ToolsBuilder
 from .arch.rd_stage2 import RamdiskStage2Builder
@@ -32,6 +34,8 @@ __all__ = [
     "Smallz4Builder",
     "SquashfsBuilder",
     "VBladeBuilder",
+    "VToyToolBuilder",
+    "VtChmodBuilder",
     "XzBuilder",
     "XzEmbeddedBuilder",
     "ZlibBuilder",

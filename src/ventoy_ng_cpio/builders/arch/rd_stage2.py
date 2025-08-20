@@ -1,10 +1,17 @@
 from dataclasses import dataclass
 from pathlib import Path
-from shutil import copy2
+from shutil import copy2, copytree, rmtree
 
 from ventoy_ng_cpio.builders.bases.cpio import BaseCpioBuilder
 from ventoy_ng_cpio.builders.utils.xz import compress_file_with_xz
 from ventoy_ng_cpio.project.jobs import ComponentJob
+
+
+def autocopy(src: Path, dst: Path):
+    if src.is_dir():
+        copytree(src, dst, dirs_exist_ok=True)
+    else:
+        copy2(src, dst)
 
 
 @dataclass
@@ -18,12 +25,13 @@ class RamdiskStage2Builder(BaseCpioBuilder):
         input_dir = self.get_input_dir(job)
         for input_file in input_dir.iterdir():
             output_file = output_dir / input_file.name
-            output_file.unlink(missing_ok=True)
-            copy2(input_file, output_file)
+            autocopy(input_file, output_file)
 
     def build_cpio(self):
         output_dir = Path("tools")
-        output_dir.mkdir(parents=True, exist_ok=True)
+        if output_dir.exists():
+            rmtree(output_dir)
+        output_dir.mkdir(parents=True)
         for dep in self.job.dependencies.values():
             self.copy_dep_files(dep, output_dir)
 

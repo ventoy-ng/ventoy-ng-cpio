@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
-from shutil import copy2
+from shutil import copy2, rmtree
 
 from ventoy_ng_cpio.builders.bases.cpio import BaseCpioBuilder
 from ventoy_ng_cpio.project.jobs import ComponentJob
@@ -17,7 +17,6 @@ class RamdiskStage1Builder(BaseCpioBuilder):
         input_dir = self.get_input_dir(job)
         for input_file in input_dir.iterdir():
             output_file = output_dir / input_file.name
-            output_file.unlink(missing_ok=True)
             copy2(input_file, output_file)
 
     def copy_stage2_dep_files(self, job: ComponentJob, output_dir: Path):
@@ -27,8 +26,10 @@ class RamdiskStage1Builder(BaseCpioBuilder):
 
     def build_cpio(self):
         output_dir = Path("ventoy")
+        if output_dir.exists():
+            rmtree(output_dir)
         busybox_dir = output_dir / "busybox"
-        busybox_dir.mkdir(parents=True, exist_ok=True)
+        busybox_dir.mkdir(parents=True)
         rd_stage1_deps = []
         rd_stage2_deps = []
         for dep in self.job.dependencies.values():

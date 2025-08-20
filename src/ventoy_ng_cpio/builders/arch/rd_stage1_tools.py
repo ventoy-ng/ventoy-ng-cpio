@@ -24,6 +24,8 @@ def rd_stage_1_bin_rename(job: ComponentJob) -> tuple[str, str]:
 
     if info.name == "busybox-full":
         binname = "busybox"
+    elif info.name == "vtchmod":
+        binname = "vtchmod"
     elif info.name == "xz-embedded":
         binname = "xzminidec"
     else:

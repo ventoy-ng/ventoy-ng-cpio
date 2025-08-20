@@ -6,18 +6,15 @@ from ventoy_ng_cpio.utils.path import PathLike
 
 
 @dataclass
-class Smallz4Builder(SimpleSourceBuilder):
-    NAME = "smallz4"
+class VtChmodBuilder(SimpleSourceBuilder):
+    NAME = "vtchmod"
 
     def __post_init__(self):
-        self.bin_name = "smallz4cat"
+        self.bin_name = self.job.component.info.name
         self.bin_build_path = Path(self.bin_name)
 
     def get_main_source_dir(self) -> Path:
-        sources_dir = self.build_paths.sources_dir
-        main_source = self.get_main_source()
-
-        return sources_dir / main_source.name
+        return super().get_main_source_dir() / "src"
 
     def get_source_files(self) -> list[PathLike]:
         return [self.bin_name + ".c"]
