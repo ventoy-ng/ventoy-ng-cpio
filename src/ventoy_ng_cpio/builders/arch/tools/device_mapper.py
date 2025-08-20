@@ -3,8 +3,8 @@ from pathlib import Path
 from shutil import copy2, copytree
 
 from ventoy_ng_cpio.builders.bases.configure import BaseConfigureBuilder
+from ventoy_ng_cpio.builders.ext.strip_install import ExtStripInstall
 from ventoy_ng_cpio.builders.utils.configure import ConfigureScriptBuilder
-from ventoy_ng_cpio.builders.utils.strip import strip_bin_copy
 from ventoy_ng_cpio.consts import ENCODING
 from ventoy_ng_cpio.project.jobs import ComponentJob
 
@@ -49,7 +49,7 @@ def do_configure(job: ComponentJob):
 
 
 @dataclass
-class DeviceMapperBuilder(BaseConfigureBuilder):
+class DeviceMapperBuilder(ExtStripInstall, BaseConfigureBuilder):
     NAME = "device-mapper"
     bin_name = "dmsetup"
     bin_path = Path("dmsetup/dmsetup")
@@ -68,11 +68,5 @@ class DeviceMapperBuilder(BaseConfigureBuilder):
         # make -q is broken here for some reason
         return not self.bin_path.exists()
 
-    def do_install(self):
-        output_dir = self.get_output_dir()
-        output_dir.mkdir(parents=True, exist_ok=True)
-        strip_bin_copy(
-            self.job.target,
-            str(self.bin_path),
-            str(output_dir / self.bin_name),
-        )
+    def get_bin_work_path(self) -> Path:
+        return self.bin_path

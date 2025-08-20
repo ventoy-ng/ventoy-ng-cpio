@@ -1,13 +1,12 @@
 from dataclasses import dataclass
 from pathlib import Path
 
-from ventoy_ng_cpio.builders.bases.base import BaseBuilder
+from ventoy_ng_cpio.builders.ext.strip_install import ExtStripInstall
 from ventoy_ng_cpio.builders.utils.cc import CcBuilder
-from ventoy_ng_cpio.builders.utils.strip import strip_bin_copy
 
 
 @dataclass
-class Smallz4Builder(BaseBuilder):
+class Smallz4Builder(ExtStripInstall):
     NAME = "smallz4"
 
     def __post_init__(self):
@@ -42,12 +41,3 @@ class Smallz4Builder(BaseBuilder):
         cmd.args.append("-MMD")
         cmd.run()
         self.flags.install = True
-
-    def do_install(self):
-        output_dir = self.get_output_dir()
-        output_dir.mkdir(parents=True, exist_ok=True)
-        strip_bin_copy(
-            self.job.target,
-            str(self.bin_name),
-            str(output_dir / self.bin_name),
-        )

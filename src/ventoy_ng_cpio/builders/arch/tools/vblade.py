@@ -4,8 +4,8 @@ from shlex import join
 from shutil import copy2, copytree
 
 from ventoy_ng_cpio.builders.bases.make import BaseMakeBuilder
+from ventoy_ng_cpio.builders.ext.strip_install import ExtStripInstall
 from ventoy_ng_cpio.builders.utils.make import MakeCommandBuilder
-from ventoy_ng_cpio.builders.utils.strip import strip_bin_copy
 
 
 def do_copy_src(source_dir: Path):
@@ -17,11 +17,11 @@ def do_copy_src(source_dir: Path):
 
 
 @dataclass
-class VBladeBuilder(BaseMakeBuilder):
+class VBladeBuilder(ExtStripInstall, BaseMakeBuilder):
     NAME = "vblade"
-    bin_name = "vblade"
 
     def __post_init__(self):
+        self.bin_name = self.job.component.info.name
         self.makefile = Path("makefile")
         make = MakeCommandBuilder()
         # NOTE: doesn't accept LDFLAGS
@@ -36,12 +36,3 @@ class VBladeBuilder(BaseMakeBuilder):
 
     def do_prepare(self):
         do_copy_src(self.get_main_source_dir())
-
-    def do_install(self):
-        output_dir = self.get_output_dir()
-        output_dir.mkdir(parents=True, exist_ok=True)
-        strip_bin_copy(
-            self.job.target,
-            self.bin_name,
-            str(output_dir / self.bin_name),
-        )

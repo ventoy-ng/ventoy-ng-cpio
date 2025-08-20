@@ -4,8 +4,8 @@ from shlex import join
 from shutil import copy2, copytree
 
 from ventoy_ng_cpio.builders.bases.make import BaseMakeBuilder
+from ventoy_ng_cpio.builders.ext.strip_install import ExtStripInstall
 from ventoy_ng_cpio.builders.utils.make import MakeCommandBuilder
-from ventoy_ng_cpio.builders.utils.strip import strip_bin_copy
 from ventoy_ng_cpio.utils.process import ProcessBuilder
 
 
@@ -21,7 +21,7 @@ ALGOS = ["gz", "xz", "lzo", "lz4", "zstd", "lzma_xz"]
 
 
 @dataclass
-class SquashfsBuilder(BaseMakeBuilder):
+class SquashfsBuilder(ExtStripInstall, BaseMakeBuilder):
     NAME = "squashfs"
     bin_name = "unsquashfs"
 
@@ -60,12 +60,3 @@ class SquashfsBuilder(BaseMakeBuilder):
 
     def get_make_targets(self):
         return [self.bin_name]
-
-    def do_install(self):
-        output_dir = self.get_output_dir()
-        output_dir.mkdir(parents=True, exist_ok=True)
-        strip_bin_copy(
-            self.job.target,
-            self.bin_name,
-            str(output_dir / self.bin_name),
-        )

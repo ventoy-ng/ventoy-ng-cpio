@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from ventoy_ng_cpio.builders.bases.configure import BaseConfigureBuilder
+from ventoy_ng_cpio.builders.ext.strip_install import ExtStripInstall
 from ventoy_ng_cpio.builders.utils.configure import ConfigureScriptBuilder
-from ventoy_ng_cpio.builders.utils.strip import strip_bin_copy
 from ventoy_ng_cpio.project.jobs import ComponentJob
 
 
@@ -21,20 +21,14 @@ def do_configure(
 
 
 @dataclass
-class LunzipBuilder(BaseConfigureBuilder):
+class LunzipBuilder(ExtStripInstall, BaseConfigureBuilder):
     NAME = "lunzip"
+
+    def __post_init__(self):
+        self.bin_name = self.job.component.info.name
 
     def do_prepare(self):
         do_configure(
             self.job,
             self.get_configure_script(),
-        )
-
-    def do_install(self):
-        output_dir = self.get_output_dir()
-        output_dir.mkdir(parents=True, exist_ok=True)
-        strip_bin_copy(
-            self.job.target,
-            self.job.component.info.name,
-            str(output_dir / self.job.component.info.name),
         )
