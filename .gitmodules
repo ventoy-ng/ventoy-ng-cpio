@@ -4,3 +4,6 @@
 [submodule "src/vtoytool"]
 	path = src/vtoytool
 	url = https://github.com/fnr1r/vtoytool.git
+[submodule "src/vtoy_fuse_iso"]
+	path = src/vtoy_fuse_iso
+	url = https://github.com/fnr1r/vtoy_fuse_iso.git

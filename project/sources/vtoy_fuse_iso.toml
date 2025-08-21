@@ -1,0 +1,4 @@
+name = "vtoy_fuse_iso"
+id = "{name}"
+extracted_name = "{name}"
+submod = true

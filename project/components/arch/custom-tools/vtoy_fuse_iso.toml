@@ -1,0 +1,4 @@
+name = "vtoy_fuse_iso"
+target_set = "system"
+sources = ["vtoy_fuse_iso"]
+deps = ["libfuse2"]

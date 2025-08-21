@@ -4,6 +4,7 @@ arch/tools/lzo.toml
 arch/tools/xz.toml
 arch/tools/zlib.toml
 arch/tools/zstd.toml
+arch/tools/libfuse2.toml
 
 # utils
 arch/tools/busybox/full.toml
@@ -12,6 +13,7 @@ arch/tools/lunzip.toml
 arch/tools/smallz4.toml
 arch/tools/squashfs.toml
 arch/tools/vblade.toml
+arch/custom-tools/vtoy_fuse_iso.toml
 arch/custom-tools/vtoytool.toml
 
 # stage 2: inner compressed ramdisk

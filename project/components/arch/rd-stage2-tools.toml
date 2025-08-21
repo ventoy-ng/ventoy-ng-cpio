@@ -13,6 +13,6 @@ deps = [
     "lunzip",
     "squashfs",
     "vblade",
-    # "vtoy_fuse_iso",
+    "vtoy_fuse_iso",
     "zstd",
 ]

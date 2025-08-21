@@ -1,4 +1,5 @@
 from .arch.custom_tools.vtchmod import VtChmodBuilder
+from .arch.custom_tools.vtoy_fuse_iso import VToyFuseIsoBuilder
 from .arch.custom_tools.vtoytool import VToyToolBuilder
 from .arch.rd_stage1 import RamdiskStage1Builder
 from .arch.rd_stage1_tools import RamdiskStage1ToolsBuilder
@@ -6,6 +7,7 @@ from .arch.rd_stage2 import RamdiskStage2Builder
 from .arch.rd_stage2_tools import RamdiskStage2ToolsBuilder
 from .arch.tools.busybox import BusyboxAshBuilder, BusyboxFullBuilder
 from .arch.tools.device_mapper import DeviceMapperBuilder
+from .arch.tools.libfuse2 import LibFuse2Builder
 from .arch.tools.lunzip import LunzipBuilder
 from .arch.tools.lz4 import Lz4Builder
 from .arch.tools.lzo import LzoBuilder
@@ -24,6 +26,7 @@ __all__ = [
     "BusyboxAshBuilder",
     "BusyboxFullBuilder",
     "DeviceMapperBuilder",
+    "LibFuse2Builder",
     "LunzipBuilder",
     "Lz4Builder",
     "LzoBuilder",
@@ -34,6 +37,7 @@ __all__ = [
     "Smallz4Builder",
     "SquashfsBuilder",
     "VBladeBuilder",
+    "VToyFuseIsoBuilder",
     "VToyToolBuilder",
     "VtChmodBuilder",
     "XzBuilder",

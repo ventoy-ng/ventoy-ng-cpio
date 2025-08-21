@@ -31,6 +31,9 @@ def rd_stage_2_bin_rename(job: ComponentJob) -> tuple[str, str]:
     elif info.name == "vblade":
         binname = "vblade"
         extra_suffix = "_"
+    elif info.name == "vtoy_fuse_iso":
+        binname = "vtoy_fuse_iso"
+        extra_suffix = "_"
     else:
         raise NotImplementedError(job.name)
 

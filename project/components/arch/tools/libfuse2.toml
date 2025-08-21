@@ -1,0 +1,3 @@
+name = "libfuse2"
+target_set = "system"
+sources = ["libfuse2"]
